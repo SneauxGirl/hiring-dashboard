@@ -129,4 +129,15 @@
     color: var(--gray-900);
     font-size: var(--font-size-label);
   }
+
+  .kpi-card.p-card {
+    border: 1px solid color-mix(in oklch, var(--gray-400) 35%, white);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .kpi-card .p-card-body {
+    padding: 1rem 1.125rem;
+  }
 }

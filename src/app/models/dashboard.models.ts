@@ -1,8 +1,19 @@
+export type KpiColorToken =
+  | 'bright-blue'
+  | 'electric-violet'
+  | 'orange-red'
+  | 'vivid-pink';
+
+export type KpiTrendDirection = 'up' | 'down' | 'neutral';
+
 export interface KpiMetric {
-    label: string;
-    value: string | number;
-    delta?: string;
-  }
+  label: string;
+  value: string | number;
+  valueUnit?: string;
+  delta?: string;
+  trend?: KpiTrendDirection;
+  colorToken: KpiColorToken;
+}
   
   export type ScheduleGroup = 'today' | 'tomorrow' | 'this-week';
   

@@ -15,10 +15,36 @@ export const MOCK_DASHBOARD: DashboardData = {
     { id: 'settings', label: 'Settings', icon: 'pi pi-cog' },
   ],
   kpis: [
-    { label: 'Open Requisitions', value: 5 },
-    { label: 'Active Candidates', value: 35, delta: '+8% vs last month' },
-    { label: 'Avg Time to Fill', value: '38 days', delta: '−4 days' },
-    { label: 'Awaiting Your Feedback', value: 4 },
+    {
+      label: 'Open Requisitions',
+      value: 8,
+      delta: '2 this month',
+      trend: 'up',
+      colorToken: 'bright-blue',
+    },
+    {
+      label: 'Average Time To Fill',
+      value: 34,
+      valueUnit: 'days',
+      delta: '5 days',
+      trend: 'down',
+      colorToken: 'electric-violet',
+    },
+    {
+      label: 'Offer Acceptance Rate',
+      value: 87,
+      valueUnit: '%',
+      delta: '6% this month',
+      trend: 'up',
+      colorToken: 'orange-red',
+    },
+    {
+      label: 'Expected Hires This Month',
+      value: 6,
+      delta: 'No change',
+      trend: 'neutral',
+      colorToken: 'vivid-pink',
+    },
   ],
   schedule: [
     {
