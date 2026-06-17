@@ -72,8 +72,11 @@
   [header]="selectedCandidate?.name ?? ''"
   [(visible)]="dialogVisible"
   [modal]="true"
+  [closable]="true"
   [draggable]="false"
   [resizable]="false"
+  [focusTrap]="true"
+  closeAriaLabel="Close candidate details"
   styleClass="candidate-dialog"
   (onHide)="closeCandidateDialog()"
 >

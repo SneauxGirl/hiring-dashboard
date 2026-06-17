@@ -11,7 +11,8 @@
           class="font-[family-name:var(--font-heading)] text-[2rem] leading-none font-semibold"
           [style.color]="colorVar(kpi.colorToken)"
         >
-          <span>{{ kpi.value }}</span>@if (kpi.valueUnit) {
+          <span>{{ kpi.value }}</span>
+          @if (kpi.valueUnit) {
             <span class="text-[1.35rem] font-medium"> {{ kpi.valueUnit }}</span>
           }
         </div>

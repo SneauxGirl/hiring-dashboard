@@ -8,6 +8,8 @@ alwaysApply: false
 
 - Standalone components only
 - PrimeNG over custom UI; custom HTML only when PrimeNG has no fit
+- **PrimeNG 21 in this repo** — use [primeng.org](https://primeng.org) docs and DOM class names for v21 only (`p-menu-item-*`, not `p-menuitem-*`)
+- Before custom CSS or config against PrimeNG internals, check the installed version’s docs (CSS Classes / API tables)
 - No new abstractions (services, base classes, shared wrappers) without explicit ask
 - Section components receive data via `@Input()` from dashboard parent
 - Use flex containers around components to dictate shape and responsiveness relative to other components

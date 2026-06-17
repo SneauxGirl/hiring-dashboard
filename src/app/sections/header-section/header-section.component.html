@@ -19,7 +19,7 @@
 
   <div class="flex min-w-0 items-center gap-2">
     <p-avatar [label]="userInitials" shape="circle" aria-hidden="true" />
-    <span class="truncate text-sm font-medium text-[var(--gray-900)]">{{ user.name }}</span>
+    <span class="truncate text-[length:var(--font-size-label)] font-medium text-[var(--gray-900)]">{{ user.name }}</span>
   </div>
 </header>
 
@@ -27,7 +27,8 @@
   [(visible)]="drawerVisible"
   position="left"
   [modal]="true"
-  [showCloseIcon]="true"
+  [closable]="true"
+  ariaCloseLabel="Close navigation menu"
   styleClass="dashboard-drawer"
 >
   <ng-template #header>
@@ -46,10 +47,15 @@
       <p-avatar [label]="userInitials" shape="circle" aria-hidden="true" />
       <div class="min-w-0">
         <div class="truncate text-base font-medium text-[var(--gray-900)]">{{ user.name }}</div>
-        <div class="truncate text-sm text-[var(--gray-700)]">{{ user.title }}</div>
+        <div class="truncate text-[length:var(--font-size-label)] text-[var(--gray-700)]">{{ user.title }}</div>
       </div>
     </div>
 
-    <p-menu [model]="menuItems" [popup]="false" styleClass="dashboard-nav-menu w-full" />
+    <p-menu
+      [model]="menuItems"
+      [popup]="false"
+      ariaLabel="Mobile navigation menu"
+      styleClass="dashboard-nav-menu w-full"
+    />
   </div>
 </p-drawer>

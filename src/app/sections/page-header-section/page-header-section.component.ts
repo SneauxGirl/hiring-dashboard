@@ -2,12 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 
-import { DashboardUser } from '../../models/dashboard.models';
-
-export interface WeekRangeOption {
-  label: string;
-  value: string;
-}
+import { DashboardUser, WeekRangeOption } from '../../models/dashboard.models';
 
 @Component({
   selector: 'app-page-header-section',

@@ -1,23 +1,51 @@
 <nav
-  class="flex h-full w-full flex-col border-r border-[color-mix(in_oklch,var(--gray-400)_35%,white)] bg-white px-3 py-5"
+  id="sidebar-main-nav"
+  class="sidebar-nav flex h-full w-full flex-col border-r border-[color-mix(in_oklch,var(--gray-400)_35%,white)] bg-white px-3 py-5"
   aria-label="Main navigation"
 >
   <div
-    class="px-2 font-[family-name:var(--font-heading)] text-[length:var(--font-size-heading-md)] font-bold uppercase tracking-[0.1em] text-[var(--bright-blue)]"
+    class="flex items-center gap-2 px-2"
+    [class.justify-between]="!collapsed"
+    [class.justify-center]="collapsed"
   >
-    Pipeline
+    <div
+      class="sidebar-brand min-w-0 font-[family-name:var(--font-heading)] text-[length:var(--font-size-heading-md)] font-bold uppercase tracking-[0.1em] text-[var(--bright-blue)]"
+    >
+      Pipeline
+    </div>
+
+    <button
+      type="button"
+      class="sidebar-toggle"
+      [attr.aria-expanded]="!collapsed"
+      aria-controls="sidebar-main-nav"
+      [attr.aria-label]="toggleLabel"
+      (click)="toggle.emit()"
+    >
+      <span
+        class="pi text-lg"
+        [class.pi-chevron-left]="!collapsed"
+        [class.pi-chevron-right]="collapsed"
+        aria-hidden="true"
+      ></span>
+    </button>
   </div>
 
-  <p-menu [model]="menuModel" [popup]="false" styleClass="dashboard-nav-menu mt-6 w-full flex-1" />
+  <p-menu
+    [model]="menuModel"
+    [popup]="false"
+    ariaLabel="Dashboard sections"
+    styleClass="dashboard-nav-menu mt-6 w-full flex-1"
+  />
 
   <div
-    class="mt-auto flex items-center gap-3 border-t border-[color-mix(in_oklch,var(--gray-400)_35%,white)] px-2 pt-4"
+    class="sidebar-user mt-auto flex items-center gap-3 border-t border-[color-mix(in_oklch,var(--gray-400)_35%,white)] px-2 pt-4"
     aria-label="Signed in user"
   >
     <p-avatar [label]="userInitials" shape="circle" aria-hidden="true" />
-    <div class="min-w-0">
+    <div class="sidebar-user-text min-w-0">
       <div class="truncate text-base font-medium text-[var(--gray-900)]">{{ user.name }}</div>
-      <div class="truncate text-sm text-[var(--gray-700)]">{{ user.title }}</div>
+      <div class="truncate text-[length:var(--font-size-label)] text-[var(--gray-700)]">{{ user.title }}</div>
     </div>
   </div>
 </nav>

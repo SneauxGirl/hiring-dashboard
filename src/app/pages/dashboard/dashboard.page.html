@@ -1,5 +1,10 @@
 <div class="flex min-h-screen bg-white">
-  <app-sidebar-nav-section [navItems]="data.navItems" [user]="data.user" />
+  <app-sidebar-nav-section
+    [navItems]="data.navItems"
+    [user]="data.user"
+    [collapsed]="sidebarCollapsed"
+    (toggle)="sidebarCollapsed = !sidebarCollapsed"
+  />
 
   <div class="flex min-w-0 flex-1 flex-col">
     <app-header-section [user]="data.user" [navItems]="data.navItems" />

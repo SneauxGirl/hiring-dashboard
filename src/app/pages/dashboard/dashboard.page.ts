@@ -22,4 +22,5 @@ import {
 })
 export class DashboardPage {
   readonly data = MOCK_DASHBOARD;
+  sidebarCollapsed = false;
 }
