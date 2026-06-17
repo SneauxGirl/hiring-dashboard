@@ -50,16 +50,24 @@ export interface BottleneckCard {
   avgLabel: string;
 }
 
-export interface TrendPoint {
-  period: string;
-  value: number;
+export type WorkforceTrendMetricId = 'attrition' | 'promotions' | 'transfers' | 'backfills';
+
+export type WorkforceTrendColorToken = 'vivid-pink' | 'bright-blue' | 'alexandrite' | 'orange';
+
+export interface WorkforceTrendSeries {
+  id: WorkforceTrendMetricId;
+  label: string;
+  colorToken: WorkforceTrendColorToken;
+  /** Twelve monthly values — index 0 = January. */
+  currentYear: number[];
+  /** Twelve monthly values — index 0 = January. */
+  priorYear: number[];
 }
 
-export interface TrendSeries {
-  id: string;
-  label: string;
-  colorToken: 'notable-hue' | 'alexandrite' | 'magical';
-  points: TrendPoint[];
+export interface WorkforceTrends {
+  currentYear: number;
+  priorYear: number;
+  series: WorkforceTrendSeries[];
 }
 
 export interface OpenRequisition {
@@ -104,7 +112,7 @@ export interface DashboardData {
   schedule: ScheduleInterview[];
   candidates: CandidateProfile[];
   bottlenecks: BottleneckCard[];
-  trends: TrendSeries[];
+  trends: WorkforceTrends;
   openRequisitions: OpenRequisition[];
   funnelStages: FunnelStage[];
   stageDurations: StageDuration[];

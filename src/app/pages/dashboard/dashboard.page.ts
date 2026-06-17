@@ -8,6 +8,7 @@ import {
   PageHeaderComponent,
   ScheduleComponent,
   SidebarNavComponent,
+  TrendsComponent,
 } from '../../sections';
 
 @Component({
@@ -19,6 +20,7 @@ import {
     PageHeaderComponent,
     ScheduleComponent,
     SidebarNavComponent,
+    TrendsComponent,
   ],
   templateUrl: './dashboard.page.html',
 })

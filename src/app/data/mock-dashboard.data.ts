@@ -144,47 +144,40 @@ export const MOCK_DASHBOARD: DashboardData = {
       avgLabel: 'avg idle time',
     },
   ],
-  trends: [
-    {
-      id: 'dropoff',
-      label: 'Candidate Drop-off Rate',
-      colorToken: 'notable-hue',
-      points: [
-        { period: 'Jan', value: 42 },
-        { period: 'Feb', value: 40 },
-        { period: 'Mar', value: 38 },
-        { period: 'Apr', value: 36 },
-        { period: 'May', value: 35 },
-        { period: 'Jun', value: 34 },
-      ],
-    },
-    {
-      id: 'int-offer',
-      label: 'Interview-to-Offer Conversion',
-      colorToken: 'alexandrite',
-      points: [
-        { period: 'Jan', value: 38 },
-        { period: 'Feb', value: 41 },
-        { period: 'Mar', value: 44 },
-        { period: 'Apr', value: 46 },
-        { period: 'May', value: 48 },
-        { period: 'Jun', value: 50 },
-      ],
-    },
-    {
-      id: 'offer-hire',
-      label: 'Offer-to-Hire Conversion',
-      colorToken: 'magical',
-      points: [
-        { period: 'Jan', value: 88 },
-        { period: 'Feb', value: 90 },
-        { period: 'Mar', value: 91 },
-        { period: 'Apr', value: 89 },
-        { period: 'May', value: 92 },
-        { period: 'Jun', value: 93 },
-      ],
-    },
-  ],
+  trends: {
+    currentYear: 2026,
+    priorYear: 2025,
+    series: [
+      {
+        id: 'attrition',
+        label: 'Attrition',
+        colorToken: 'vivid-pink',
+        currentYear: [16, 15, 14, 12, 11, 10, 9, 8, 7, 10, 13, 16],
+        priorYear: [13, 12, 14, 11, 10, 10, 8, 7, 7, 9, 12, 16],
+      },
+      {
+        id: 'promotions',
+        label: 'Promotions',
+        colorToken: 'bright-blue',
+        currentYear: [5, 6, 8, 12, 15, 18, 19, 20, 22, 18, 14, 11],
+        priorYear: [6, 7, 9, 11, 14, 18, 17, 19, 22, 16, 12, 11],
+      },
+      {
+        id: 'transfers',
+        label: 'Transfers',
+        colorToken: 'alexandrite',
+        currentYear: [4, 4, 5, 6, 8, 9, 10, 11, 12, 9, 7, 6],
+        priorYear: [3, 4, 5, 7, 8, 9, 10, 11, 12, 8, 7, 6],
+      },
+      {
+        id: 'backfills',
+        label: 'Backfills',
+        colorToken: 'orange',
+        currentYear: [7, 8, 9, 11, 12, 14, 15, 16, 19, 15, 13, 12],
+        priorYear: [8, 8, 9, 12, 13, 14, 16, 17, 19, 14, 11, 12],
+      },
+    ],
+  },
   openRequisitions: [
     {
       id: 'r1',
