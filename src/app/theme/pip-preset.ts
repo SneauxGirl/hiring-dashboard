@@ -7,6 +7,12 @@ import { PIP_TOKENS } from './pip-tokens';
 export const PipPreset = definePreset(Lara, {
   semantic: {
     primary: palette(PIP_TOKENS.primary),
+    overlay: {
+      select: { shadow: PIP_TOKENS.shadow.select },
+      popover: { shadow: PIP_TOKENS.shadow.popover },
+      modal: { shadow: PIP_TOKENS.shadow.modal },
+      navigation: { shadow: PIP_TOKENS.shadow.navigation },
+    },
     colorScheme: {
       light: {
         surface: {
@@ -20,6 +26,13 @@ export const PipPreset = definePreset(Lara, {
           mutedColor: PIP_TOKENS.text.muted,
           hoverMutedColor: PIP_TOKENS.text.soft,
         },
+      },
+    },
+  },
+  components: {
+    card: {
+      root: {
+        shadow: PIP_TOKENS.shadow.card,
       },
     },
   },

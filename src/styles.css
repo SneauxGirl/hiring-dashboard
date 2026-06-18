@@ -14,9 +14,15 @@
   --font-body: 'Sansation', sans-serif;
   --font-heading: 'Cormorant SC', serif;
   --font-accent: 'Birthstone', cursive;
+  --font-accent-weight: 400;
+  --font-accent-size: 3rem;
+  --font-accent-color: color-mix(in srgb, #1f2937 95%, white 5%);
 
   --dashboard-max-width: 1440px;
   --dashboard-margin: 20px;
+  --dashboard-header-padding-block: 1.25rem;
+  --dashboard-header-padding-block-lg: 1.5rem;
+  --dashboard-header-row-height: var(--font-accent-size);
   --sidebar-width: 240px;
   --sidebar-width-collapsed: 4.5rem;
 }

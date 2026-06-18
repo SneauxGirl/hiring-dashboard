@@ -27,15 +27,23 @@ export type PipResponsibility =
 
 export const PIP_TOKENS = {
   surface: {
-    page: '#f4f5f7',
+    page: '#FEFDFB',
     card: '#ffffff',
-    border: '#e5e7eb',
+    border: '#e8e8e7',
     hover: '#eef1f5',
   },
   text: {
     color: '#374151',
     soft: '#6b7280',
     muted: '#9ca3af',
+  },
+  /** Lara shadow overrides — ink-tinted, slightly softer than default black rgba. */
+  shadow: {
+    card: '0 1px 3px color-mix(in srgb, #374151 6%, transparent)',
+    popover: '0 1px 4px color-mix(in srgb, #374151 8%, transparent)',
+    select: '0 2px 10px color-mix(in srgb, #374151 9%, transparent)',
+    modal: '0 2px 6px color-mix(in srgb, #374151 22%, transparent)',
+    navigation: '0 2px 10px color-mix(in srgb, #374151 9%, transparent)',
   },
   primary: SLOTS[0].ink,
   slots: SLOTS,

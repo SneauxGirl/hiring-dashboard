@@ -1,12 +1,16 @@
 <header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
   <div class="min-w-0">
     <h1
-      class="m-0 font-[family-name:var(--font-heading)] text-[length:var(--font-size-heading-lg)] font-semibold leading-tight text-color"
+      class="m-0 flex min-h-[length:var(--dashboard-header-row-height)] items-end font-[family-name:var(--font-heading)] text-[length:var(--font-size-heading-lg)] font-semibold leading-none text-color"
     >
-      <span class="font-[family-name:var(--font-accent)] text-[1.15em] font-normal">{{ timeGreeting }}</span
-      >{{ firstName }}.
+      <span
+        class="font-[family-name:var(--font-accent)] text-[length:var(--font-accent-size)] leading-none font-[weight:var(--font-accent-weight)] text-[color:var(--font-accent-color)]"
+        >{{ timeGreeting }}{{ firstName }}</span
+      >
     </h1>
-    <p class="m-0 mt-1 text-[length:var(--font-size-label)] font-normal text-muted-color">
+    <p
+      class="m-0 mt-1 text-[0.8rem] font-normal uppercase tracking-[0.08em] text-muted-color"
+    >
       Here's what's happening with your hiring.
     </p>
   </div>
