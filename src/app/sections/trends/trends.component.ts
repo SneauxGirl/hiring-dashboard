@@ -16,11 +16,10 @@ import { Menu } from 'primeng/menu';
 import type { ChartConfiguration } from 'chart.js';
 
 import {
-  WorkforceTrendColorToken,
   WorkforceTrendSeries,
   WorkforceTrends,
 } from '../../models/dashboard.models';
-import { readPaletteColor, readThemeVar, themeBorderColor } from '../../theme/theme-colors';
+import { readChartColor, readThemeVar, paleChartColor, themeBorderColor } from '../../theme/theme-colors';
 
 type TrendsViewMode = 'chart' | 'table';
 
@@ -186,8 +185,8 @@ export class TrendsComponent implements OnDestroy {
       data: {
         labels: [...MONTH_LABELS],
         datasets: this.trends.series.map((series) => {
-          const color = readPaletteColor(series.colorToken, 600);
-          const paleColor = this.paleColor(series.colorToken);
+          const color = readChartColor(series.colorToken);
+          const paleColor = paleChartColor(series.colorToken);
 
           return {
             label: series.label,
@@ -281,11 +280,6 @@ export class TrendsComponent implements OnDestroy {
         },
       },
     };
-  }
-
-  private paleColor(token: WorkforceTrendColorToken): string {
-    const base = readPaletteColor(token, 600);
-    return `color-mix(in srgb, ${base} 38%, white)`;
   }
 
   private gridColor(): string {

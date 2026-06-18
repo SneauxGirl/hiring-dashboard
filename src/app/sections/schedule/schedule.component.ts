@@ -6,15 +6,12 @@ import { Dialog } from 'primeng/dialog';
 import {
   CandidateProfile,
   ScheduleGroup,
-  ScheduleGroupColorToken,
   ScheduleInterview,
 } from '../../models/dashboard.models';
-import { themePaletteVar } from '../../theme/theme-colors';
 
 interface ScheduleGroupConfig {
   key: ScheduleGroup;
   label: string;
-  colorToken: ScheduleGroupColorToken;
 }
 
 @Component({
@@ -30,9 +27,9 @@ export class ScheduleComponent {
   selectedCandidate: CandidateProfile | null = null;
 
   readonly groupConfigs: ScheduleGroupConfig[] = [
-    { key: 'today', label: 'Today', colorToken: 'primary' },
-    { key: 'tomorrow', label: 'Tomorrow', colorToken: 'teal' },
-    { key: 'this-week', label: 'This week', colorToken: 'amber' },
+    { key: 'today', label: 'Today' },
+    { key: 'tomorrow', label: 'Tomorrow' },
+    { key: 'this-week', label: 'This week' },
   ];
 
   interviewsForGroup(group: ScheduleGroup): ScheduleInterview[] {
@@ -41,10 +38,6 @@ export class ScheduleComponent {
 
   candidateFor(interview: ScheduleInterview): CandidateProfile | undefined {
     return this.candidates.find((candidate) => candidate.id === interview.candidateId);
-  }
-
-  colorVar(token: ScheduleGroupColorToken): string {
-    return themePaletteVar(token, 600);
   }
 
   openCandidate(candidateId: string): void {

@@ -1,6 +1,10 @@
-import { ThemePalette } from '../theme/theme-colors';
-
-export type KpiColorToken = ThemePalette;
+import {
+  PipBottleneckTheme,
+  PipChartColor,
+  PipFunnelZone,
+  PipRiskLevel,
+  PipStageTone,
+} from '../theme/pip-tokens';
 
 export type KpiTrendDirection = 'up' | 'down' | 'neutral';
 
@@ -10,12 +14,9 @@ export interface KpiMetric {
   valueUnit?: string;
   delta?: string;
   trend?: KpiTrendDirection;
-  colorToken: KpiColorToken;
 }
 
 export type ScheduleGroup = 'today' | 'tomorrow' | 'this-week';
-
-export type ScheduleGroupColorToken = ThemePalette;
 
 export interface ScheduleInterview {
   id: string;
@@ -36,7 +37,7 @@ export interface WeekRangeOption {
   value: string;
 }
 
-export type BottleneckTheme = ThemePalette;
+export type BottleneckTheme = PipBottleneckTheme;
 
 export interface BottleneckCard {
   id: string;
@@ -50,7 +51,7 @@ export interface BottleneckCard {
 
 export type WorkforceTrendMetricId = 'attrition' | 'promotions' | 'transfers' | 'backfills';
 
-export type WorkforceTrendColorToken = ThemePalette;
+export type WorkforceTrendColorToken = PipChartColor;
 
 export interface WorkforceTrendSeries {
   id: WorkforceTrendMetricId;
@@ -73,8 +74,9 @@ export interface OpenRequisition {
   role: string;
   candidates: number;
   stage: string;
+  stageTone: PipStageTone;
   daysOpen: number;
-  risk: 'low' | 'medium' | 'high';
+  risk: PipRiskLevel;
 }
 
 export interface OpenRequisitionsData {
@@ -87,17 +89,14 @@ export interface FunnelStage {
   label: string;
   count: number;
   conversionPct?: number;
-  colorZone: 'primary' | 'amber';
+  colorZone: PipFunnelZone;
 }
 
 export interface StageDuration {
   fromStage: string;
   toStage: string;
   days: number;
-  colorToken: ThemePalette;
 }
-
-export type StageDurationColorToken = StageDuration['colorToken'];
 
 export interface NavItem {
   id: string;

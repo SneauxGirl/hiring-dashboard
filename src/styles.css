@@ -17,7 +17,6 @@
 
   --dashboard-max-width: 1440px;
   --dashboard-margin: 20px;
-  --dashboard-page-bg: oklch(0.9044 0.0366 72.71);
   --sidebar-width: 240px;
   --sidebar-width-collapsed: 4.5rem;
 }
@@ -88,10 +87,6 @@
     width: min(18rem, 85vw);
   }
 
-  .dashboard-page {
-    background: var(--dashboard-page-bg);
-  }
-
   .dashboard-main {
     box-sizing: border-box;
     width: 100%;
@@ -100,17 +95,8 @@
     padding-inline: var(--dashboard-margin);
   }
 
-  .kpi-card .p-card-body,
-  .dashboard-card .p-card-body {
-    padding: 1rem 1.125rem;
-  }
-
   .sidebar-nav {
-    border-right: 1px solid var(--p-form-field-border-color);
-  }
-
-  .sidebar-user-card .p-card-body {
-    padding: 0.75rem 1rem;
+    border-right: 1px solid var(--p-content-border-color);
   }
 
   .sidebar-shell {
@@ -164,7 +150,7 @@
     font-size: 1.125rem;
   }
 
-  .sidebar-shell--collapsed .sidebar-user-card .sidebar-user {
+  .sidebar-shell--collapsed .sidebar-user {
     justify-content: center;
     padding-inline: 0;
   }

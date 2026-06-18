@@ -20,7 +20,8 @@
         class="h-8 w-auto shrink-0 object-contain"
       />
       <span
-        class="min-w-0 font-[family-name:var(--font-heading)] text-[length:var(--font-size-heading-md)] font-bold uppercase tracking-[0.1em] text-primary"
+        class="min-w-0 font-[family-name:var(--font-heading)] text-[length:var(--font-size-heading-md)] font-bold uppercase tracking-[0.1em]"
+        [style.color]="wordmarkColor"
         aria-hidden="true"
       >
         ipeline
@@ -51,7 +52,7 @@
     styleClass="dashboard-nav-menu mt-6 w-full flex-1"
   />
 
-  <p-card styleClass="dashboard-card sidebar-user-card mt-auto w-full">
+  <p-card styleClass="mt-auto w-full">
     <div class="sidebar-user flex items-center gap-3" aria-label="Signed in user">
       <p-avatar [label]="userInitials" shape="circle" aria-hidden="true" />
       <div class="sidebar-user-text min-w-0">

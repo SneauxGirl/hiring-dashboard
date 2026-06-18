@@ -5,6 +5,7 @@ import { Card } from 'primeng/card';
 import { Menu } from 'primeng/menu';
 
 import { DashboardUser, NavItem } from '../../models/dashboard.models';
+import { brandIndigo } from '../../theme/theme-colors';
 
 @Component({
   selector: 'app-sidebar-nav',
@@ -16,6 +17,8 @@ import { DashboardUser, NavItem } from '../../models/dashboard.models';
   },
 })
 export class SidebarNavComponent {
+  readonly wordmarkColor = brandIndigo();
+
   @Input({ required: true }) navItems: NavItem[] = [];
   @Input({ required: true }) user!: DashboardUser;
   @Input() collapsed = false;

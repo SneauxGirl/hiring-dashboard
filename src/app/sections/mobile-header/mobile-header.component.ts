@@ -6,6 +6,7 @@ import { Drawer } from 'primeng/drawer';
 import { Menu } from 'primeng/menu';
 
 import { DashboardUser, NavItem } from '../../models/dashboard.models';
+import { brandIndigo } from '../../theme/theme-colors';
 
 @Component({
   selector: 'app-mobile-header',
@@ -14,6 +15,8 @@ import { DashboardUser, NavItem } from '../../models/dashboard.models';
   host: { class: 'block md:hidden' },
 })
 export class MobileHeaderComponent {
+  readonly wordmarkColor = brandIndigo();
+
   @Input({ required: true }) user!: DashboardUser;
   @Input({ required: true }) navItems: NavItem[] = [];
 

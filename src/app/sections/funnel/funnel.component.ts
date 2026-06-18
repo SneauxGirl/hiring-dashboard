@@ -5,9 +5,8 @@ import { Card } from 'primeng/card';
 import {
   FunnelStage,
   StageDuration,
-  StageDurationColorToken,
 } from '../../models/dashboard.models';
-import { themePaletteVar } from '../../theme/theme-colors';
+import { funnelBarFill } from '../../theme/theme-colors';
 
 @Component({
   selector: 'app-funnel',
@@ -41,13 +40,8 @@ export class FunnelComponent {
   }
 
   barColor(stage: FunnelStage, index: number): string {
-    if (stage.colorZone === 'primary') {
-      const shades = [200, 300, 400] as const;
-      return themePaletteVar('primary', shades[index] ?? 400);
-    }
-
-    const shades = [200, 300, 400] as const;
-    return themePaletteVar('amber', shades[index - 3] ?? 400);
+    const zoneIndex = stage.colorZone === 'early' ? index : index - 3;
+    return funnelBarFill(stage.colorZone, zoneIndex);
   }
 
   stageTitle(stage: FunnelStage): string {
@@ -70,7 +64,12 @@ export class FunnelComponent {
     return days >= 8 || (days / this.totalDurationDays) * 100 >= 8;
   }
 
-  durationColor(token: StageDurationColorToken): string {
-    return themePaletteVar(token, 500);
+  durationColor(durationIndex: number): string {
+    const stage = this.funnelStages[durationIndex];
+    if (!stage) {
+      return funnelBarFill('early', 0);
+    }
+
+    return this.barColor(stage, durationIndex);
   }
 }

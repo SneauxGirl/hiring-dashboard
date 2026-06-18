@@ -1,4 +1,4 @@
-<p-card styleClass="dashboard-card">
+<p-card>
   <div class="flex flex-col gap-4">
     <div class="flex items-center gap-2">
       <h2
@@ -20,12 +20,12 @@
         <li
           class="flex items-center gap-3 rounded-border border border-surface p-3"
           [style.border-inline-start-width]="'3px'"
-          [style.border-inline-start-color]="colorVar(bottleneck.theme)"
+          [style.border-inline-start-color]="accentColor(bottleneck.theme)"
         >
           <span
             class="flex h-9 w-9 shrink-0 items-center justify-center rounded-border text-base"
             [style.background]="iconBg(bottleneck.theme)"
-            [style.color]="colorVar(bottleneck.theme)"
+            [style.color]="accentColor(bottleneck.theme)"
             aria-hidden="true"
           >
             <span [class]="themeConfig(bottleneck.theme).iconClass"></span>
@@ -42,7 +42,7 @@
             <div>
               <div
                 class="text-base font-bold leading-tight"
-                [style.color]="colorVar(bottleneck.theme)"
+                [style.color]="accentColor(bottleneck.theme)"
               >
                 {{ bottleneck.candidateCount }}
               </div>
@@ -53,7 +53,7 @@
             <div>
               <div
                 class="text-base font-bold leading-tight"
-                [style.color]="colorVar(bottleneck.theme)"
+                [style.color]="accentColor(bottleneck.theme)"
               >
                 {{ bottleneck.avgMetric }} days
               </div>

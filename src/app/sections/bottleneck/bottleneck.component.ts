@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Card } from 'primeng/card';
 
 import { BottleneckCard, BottleneckTheme } from '../../models/dashboard.models';
-import { themePaletteTint, themePaletteVar } from '../../theme/theme-colors';
+import { bottleneckAccent, bottleneckIconBg } from '../../theme/theme-colors';
 
 interface BottleneckThemeConfig {
   iconClass: string;
@@ -18,22 +18,20 @@ export class BottleneckComponent {
 
   themeConfig(theme: BottleneckTheme): BottleneckThemeConfig {
     switch (theme) {
-      case 'teal':
+      case 'waiting-on-me':
         return { iconClass: 'pi pi-clock' };
-      case 'primary':
+      case 'waiting-on-recruiter':
         return { iconClass: 'pi pi-user' };
-      case 'amber':
+      case 'candidates-aging':
         return { iconClass: 'pi pi-calendar' };
-      default:
-        return { iconClass: 'pi pi-info-circle' };
     }
   }
 
-  colorVar(theme: BottleneckTheme): string {
-    return themePaletteVar(theme, 600);
+  accentColor(theme: BottleneckTheme): string {
+    return bottleneckAccent(theme);
   }
 
   iconBg(theme: BottleneckTheme): string {
-    return themePaletteTint(theme, 600);
+    return bottleneckIconBg(theme);
   }
 }

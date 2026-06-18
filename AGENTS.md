@@ -27,3 +27,10 @@ npm start
 
 - PrimeNG expects Angular 21 peer versions in this repo.
 - `@angular/cdk` is installed as a PrimeNG peer dependency.
+
+## Theme
+
+- **PrimeNG preset: Lara** — `PipPreset` extends Lara in `src/app/theme/pip-preset.ts`.
+- **Locked:** Do not switch to Nora, Aura, or another base preset unless the user explicitly asks.
+- Pip brand colors live in `pip-tokens.ts`; only surfaces, text, and primary override Lara via `definePreset`.
+- Do not recreate Lara component styling (card borders, shadows, padding) in CSS — use Lara defaults.
