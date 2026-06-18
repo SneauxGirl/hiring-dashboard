@@ -15,24 +15,24 @@
       <app-page-header class="hidden w-full min-w-0 md:block lg:order-1" [user]="data.user" />
       <app-kpi class="order-1 w-full min-w-0 lg:order-2" [kpis]="data.kpis" />
       <app-schedule
-        class="order-2 w-full min-w-0 lg:order-6 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
+        class="order-2 w-full min-w-0 lg:order-4 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
         [schedule]="data.schedule"
         [candidates]="data.candidates"
       />
       <app-bottleneck
-        class="order-3 w-full min-w-0 lg:order-5 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
+        class="order-3 w-full min-w-0 lg:order-3 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
         [bottlenecks]="data.bottlenecks"
       />
       <app-requisitions
-        class="order-4 w-full min-w-0 lg:order-4 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)*0.65)]"
+        class="order-4 w-full min-w-0 lg:order-6 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)*0.65)]"
         [requisitions]="data.openRequisitions"
       />
       <app-trends
-        class="order-5 w-full min-w-0 lg:order-7 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
+        class="order-5 w-full min-w-0 lg:order-7 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)*0.35)]"
         [trends]="data.trends"
       />
       <app-funnel
-        class="order-6 w-full min-w-0 lg:order-3 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)*0.35)]"
+        class="order-6 w-full min-w-0 lg:order-5 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
         [funnelStages]="data.funnelStages"
         [stageDurations]="data.stageDurations"
       />

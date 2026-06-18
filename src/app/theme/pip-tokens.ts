@@ -8,9 +8,9 @@ export type PipSlot = 0 | 1 | 2 | 3 | 4 | 5;
 const SLOTS = [
   { fill: '#e7f2f1', ink: '#008782' },
   { fill: '#f0ebf6', ink: '#6b229c' },
-  { fill: '#f7ebe4', ink: '#cf4a10' },
+  { fill: '#f6f4e6', ink: '#cf4a10' },
   { fill: '#f9f2e2', ink: '#cb911a' },
-  { fill: '#f9e8e8', ink: '#be7774' },
+  { fill: '#FFF2F7', ink: '#E00048' },
   { fill: '#e5e7eb', ink: '#4b5563' },
 ] as const;
 

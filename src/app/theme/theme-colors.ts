@@ -44,6 +44,17 @@ export function funnelStageLabelColor(stageIndex: number): string {
   return slotInk(slot);
 }
 
+/** Funnel glass bars — layered ink/fill at ~85% strength for glass styling. */
+export function funnelStageGlassStyle(stageIndex: number): {
+  ink: string;
+  fill: string;
+} {
+  const slot = Math.min(stageIndex, PIP_TOKENS.slots.length - 1) as PipSlot;
+  const { fill, ink } = PIP_TOKENS.slots[slot];
+
+  return { ink, fill };
+}
+
 export function chartColor(token: PipChartColor): string {
   return PIP_TOKENS.chart[token];
 }

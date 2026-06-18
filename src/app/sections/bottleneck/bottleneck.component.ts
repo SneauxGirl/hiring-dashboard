@@ -35,4 +35,9 @@ export class BottleneckComponent {
   iconBg(responsibility: PipResponsibility): string {
     return bottleneckIconBg(responsibility);
   }
+
+  washBg(responsibility: PipResponsibility): string {
+    const fill = bottleneckIconBg(responsibility);
+    return `color-mix(in srgb, ${fill} 45%, white)`;
+  }
 }

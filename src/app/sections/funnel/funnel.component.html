@@ -11,41 +11,50 @@
       </p>
     </div>
 
-    <div class="flex flex-col gap-2.5" aria-label="Recruitment funnel stages">
-      @for (stage of funnelStages; track stage.stageKey; let index = $index) {
-        <div class="flex min-w-0 items-center gap-3">
-          <span
-            class="w-[9.5rem] shrink-0 truncate text-[length:var(--font-size-label)] text-muted-color sm:w-[11rem]"
-            [title]="stageTitle(stage)"
-          >
-            {{ stageTitle(stage) }}
-          </span>
-
-          <div class="flex min-w-0 flex-1 justify-center">
+    <div class="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4">
+      <div
+        class="funnel-chart flex min-w-0 flex-1 flex-col"
+        role="img"
+        [attr.aria-label]="'Recruitment funnel chart, max stage ' + (maxCount | number) + ' applicants'"
+      >
+        @for (stage of funnelStages; track stage.stageKey; let index = $index) {
+          <div class="funnel-stage-row flex h-9 w-full items-stretch justify-center">
             <div
-              class="flex h-7 min-w-[3rem] items-center rounded-[4px] px-2 text-[length:var(--font-size-label)] font-medium"
-              [style.width]="barWidth(stage.count)"
+              class="funnel-stage-bar h-full shrink-0"
+              [style.width.%]="barWidthPct(stage.count)"
+              [ngStyle]="barGlassVars(index)"
+              [attr.aria-label]="stageTitle(stage) + ', ' + (stage.count | number) + ' applicants'"
+            ></div>
+          </div>
+        }
+      </div>
+
+      <div
+        class="flex min-w-0 flex-col sm:w-[17rem]"
+        aria-label="Recruitment funnel stage details"
+      >
+        @for (stage of funnelStages; track stage.stageKey; let index = $index) {
+          <div
+            class="grid h-9 min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-3 border-b border-surface last:border-b-0"
+          >
+            <span
+              class="truncate text-[length:var(--font-size-label)] font-medium text-muted-color"
+              [title]="stageTitle(stage)"
+            >
+              {{ stageTitle(stage) }}
+            </span>
+            <span class="text-right text-[length:var(--font-size-label)] font-semibold text-color">
+              {{ stage.count | number }}
+            </span>
+            <span
+              class="inline-flex min-w-[3.75rem] justify-center rounded-full px-2 py-1 text-[length:var(--font-size-label)] font-semibold"
               [style.background]="barColor(index)"
               [style.color]="barLabelColor(index)"
             >
-              <span class="truncate">
-                {{ stage.count | number }}
-                @if (stage.conversionPct !== undefined) {
-                  <span class="font-normal"> ({{ stage.conversionPct }}%)</span>
-                }
-              </span>
-            </div>
+              {{ stageConversionText(stage) }}
+            </span>
           </div>
-        </div>
-      }
-    </div>
-
-    <div class="flex justify-center">
-      <div
-        class="inline-flex items-center gap-1 border border-surface px-2 py-0.5 text-[length:var(--font-size-label)] text-muted-color"
-        aria-label="Overall funnel conversion"
-      >
-        <span class="border-l border-surface-400 pl-1">{{ overallConversionPct }}%</span>
+        }
       </div>
     </div>
 
