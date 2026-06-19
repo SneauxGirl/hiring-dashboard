@@ -239,7 +239,7 @@ export class TrendsComponent implements OnDestroy {
           },
           tooltip: {
             backgroundColor: readThemeVar('text-color'),
-            titleFont: { family: this.fontFamily(), size: 14, weight: 'bold' },
+            titleFont: { family: this.fontFamily(), size: 14, weight: this.fontWeightStrong() },
             bodyFont: { family: this.fontFamily(), size: 14 },
             padding: 12,
             cornerRadius: 8,
@@ -299,5 +299,17 @@ export class TrendsComponent implements OnDestroy {
     }
 
     return getComputedStyle(document.documentElement).getPropertyValue('--font-body').trim();
+  }
+
+  private fontWeightStrong(): number {
+    if (!isPlatformBrowser(this.platformId)) {
+      return 700;
+    }
+
+    const raw = getComputedStyle(document.documentElement)
+      .getPropertyValue('--font-weight-bold')
+      .trim();
+    const parsed = Number.parseInt(raw, 10);
+    return Number.isFinite(parsed) ? parsed : 700;
   }
 }

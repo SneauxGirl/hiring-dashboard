@@ -16,8 +16,20 @@ alwaysApply: false
 - Icons via PrimeIcons/SVG — not Unicode emoji
 - Prefer consistent variables over hardcoded values
 
-# Font Roles
+# Font
 
-- **Sansation** — body, UI, captions, table text
-- **Cormorant SC** — section headings, card titles
-- **Birthstone** — script accent only (e.g. "Good morning, ")
+- **Sansation** — all UI text except section card titles
+- **PT Serif** — `h2` section titles only (semibold via global base rule)
+
+# Font Weights
+
+Use standard Tailwind utilities — defaults are not overridden:
+
+| Utility | Weight |
+|---------|--------|
+| `font-normal` | 400 |
+| `font-medium` | 500 |
+| `font-semibold` | 600 |
+| `font-bold` | 700 |
+
+Global `h1`–`h4` use `font-semibold` (600); `strong`/`b` use `font-bold` (700). Tagline weight is `--font-accent-weight` on `.text-accent`.

@@ -3,7 +3,7 @@
     <div class="flex items-start justify-between gap-3">
       <div class="min-w-0">
         <h2
-          class="m-0 text-[length:var(--font-size-label)] font-bold uppercase tracking-[0.12em] text-color"
+          class="m-0 text-[length:var(--font-size-label)] text-color"
         >
           Workforce movement trends
         </h2>
@@ -34,14 +34,14 @@
             <tr>
               <th
                 scope="col"
-                class="border-b border-surface pb-3 text-left text-[length:var(--font-size-label)] font-bold uppercase tracking-[0.08em] text-muted-color"
+                class="border-b border-surface pb-3 text-left text-[length:var(--font-size-label)] font-bold text-muted-color"
               >
                 Quarter
               </th>
               @for (series of trends.series; track series.id) {
                 <th
                   scope="col"
-                  class="border-b border-surface pb-3 text-left text-[length:var(--font-size-label)] font-bold uppercase tracking-[0.08em] text-muted-color"
+                  class="border-b border-surface pb-3 text-left text-[length:var(--font-size-label)] font-bold text-muted-color"
                 >
                   {{ series.label }}
                 </th>

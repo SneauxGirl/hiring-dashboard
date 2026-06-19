@@ -12,19 +12,21 @@
   --font-size-heading-lg: 1.75rem;
 
   --font-body: 'Sansation', sans-serif;
-  --font-heading: 'Cormorant SC', serif;
-  --font-accent: 'Birthstone', cursive;
+  --font-heading: var(--font-body);
+  --font-accent: var(--font-body);
+  --font-h2: 'PT Serif', serif;
+  --font-size-accent: var(--font-size-label);
   --font-accent-weight: 400;
-  --font-accent-size: 3rem;
-  --font-accent-color: color-mix(in srgb, #1f2937 95%, white 5%);
 
   --dashboard-max-width: 1440px;
   --dashboard-margin: 20px;
   --dashboard-header-padding-block: 1.25rem;
   --dashboard-header-padding-block-lg: 1.5rem;
-  --dashboard-header-row-height: var(--font-accent-size);
+  --dashboard-header-row-height: var(--sidebar-logo-height);
+  --sidebar-logo-height: 3rem;
   --sidebar-width: 240px;
   --sidebar-width-collapsed: 4.5rem;
+  --letter-spacing-caps: 0.12em;
 
   --pip-nav-active-bg: #f0ebf6;
   --pip-nav-active-ink: #6b229c;
@@ -54,8 +56,20 @@
   h3,
   h4 {
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     margin: 0;
+  }
+
+  h2 {
+    font-family: var(--font-h2);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-caps);
+  }
+
+  strong,
+  b {
+    font-weight: var(--font-weight-bold);
   }
 
   .p-component {
@@ -65,6 +79,13 @@
 }
 
 @layer components {
+  .text-accent {
+    font-family: var(--font-accent);
+    font-size: var(--font-size-accent);
+    font-weight: var(--font-accent-weight);
+    line-height: 1.35;
+  }
+
   .dashboard-nav-menu .p-menu-item.nav-item--active > .p-menu-item-content {
     background: var(--pip-nav-active-bg);
     color: var(--pip-nav-active-ink);
