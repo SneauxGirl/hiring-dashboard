@@ -28,12 +28,12 @@
   --sidebar-width-collapsed: 4.5rem;
   --letter-spacing-caps: 0.12em;
 
-  --pip-nav-active-bg: #f0ebf6;
-  --pip-nav-active-ink: #6b229c;
+  --pip-nav-active-bg: #f0ebf6; /* PIP_PALETTE.purple.fill */
+  --pip-nav-active-ink: #6b229c; /* PIP_PALETTE.purple.solid */
   --pip-brand-blue: #252356; /* PIP_PALETTE.blue.ink */
   --pip-brand-blue-fill: #ECEBF8; /* PIP_PALETTE.blue.fill */
-  --pip-nav-hover-bg: color-mix(in srgb, #f0ebf6 55%, white);
-  --pip-nav-hover-ink: #6b229c;
+  --pip-nav-hover-bg: color-mix(in srgb, #f0ebf6 55%, white); /* purple.fill tint */
+  --pip-nav-hover-ink: #6b229c; /* PIP_PALETTE.purple.solid */
 }
 
 @layer base {

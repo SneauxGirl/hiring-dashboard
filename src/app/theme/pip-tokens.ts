@@ -6,7 +6,7 @@
 /** Fill + solid + ink triples keyed by color name. Charts use solid; pills/labels use fill + ink. */
 export const PIP_PALETTE = {
   teal: { fill: '#e7f2f1', solid: '#008782', ink: '#008782' },
-  purple: { fill: '#F3EAF4', solid: '#9B2E8A', ink: '#5C1A53' },
+  purple: { fill: '#f0ebf6', solid: '#6b229c', ink: '#6b229c' },
   orange: { fill: '#FFF1EB', solid: '#F85330', ink: '#A02F15' },
   gold: { fill: '#f9f2e2', solid: '#e5b82e', ink: '#cb911a' },
   pink: { fill: '#FFF0F6', solid: '#D0356D', ink: '#7A1D42' },
@@ -51,7 +51,7 @@ export const PIP_TOKENS = {
     modal: '0 2px 6px color-mix(in srgb, #334155 22%, transparent)',
     navigation: '0 2px 10px color-mix(in srgb, #334155 9%, transparent)',
   },
-  primary: PIP_PALETTE.teal.ink,
+  primary: PIP_PALETTE.purple.solid,
   nav: 'purple' satisfies PipColor,
   responsibility: {
     'waiting-on-me': 'teal',

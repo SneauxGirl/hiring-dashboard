@@ -1,7 +1,9 @@
 import { definePreset, palette } from '@primeuix/themes';
 import Lara from '@primeuix/themes/lara';
 
-import { PIP_TOKENS } from './pip-tokens';
+import { PIP_PALETTE, PIP_TOKENS } from './pip-tokens';
+
+const purple = PIP_PALETTE.purple;
 
 /** PrimeNG base preset: Lara. Locked — do not switch to Nora, Aura, or another preset without explicit user approval. */
 export const PipPreset = definePreset(Lara, {
@@ -26,6 +28,22 @@ export const PipPreset = definePreset(Lara, {
           hoverColor: PIP_TOKENS.text.hoverColor,
           mutedColor: PIP_TOKENS.text.mutedColor,
           hoverMutedColor: PIP_TOKENS.text.hoverMutedColor,
+        },
+        primary: {
+          color: purple.solid,
+          hoverColor: purple.solid,
+          activeColor: purple.solid,
+        },
+        highlight: {
+          background: purple.fill,
+          focusBackground: purple.fill,
+          color: purple.solid,
+          focusColor: purple.solid,
+        },
+        formField: {
+          hoverBorderColor: purple.solid,
+          focusBorderColor: purple.solid,
+          floatLabelFocusColor: purple.solid,
         },
       },
     },
