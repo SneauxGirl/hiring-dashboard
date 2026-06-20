@@ -4,9 +4,7 @@ Work in progress: Hiring-manager dashboard. Built in Angular, with Typescript an
 
 **Live demo:** [pipeline-dashboard-seven-chi.vercel.app/](https://pipeline-dashboard-seven-chi.vercel.app/)
 
-## Current Stage
-
-First Pass: blocking in components for responsive layout.
+![Pipeline dashboard at desktop](docs/images/dashboard-colorlock.png)
 
 ## Stack
 
@@ -15,6 +13,7 @@ First Pass: blocking in components for responsive layout.
 - **Tailwind CSS** 4 + `tailwindcss-primeui`
 - **Node** 20.19+, 22.12+, or 24+ (26.2.x used in development)
 - **npm** 8+ (`package-lock.json` — use npm, not yarn/pnpm)
+
 Check `node -v` and `npm -v` against the ranges above before installing.
 
 ## Setup
@@ -53,13 +52,13 @@ npm run serve:ssr:pip
 
 Output goes to `dist/pip/`. Fonts load from Google Fonts on first visit (network required for typography).
 
-Section components live under `src/app/sections/` and compose on `src/app/pages/dashboard/`.
+Section components live under `src/app/sections/` and compose on `src/app/pages/dashboard/`. Data is static from `src/app/data/`.
 
 ## Project conventions
 
 - PrimeNG-first UI; custom markup only when PrimeNG has no fit
 - Mobile-first layout (flexbox)
-- Design tokens and fonts in `src/styles.css`
+- Design tokens in `src/app/theme/pip-tokens.ts`; global styles in `src/styles.css`
 
 ## Scripts
 
@@ -70,6 +69,4 @@ Section components live under `src/app/sections/` and compose on `src/app/pages/
 | `npm run build`         | Production build                 |
 | `npm run serve:ssr:pip` | Run SSR server after build       |
 
-## Status
 
-Work in progress — additional dashboard sections (KPIs, schedule, charts, etc.) are not built yet.

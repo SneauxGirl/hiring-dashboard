@@ -7,7 +7,7 @@
 export const PIP_PALETTE = {
   teal: { fill: '#e7f2f1', solid: '#008782', ink: '#008782' },
   purple: { fill: '#f0ebf6', solid: '#6b229c', ink: '#6b229c' },
-  orange: { fill: '#FFF1EB', solid: '#F85330', ink: '#A02F15' },
+  orange: { fill: '#FFF1EB', solid: '#F85330', ink: '#C94327' },
   gold: { fill: '#f9f2e2', solid: '#e5b82e', ink: '#cb911a' },
   pink: { fill: '#FFF0F6', solid: '#D0356D', ink: '#7A1D42' },
   red: { fill: '#fce8ec', solid: '#DC143C', ink: '#9B1B30' },
