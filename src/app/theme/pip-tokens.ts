@@ -74,10 +74,10 @@ export const PIP_TOKENS = {
     transfers: 'teal',
     backfills: 'blue',
   } satisfies Record<'attrition' | 'promotions' | 'transfers' | 'backfills', PipColor>,
-  /** Stage index → palette color (h1 applicants bar → h6 hired). */
+  /** Stage index → palette color (h1 applicants → h6 hired). Aligns with responsibility hues from h3 onward. */
   funnel: {
-    bar: ['blue', 'purple', 'orange', 'gold', 'pink', 'charcoal'],
-    duration: ['blue', 'purple', 'orange', 'gold', 'pink', 'charcoal'],
+    bar: ['blue', 'purple', 'orange', 'teal', 'pink', 'charcoal'],
+    duration: ['blue', 'purple', 'orange', 'teal', 'pink', 'charcoal'],
   } satisfies { bar: readonly PipColor[]; duration: readonly PipColor[] },
 } as const;
 

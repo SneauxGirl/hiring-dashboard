@@ -4,7 +4,7 @@
 import { DashboardData } from '../models/dashboard.models';
 
 export const MOCK_DASHBOARD: DashboardData = {
-  user: { name: 'Alex Rivera', title: 'Hiring Manager' },
+  user: { name: 'Alex Rivera', title: 'Hiring Manager', avatarUrl: '/user-avatar.png' },
   navItems: [
     { id: 'overview', label: 'Overview', icon: 'pi pi-home', active: true },
     { id: 'requisitions', label: 'Requisitions', icon: 'pi pi-briefcase' },

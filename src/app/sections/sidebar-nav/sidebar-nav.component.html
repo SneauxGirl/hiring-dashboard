@@ -1,6 +1,6 @@
 <nav
   id="sidebar-main-nav"
-  class="sidebar-nav flex h-full w-full flex-col bg-surface-0 px-3 pb-5 pt-[length:var(--dashboard-header-padding-block)] lg:pt-[length:var(--dashboard-header-padding-block-lg)]"
+  class="sidebar-nav flex h-full w-full flex-col bg-surface-0 px-3 pb-[length:var(--sidebar-edge-gap)] pt-[length:var(--dashboard-header-padding-block)] lg:pt-[length:var(--dashboard-header-padding-block-lg)]"
   aria-label="Main navigation"
 >
   <div
@@ -40,9 +40,13 @@
     styleClass="dashboard-nav-menu mt-6 w-full flex-1"
   />
 
-  <p-card styleClass="mt-auto w-full">
+  <p-card styleClass="sidebar-user-card mt-auto w-full">
     <div class="sidebar-user flex items-center gap-3" aria-label="Signed in user">
-      <p-avatar [label]="userInitials" shape="circle" aria-hidden="true" />
+      <p-avatar
+        [image]="user.avatarUrl"
+        shape="circle"
+        [attr.aria-label]="user.name"
+      />
       <div class="sidebar-user-text min-w-0">
         <div class="truncate text-base font-medium text-color">{{ user.name }}</div>
         <div class="truncate text-[length:var(--font-size-label)] text-muted-color">{{ user.title }}</div>

@@ -26,6 +26,7 @@
   --sidebar-logo-height: 3rem;
   --sidebar-width: 240px;
   --sidebar-width-collapsed: 4.5rem;
+  --sidebar-edge-gap: 75px; /* viewport edge → first nav item top; mirrored below user text */
   --letter-spacing-caps: 0.12em;
 
   --pip-nav-active-bg: #f0ebf6; /* PIP_PALETTE.purple.fill */
@@ -223,5 +224,13 @@
   .sidebar-toggle:focus-visible {
     outline: 2px solid var(--pip-nav-active-ink);
     outline-offset: 2px;
+  }
+
+  .sidebar-user-card.p-card {
+    box-shadow: none;
+  }
+
+  .sidebar-user-card .p-card-body {
+    padding-bottom: 0;
   }
 }

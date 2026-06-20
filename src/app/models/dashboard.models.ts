@@ -98,6 +98,7 @@ export interface NavItem {
 export interface DashboardUser {
   name: string;
   title: string;
+  avatarUrl: string;
 }
 
 export interface DashboardData {

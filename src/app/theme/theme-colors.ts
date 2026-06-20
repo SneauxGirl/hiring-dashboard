@@ -105,7 +105,7 @@ export function bottleneckIconBg(responsibility: PipResponsibility): string {
 }
 
 export function scheduleGroupColor(group: keyof typeof PIP_TOKENS.schedule): string {
-  return paletteInk(PIP_TOKENS.schedule[group]);
+  return paletteSolid(PIP_TOKENS.schedule[group]);
 }
 
 export function trendSeriesColor(metricId: PipTrendMetricId): string {
