@@ -4,8 +4,10 @@ import {
   ElementRef,
   inject,
   Input,
+  OnChanges,
   OnDestroy,
   PLATFORM_ID,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -16,6 +18,7 @@ import { Menu } from 'primeng/menu';
 import type { ChartConfiguration } from 'chart.js';
 
 import {
+  TrendWeekData,
   WorkforceTrendSeries,
   WorkforceTrends,
 } from '../../models/dashboard.models';
@@ -26,6 +29,7 @@ import {
   trendSeriesColor,
   trendSeriesPriorColor,
 } from '../../theme/theme-colors';
+import { TREND_CHART_YEARS, TREND_METRIC_DEFINITIONS } from './trends.catalog';
 
 type TrendsViewMode = 'chart' | 'table';
 
@@ -68,8 +72,8 @@ const QUARTER_ROWS: QuarterRow[] = [
   imports: [Button, Card, Menu],
   templateUrl: './trends.component.html',
 })
-export class TrendsComponent implements OnDestroy {
-  @Input({ required: true }) trends!: WorkforceTrends;
+export class TrendsComponent implements OnChanges, OnDestroy {
+  @Input({ required: true }) trendValues!: TrendWeekData;
   @ViewChild('chartCanvas') chartCanvas?: ElementRef<HTMLCanvasElement>;
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -80,8 +84,23 @@ export class TrendsComponent implements OnDestroy {
   readonly monthLabels = MONTH_LABELS;
   readonly quarterRows = QUARTER_ROWS;
 
+  get trends(): WorkforceTrends {
+    return {
+      ...TREND_CHART_YEARS,
+      asOfMonthIndex: this.trendValues.asOfMonthIndex,
+      series: TREND_METRIC_DEFINITIONS.map((definition) => ({
+        id: definition.id,
+        label: definition.label,
+        currentYear: [...this.trendValues.series[definition.id].currentYear],
+        priorYear: [...this.trendValues.series[definition.id].priorYear],
+      })),
+    };
+  }
+
   /** Last month index (inclusive) that uses current-year data. */
-  readonly currentMonthIndex = new Date().getMonth();
+  get currentMonthIndex(): number {
+    return this.trendValues.asOfMonthIndex;
+  }
 
   constructor() {
     afterNextRender(() => {
@@ -103,6 +122,14 @@ export class TrendsComponent implements OnDestroy {
       command: () => this.setViewMode('table'),
     },
   ];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['trendValues'] && !changes['trendValues'].firstChange && this.viewMode === 'chart') {
+      if (isPlatformBrowser(this.platformId)) {
+        requestAnimationFrame(() => this.createChart());
+      }
+    }
+  }
 
   ngOnDestroy(): void {
     this.destroyChart();

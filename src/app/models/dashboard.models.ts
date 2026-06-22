@@ -2,22 +2,39 @@ import { PipResponsibility, PipRiskLevel } from '../theme/pip-tokens';
 
 export type KpiTrendDirection = 'up' | 'down' | 'neutral';
 
-export interface KpiMetric {
-  label: string;
+/** Weekly KPI values — labels are in kpi.catalog.ts. */
+export interface KpiWeekValues {
   value: string | number;
   valueUnit?: string;
   delta?: string;
   trend?: KpiTrendDirection;
 }
 
+/** @deprecated Use KpiWeekValues with KPI_DEFINITIONS in the component. */
+export interface KpiMetric extends KpiWeekValues {
+  label: string;
+}
+
 export type ScheduleGroup = 'today' | 'tomorrow' | 'this-week';
 
-export interface ScheduleInterview {
+export type ScheduleInterviewEntry = {
   id: string;
   timeLabel: string;
   group: ScheduleGroup;
+  kind?: 'interview';
   candidateId: string;
-}
+};
+
+export type SchedulePtoEntry = {
+  id: string;
+  group: ScheduleGroup;
+  kind: 'pto';
+};
+
+export type ScheduleEntry = ScheduleInterviewEntry | SchedulePtoEntry;
+
+/** @deprecated Use ScheduleEntry */
+export type ScheduleInterview = ScheduleInterviewEntry;
 
 export interface CandidateProfile {
   id: string;
@@ -33,30 +50,48 @@ export interface WeekRangeOption {
 
 export type BottleneckTheme = PipResponsibility;
 
-export interface BottleneckCard {
-  id: string;
-  title: string;
-  subtitle: string;
+/** Weekly bottleneck metrics — copy and icons are in bottleneck.catalog.ts. */
+export interface BottleneckWeekMetrics {
   responsibility: PipResponsibility;
   candidateCount: number;
   avgMetric: number;
+}
+
+/** @deprecated Use BottleneckWeekMetrics with BOTTLENECK_DEFINITIONS. */
+export interface BottleneckCard extends BottleneckWeekMetrics {
+  id: string;
+  title: string;
+  subtitle: string;
   avgLabel: string;
 }
 
 export type WorkforceTrendMetricId = 'attrition' | 'promotions' | 'transfers' | 'backfills';
 
-export interface WorkforceTrendSeries {
-  id: WorkforceTrendMetricId;
-  label: string;
-  /** Twelve monthly values — index 0 = January. */
+/** Twelve monthly values per year — index 0 = January. */
+export interface TrendSeriesWeekValues {
   currentYear: number[];
-  /** Twelve monthly values — index 0 = January. */
   priorYear: number[];
 }
 
+/** Weekly trend numbers — metric labels and chart years are in trends.catalog.ts. */
+export interface TrendWeekData {
+  /** 0–11 (Jan–Dec); months through this index use currentYear in chart/table. */
+  asOfMonthIndex: number;
+  series: Record<WorkforceTrendMetricId, TrendSeriesWeekValues>;
+}
+
+export interface WorkforceTrendSeries {
+  id: WorkforceTrendMetricId;
+  label: string;
+  currentYear: number[];
+  priorYear: number[];
+}
+
+/** View model built by TrendsComponent from TrendWeekData + trends.catalog.ts. */
 export interface WorkforceTrends {
   currentYear: number;
   priorYear: number;
+  asOfMonthIndex: number;
   series: WorkforceTrendSeries[];
 }
 
@@ -75,6 +110,12 @@ export interface OpenRequisitionsData {
   moreCount: number;
 }
 
+/** Weekly funnel stage values — stage keys and labels are in funnel.catalog.ts. */
+export interface FunnelStageWeekData {
+  count: number;
+  conversionPct?: number;
+}
+
 export interface FunnelStage {
   stageKey: string;
   label: string;
@@ -88,28 +129,23 @@ export interface StageDuration {
   days: number;
 }
 
-export interface NavItem {
-  id: string;
-  label: string;
-  icon: string;
-  active?: boolean;
-}
-
 export interface DashboardUser {
   name: string;
   title: string;
   avatarUrl: string;
 }
 
-export interface DashboardData {
-  user: DashboardUser;
-  kpis: KpiMetric[];
-  schedule: ScheduleInterview[];
+/** Week-scoped dashboard mock payload (no user, nav, or fixed labels). */
+export interface DashboardWeekData {
+  kpis: KpiWeekValues[];
+  schedule: ScheduleEntry[];
   candidates: CandidateProfile[];
-  bottlenecks: BottleneckCard[];
-  trends: WorkforceTrends;
+  bottlenecks: BottleneckWeekMetrics[];
+  trends: TrendWeekData;
   openRequisitions: OpenRequisitionsData;
-  funnelStages: FunnelStage[];
-  stageDurations: StageDuration[];
-  navItems: NavItem[];
+  funnelStages: FunnelStageWeekData[];
+  stageDurationDays: number[];
 }
+
+/** @deprecated Use DashboardWeekData */
+export type DashboardData = DashboardWeekData;

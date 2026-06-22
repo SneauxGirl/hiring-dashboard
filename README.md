@@ -52,13 +52,19 @@ npm run serve:ssr:pip
 
 Output goes to `dist/pip/`. Fonts load from Google Fonts on first visit (network required for typography).
 
-Section components live under `src/app/sections/` and compose on `src/app/pages/dashboard/`. Data is static from `src/app/data/`.
+Section components live under `src/app/sections/` and compose on `src/app/pages/dashboard/`. Data is 
+static from `src/app/data/`. Design tokens in `src/app/theme/pip-tokens.ts`; global styles in `src/styles.css`
 
-## Project conventions
+### Mock Data
 
-- PrimeNG-first UI; custom markup only when PrimeNG has no fit
-- Mobile-first layout (flexbox)
-- Design tokens in `src/app/theme/pip-tokens.ts`; global styles in `src/styles.css`
+```
+src/app/data/
+  dashboard-user.mock.ts          # Signed-in user (Alex Rivera) — same every week
+  dashboard-weeks.mock.ts         # Week keys and picker labels
+  dashboard-weekly.mock.ts        # All five weekly snapshots (KPIs, requisitions, schedule, …)
+  dashboard-trends.mock.ts        # Trend & stage-duration number builders per week
+  dashboard-rules.mock.ts         # Schedule rules (e.g. interview-eligible stages)
+```
 
 ## Scripts
 
@@ -69,4 +75,7 @@ Section components live under `src/app/sections/` and compose on `src/app/pages/
 | `npm run build`         | Production build                 |
 | `npm run serve:ssr:pip` | Run SSR server after build       |
 
+## Contact
+
+For design questions or feedback, open an issue on this repository or contact Heather Hugo on [GitHub](https://github.com/SneauxGirl).
 

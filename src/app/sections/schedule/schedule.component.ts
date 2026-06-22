@@ -5,9 +5,11 @@ import { Dialog } from 'primeng/dialog';
 
 import {
   CandidateProfile,
+  ScheduleEntry,
   ScheduleGroup,
-  ScheduleInterview,
+  SchedulePtoEntry,
 } from '../../models/dashboard.models';
+import { PTO_SCHEDULE_COPY } from './schedule.catalog';
 import { scheduleGroupColor } from '../../theme/theme-colors';
 
 interface ScheduleGroupConfig {
@@ -21,23 +23,34 @@ interface ScheduleGroupConfig {
   templateUrl: './schedule.component.html',
 })
 export class ScheduleComponent {
-  @Input({ required: true }) schedule: ScheduleInterview[] = [];
+  @Input({ required: true }) schedule: ScheduleEntry[] = [];
   @Input({ required: true }) candidates: CandidateProfile[] = [];
 
   dialogVisible = false;
   selectedCandidate: CandidateProfile | null = null;
 
+  readonly ptoCopy = PTO_SCHEDULE_COPY;
+
   readonly groupConfigs: ScheduleGroupConfig[] = [
     { key: 'today', label: 'Today' },
     { key: 'tomorrow', label: 'Tomorrow' },
+    { key: 'this-week', label: 'This week' },
   ];
 
-  interviewsForGroup(group: ScheduleGroup): ScheduleInterview[] {
-    return this.schedule.filter((interview) => interview.group === group);
+  entriesForGroup(group: ScheduleGroup): ScheduleEntry[] {
+    return this.schedule.filter((entry) => entry.group === group);
   }
 
-  candidateFor(interview: ScheduleInterview): CandidateProfile | undefined {
-    return this.candidates.find((candidate) => candidate.id === interview.candidateId);
+  isPto(entry: ScheduleEntry): entry is SchedulePtoEntry {
+    return entry.kind === 'pto';
+  }
+
+  candidateFor(entry: ScheduleEntry): CandidateProfile | undefined {
+    if (this.isPto(entry)) {
+      return undefined;
+    }
+
+    return this.candidates.find((candidate) => candidate.id === entry.candidateId);
   }
 
   groupColor(group: ScheduleGroup): string {

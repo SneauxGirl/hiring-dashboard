@@ -1,0 +1,558 @@
+import { DashboardWeekData } from '../models/dashboard.models';
+import { stageDurationDaysForWeek, trendsForWeek } from './dashboard-trends.mock';
+import { DashboardWeekKey } from './dashboard-weeks.mock';
+
+function week(
+  weekKey: DashboardWeekKey,
+  data: Omit<DashboardWeekData, 'trends' | 'stageDurationDays'>,
+): DashboardWeekData {
+  return {
+    ...data,
+    trends: trendsForWeek(weekKey),
+    stageDurationDays: stageDurationDaysForWeek(weekKey),
+  };
+}
+
+export const MOCK_DASHBOARD_BY_WEEK: Record<DashboardWeekKey, DashboardWeekData> = {
+  '2026-06-01': week('2026-06-01', {
+    kpis: [
+      { value: 7, delta: '1 this month', trend: 'up' },
+      { value: 41,
+        valueUnit: 'days',
+        delta: '2 days',
+        trend: 'up',
+      },
+      { value: 81,
+        valueUnit: '%',
+        delta: '2% this month',
+        trend: 'down',
+      },
+      { value: 3, delta: '1 this month', trend: 'up' },
+    ],
+    openRequisitions: {
+      items: [
+        {
+          id: 'r1',
+          role: 'Senior Frontend Engineer',
+          candidates: 612,
+          stage: 'Assessment',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 18,
+          risk: 'medium',
+        },
+        {
+          id: 'r2',
+          role: 'Product Designer',
+          candidates: 894,
+          stage: 'Screening',
+          responsibility: 'candidates-aging',
+          daysOpen: 24,
+          risk: 'medium',
+        },
+        {
+          id: 'r3',
+          role: 'Marketing Manager',
+          candidates: 1124,
+          stage: 'Application',
+          responsibility: 'candidates-aging',
+          daysOpen: 17,
+          risk: 'low',
+        },
+        {
+          id: 'r4',
+          role: 'Backend Engineer',
+          candidates: 548,
+          stage: 'Assessment',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 21,
+          risk: 'medium',
+        },
+        {
+          id: 'r5',
+          role: 'Data Analyst',
+          candidates: 821,
+          stage: 'Screening',
+          responsibility: 'waiting-on-me',
+          daysOpen: 16,
+          risk: 'low',
+        },
+      ],
+      moreCount: 2,
+    },
+    candidates: [
+      {
+        id: 'c-lena-morris',
+        name: 'Lena Morris',
+        roleTitle: 'Senior Frontend Engineer',
+        roleSpecs:
+          'Frontend engineer with Angular, accessibility, and design-system experience.',
+      },
+      {
+        id: 'c-omar-saleh',
+        name: 'Omar Saleh',
+        roleTitle: 'Backend Engineer',
+        roleSpecs: 'Backend engineer focused on APIs, services, and cloud deployment.',
+      },
+      {
+        id: 'c-grace-lee',
+        name: 'Grace Lee',
+        roleTitle: 'Senior Frontend Engineer',
+        roleSpecs: 'Senior UI engineer with component architecture and mentoring experience.',
+      },
+    ],
+    schedule: [
+      { id: 'pto-0601-today', kind: 'pto', group: 'today' },
+      { id: 'pto-0601-tomorrow', kind: 'pto', group: 'tomorrow' },
+      { id: 'pto-0601-week', kind: 'pto', group: 'this-week' },
+    ],
+    bottlenecks: [
+      { responsibility: 'waiting-on-me', candidateCount: 7, avgMetric: 8.1 },
+      { responsibility: 'waiting-on-recruiter', candidateCount: 8, avgMetric: 5.6 },
+      { responsibility: 'candidates-aging', candidateCount: 15, avgMetric: 20.4 },
+    ],
+    funnelStages: [
+      { count: 3128 },
+      { count: 2867, conversionPct: 91.66 },
+      { count: 1734, conversionPct: 60.48 },
+      { count: 218, conversionPct: 12.57 },
+      { count: 5, conversionPct: 2.29 },
+      { count: 3, conversionPct: 60 },
+    ],
+  }),
+
+  '2026-06-08': week('2026-06-08', {
+    kpis: [
+      { value: 8, delta: '2 this month', trend: 'up' },
+      { value: 39,
+        valueUnit: 'days',
+        delta: '2 days',
+        trend: 'down',
+      },
+      { value: 83,
+        valueUnit: '%',
+        delta: '2% this month',
+        trend: 'up',
+      },
+      { value: 4, delta: '1 this month', trend: 'up' },
+    ],
+    openRequisitions: {
+      items: [
+        {
+          id: 'r1',
+          role: 'Senior Frontend Engineer',
+          candidates: 97,
+          stage: 'Interview',
+          responsibility: 'waiting-on-me',
+          daysOpen: 25,
+          risk: 'medium',
+        },
+        {
+          id: 'r2',
+          role: 'Product Designer',
+          candidates: 541,
+          stage: 'Assessment',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 31,
+          risk: 'medium',
+        },
+        {
+          id: 'r3',
+          role: 'Marketing Manager',
+          candidates: 967,
+          stage: 'Screening',
+          responsibility: 'candidates-aging',
+          daysOpen: 24,
+          risk: 'medium',
+        },
+        {
+          id: 'r4',
+          role: 'Backend Engineer',
+          candidates: 84,
+          stage: 'Interview',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 28,
+          risk: 'medium',
+        },
+        {
+          id: 'r5',
+          role: 'Data Analyst',
+          candidates: 506,
+          stage: 'Assessment',
+          responsibility: 'waiting-on-me',
+          daysOpen: 23,
+          risk: 'low',
+        },
+      ],
+      moreCount: 3,
+    },
+    candidates: [
+      {
+        id: 'c-nina-walker',
+        name: 'Nina Walker',
+        roleTitle: 'Senior Frontend Engineer',
+        roleSpecs: 'Senior frontend engineer with Angular and component-library ownership.',
+      },
+      {
+        id: 'c-daniel-kim',
+        name: 'Daniel Kim',
+        roleTitle: 'Backend Engineer',
+        roleSpecs: 'Backend engineer with API, database, and service reliability experience.',
+      },
+      {
+        id: 'c-aisha-robinson',
+        name: 'Aisha Robinson',
+        roleTitle: 'Senior Frontend Engineer',
+        roleSpecs:
+          'Frontend lead with accessibility, state management, and UI architecture experience.',
+      },
+    ],
+    schedule: [
+      { id: 'i-0608-1', timeLabel: '9:30 AM', group: 'today', candidateId: 'c-nina-walker' },
+      { id: 'i-0608-2', timeLabel: '12:00 PM', group: 'today', candidateId: 'c-daniel-kim' },
+      { id: 'i-0608-3', timeLabel: '2:30 PM', group: 'tomorrow', candidateId: 'c-aisha-robinson' },
+    ],
+    bottlenecks: [
+      { responsibility: 'waiting-on-me', candidateCount: 6, avgMetric: 7.4 },
+      { responsibility: 'waiting-on-recruiter', candidateCount: 7, avgMetric: 4.9 },
+      { responsibility: 'candidates-aging', candidateCount: 13, avgMetric: 18.8 },
+    ],
+    funnelStages: [
+      { count: 3374 },
+      { count: 3098, conversionPct: 91.82 },
+      { count: 1879, conversionPct: 60.65 },
+      { count: 265, conversionPct: 14.1 },
+      { count: 7, conversionPct: 2.64 },
+      { count: 4, conversionPct: 57.14 },
+    ],
+  }),
+
+  '2026-06-15': week('2026-06-15', {
+    kpis: [
+      { value: 8, delta: '2 this month', trend: 'up' },
+      { value: 34, valueUnit: 'days', delta: '5 days', trend: 'down' },
+      { value: 87, valueUnit: '%', delta: '6% this month', trend: 'up' },
+      { value: 6, delta: 'No change', trend: 'neutral' },
+    ],
+    schedule: [
+      { id: '1', timeLabel: '10:00 AM', group: 'today', candidateId: 'c-sarah-chen' },
+      { id: '2', timeLabel: '1:30 PM', group: 'today', candidateId: 'c-mike-davis' },
+      { id: '3', timeLabel: '3:00 PM', group: 'today', candidateId: 'c-emma-white' },
+      { id: '4', timeLabel: '11:00 AM', group: 'tomorrow', candidateId: 'c-james-patel' },
+    ],
+    candidates: [
+      {
+        id: 'c-sarah-chen',
+        name: 'Sarah Chen',
+        roleTitle: 'Senior Frontend Engineer',
+        roleSpecs:
+          '5+ years building responsive web apps with Angular or React. Leads UI implementation, mentors junior engineers, and partners with design on component systems.',
+      },
+      {
+        id: 'c-mike-davis',
+        name: 'Mike Davis',
+        roleTitle: 'Product Designer',
+        roleSpecs:
+          'End-to-end product designer with strong UX research and visual design skills. Portfolio should show mobile-first flows and design-system work.',
+      },
+      {
+        id: 'c-emma-white',
+        name: 'Emma White',
+        roleTitle: 'Marketing Manager',
+        roleSpecs:
+          'B2B marketing lead with campaign strategy, demand gen, and cross-functional launch experience. Comfortable owning pipeline metrics and content calendar.',
+      },
+      {
+        id: 'c-james-patel',
+        name: 'James Patel',
+        roleTitle: 'Backend Engineer',
+        roleSpecs:
+          'Backend engineer focused on API design, data modeling, and service reliability. Experience with Node or Java and cloud-native deployment patterns.',
+      },
+      {
+        id: 'c-olivia-brown',
+        name: 'Olivia Brown',
+        roleTitle: 'Data Analyst',
+        roleSpecs:
+          'Analyst who translates hiring and business data into dashboards and recommendations. SQL, spreadsheet modeling, and clear stakeholder communication required.',
+      },
+    ],
+    bottlenecks: [
+      { responsibility: 'waiting-on-me', candidateCount: 4, avgMetric: 6.2 },
+      { responsibility: 'waiting-on-recruiter', candidateCount: 6, avgMetric: 4.1 },
+      { responsibility: 'candidates-aging', candidateCount: 9, avgMetric: 17.3 },
+    ],
+    openRequisitions: {
+      items: [
+        {
+          id: 'r1',
+          role: 'Senior Frontend Engineer',
+          candidates: 14,
+          stage: 'Final Round',
+          responsibility: 'waiting-on-me',
+          daysOpen: 32,
+          risk: 'low',
+        },
+        {
+          id: 'r2',
+          role: 'Product Designer',
+          candidates: 8,
+          stage: 'Interview',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 45,
+          risk: 'medium',
+        },
+        {
+          id: 'r3',
+          role: 'Marketing Manager',
+          candidates: 4,
+          stage: 'Screening',
+          responsibility: 'candidates-aging',
+          daysOpen: 61,
+          risk: 'high',
+        },
+        {
+          id: 'r4',
+          role: 'Backend Engineer',
+          candidates: 6,
+          stage: 'Interview',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 28,
+          risk: 'low',
+        },
+        {
+          id: 'r5',
+          role: 'Data Analyst',
+          candidates: 3,
+          stage: 'Screening',
+          responsibility: 'candidates-aging',
+          daysOpen: 35,
+          risk: 'medium',
+        },
+      ],
+      moreCount: 3,
+    },
+    funnelStages: [
+      { count: 3675 },
+      { count: 3273, conversionPct: 89.06 },
+      { count: 657, conversionPct: 20.07 },
+      { count: 439, conversionPct: 66.82 },
+      { count: 71, conversionPct: 16.17 },
+      { count: 69, conversionPct: 97.18 },
+    ],
+  }),
+
+  '2026-06-22': week('2026-06-22', {
+    kpis: [
+      { value: 8, delta: '2 this month', trend: 'up' },
+      { value: 33,
+        valueUnit: 'days',
+        delta: '6 days',
+        trend: 'down',
+      },
+      { value: 88,
+        valueUnit: '%',
+        delta: '7% this month',
+        trend: 'up',
+      },
+      { value: 6, delta: 'No change', trend: 'neutral' },
+    ],
+    openRequisitions: {
+      items: [
+        {
+          id: 'r1',
+          role: 'Senior Frontend Engineer',
+          candidates: 2,
+          stage: 'Offer',
+          responsibility: 'waiting-on-me',
+          daysOpen: 39,
+          risk: 'low',
+        },
+        {
+          id: 'r2',
+          role: 'Product Designer',
+          candidates: 12,
+          stage: 'Final Round',
+          responsibility: 'waiting-on-me',
+          daysOpen: 52,
+          risk: 'medium',
+        },
+        {
+          id: 'r3',
+          role: 'Marketing Manager',
+          candidates: 523,
+          stage: 'Assessment',
+          responsibility: 'candidates-aging',
+          daysOpen: 68,
+          risk: 'high',
+        },
+        {
+          id: 'r4',
+          role: 'Backend Engineer',
+          candidates: 68,
+          stage: 'Interview',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 35,
+          risk: 'low',
+        },
+        {
+          id: 'r5',
+          role: 'Data Analyst',
+          candidates: 914,
+          stage: 'Screening',
+          responsibility: 'candidates-aging',
+          daysOpen: 42,
+          risk: 'medium',
+        },
+      ],
+      moreCount: 3,
+    },
+    candidates: [
+      {
+        id: 'c-priya-shah',
+        name: 'Priya Shah',
+        roleTitle: 'Product Designer',
+        roleSpecs:
+          'Product designer with mobile-first UX, research synthesis, and design-system experience.',
+      },
+      {
+        id: 'c-marcus-green',
+        name: 'Marcus Green',
+        roleTitle: 'Backend Engineer',
+        roleSpecs:
+          'Backend engineer with distributed systems, API design, and cloud deployment experience.',
+      },
+      {
+        id: 'c-amelia-stone',
+        name: 'Amelia Stone',
+        roleTitle: 'Senior Frontend Engineer',
+        roleSpecs:
+          'Frontend engineer in offer stage with Angular, accessibility, and team leadership experience.',
+      },
+    ],
+    schedule: [
+      { id: 'i-0622-1', timeLabel: '10:00 AM', group: 'today', candidateId: 'c-priya-shah' },
+      { id: 'i-0622-2', timeLabel: '1:00 PM', group: 'today', candidateId: 'c-marcus-green' },
+      { id: 'i-0622-3', timeLabel: '3:30 PM', group: 'tomorrow', candidateId: 'c-amelia-stone' },
+    ],
+    bottlenecks: [
+      { responsibility: 'waiting-on-me', candidateCount: 3, avgMetric: 5.1 },
+      { responsibility: 'waiting-on-recruiter', candidateCount: 5, avgMetric: 3.8 },
+      { responsibility: 'candidates-aging', candidateCount: 7, avgMetric: 15.9 },
+    ],
+    funnelStages: [
+      { count: 3820 },
+      { count: 3401, conversionPct: 89.03 },
+      { count: 2015, conversionPct: 59.25 },
+      { count: 473, conversionPct: 23.47 },
+      { count: 76, conversionPct: 16.07 },
+      { count: 72, conversionPct: 94.74 },
+    ],
+  }),
+
+  '2026-06-29': week('2026-06-29', {
+    kpis: [
+      { value: 7, delta: '1 this month', trend: 'down' },
+      { value: 31,
+        valueUnit: 'days',
+        delta: '8 days',
+        trend: 'down',
+      },
+      { value: 89,
+        valueUnit: '%',
+        delta: '8% this month',
+        trend: 'up',
+      },
+      { value: 7, delta: '1 this month', trend: 'up' },
+    ],
+    openRequisitions: {
+      items: [
+        {
+          id: 'r1',
+          role: 'Senior Frontend Engineer',
+          candidates: 1,
+          stage: 'Hired',
+          responsibility: 'waiting-on-me',
+          daysOpen: 46,
+          risk: 'low',
+        },
+        {
+          id: 'r2',
+          role: 'Product Designer',
+          candidates: 2,
+          stage: 'Offer',
+          responsibility: 'waiting-on-me',
+          daysOpen: 59,
+          risk: 'medium',
+        },
+        {
+          id: 'r3',
+          role: 'Marketing Manager',
+          candidates: 61,
+          stage: 'Interview',
+          responsibility: 'waiting-on-recruiter',
+          daysOpen: 75,
+          risk: 'high',
+        },
+        {
+          id: 'r4',
+          role: 'Backend Engineer',
+          candidates: 11,
+          stage: 'Final Round',
+          responsibility: 'waiting-on-me',
+          daysOpen: 42,
+          risk: 'low',
+        },
+        {
+          id: 'r5',
+          role: 'Data Analyst',
+          candidates: 495,
+          stage: 'Assessment',
+          responsibility: 'candidates-aging',
+          daysOpen: 49,
+          risk: 'medium',
+        },
+      ],
+      moreCount: 2,
+    },
+    candidates: [
+      {
+        id: 'c-talia-brooks',
+        name: 'Talia Brooks',
+        roleTitle: 'Marketing Manager',
+        roleSpecs:
+          'Marketing manager with B2B campaign strategy, launch planning, and pipeline reporting experience.',
+      },
+      {
+        id: 'c-ethan-ross',
+        name: 'Ethan Ross',
+        roleTitle: 'Backend Engineer',
+        roleSpecs: 'Backend engineer with API, data modeling, and platform reliability experience.',
+      },
+      {
+        id: 'c-maya-singh',
+        name: 'Maya Singh',
+        roleTitle: 'Marketing Manager',
+        roleSpecs:
+          'Demand generation marketer with strong content strategy and cross-functional execution.',
+      },
+    ],
+    schedule: [
+      { id: 'i-0629-1', timeLabel: '9:00 AM', group: 'today', candidateId: 'c-talia-brooks' },
+      { id: 'i-0629-2', timeLabel: '11:30 AM', group: 'today', candidateId: 'c-ethan-ross' },
+      { id: 'i-0629-3', timeLabel: '2:00 PM', group: 'tomorrow', candidateId: 'c-maya-singh' },
+    ],
+    bottlenecks: [
+      { responsibility: 'waiting-on-me', candidateCount: 2, avgMetric: 4.3 },
+      { responsibility: 'waiting-on-recruiter', candidateCount: 4, avgMetric: 3.2 },
+      { responsibility: 'candidates-aging', candidateCount: 5, avgMetric: 14.7 },
+    ],
+    funnelStages: [
+      { count: 3952 },
+      { count: 3524, conversionPct: 89.17 },
+      { count: 2121, conversionPct: 60.19 },
+      { count: 511, conversionPct: 24.09 },
+      { count: 83, conversionPct: 16.24 },
+      { count: 78, conversionPct: 93.98 },
+    ],
+  }),
+};

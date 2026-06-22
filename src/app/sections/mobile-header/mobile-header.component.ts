@@ -5,7 +5,8 @@ import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
 import { Menu } from 'primeng/menu';
 
-import { DashboardUser, NavItem } from '../../models/dashboard.models';
+import { DASHBOARD_NAV_ITEMS } from '../../config/dashboard-nav.config';
+import { DashboardUser } from '../../models/dashboard.models';
 import { brandIndigo } from '../../theme/theme-colors';
 
 @Component({
@@ -18,15 +19,15 @@ export class MobileHeaderComponent {
   readonly wordmarkColor = brandIndigo();
 
   @Input({ required: true }) user!: DashboardUser;
-  @Input({ required: true }) navItems: NavItem[] = [];
 
   drawerVisible = false;
 
   get menuItems(): MenuItem[] {
-    return this.navItems.map((item) => ({
+    return DASHBOARD_NAV_ITEMS.map((item) => ({
       id: item.id,
       label: item.label,
       icon: item.icon,
+      url: item.href,
       styleClass: item.active ? 'nav-item--active' : undefined,
       command: () => this.closeDrawer(),
     }));

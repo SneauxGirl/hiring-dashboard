@@ -2,7 +2,11 @@ import { DecimalPipe, NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Card } from 'primeng/card';
 
-import { FunnelStage, StageDuration } from '../../models/dashboard.models';
+import {
+  FUNNEL_DURATION_SEGMENTS,
+  FUNNEL_STAGE_DEFINITIONS,
+} from './funnel.catalog';
+import { FunnelStage, FunnelStageWeekData, StageDuration } from '../../models/dashboard.models';
 import {
   funnelBarColor,
   funnelBarGlassStyle,
@@ -31,8 +35,25 @@ import {
   `,
 })
 export class FunnelComponent {
-  @Input({ required: true }) funnelStages: FunnelStage[] = [];
-  @Input({ required: true }) stageDurations: StageDuration[] = [];
+  @Input({ required: true }) funnelStageValues: FunnelStageWeekData[] = [];
+  @Input({ required: true }) stageDurationDays: number[] = [];
+
+  get funnelStages(): FunnelStage[] {
+    return FUNNEL_STAGE_DEFINITIONS.map((definition, index) => ({
+      stageKey: definition.stageKey,
+      label: definition.label,
+      count: this.funnelStageValues[index]?.count ?? 0,
+      conversionPct: this.funnelStageValues[index]?.conversionPct,
+    }));
+  }
+
+  get stageDurations(): StageDuration[] {
+    return FUNNEL_DURATION_SEGMENTS.map((segment, index) => ({
+      fromStage: segment.fromStage,
+      toStage: segment.toStage,
+      days: this.stageDurationDays[index] ?? 0,
+    }));
+  }
 
   get maxCount(): number {
     return this.funnelStages[0]?.count ?? 1;

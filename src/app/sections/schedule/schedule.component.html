@@ -15,7 +15,7 @@
     </div>
 
     @for (group of groupConfigs; track group.key; let last = $last) {
-      @if (interviewsForGroup(group.key).length > 0) {
+      @if (entriesForGroup(group.key).length > 0) {
         <section [attr.aria-label]="group.label">
           <h3
             class="m-0 mb-3 text-[length:var(--font-size-label)] font-bold"
@@ -26,13 +26,35 @@
           </h3>
 
           <ul class="m-0 flex list-none flex-col gap-3 p-0">
-            @for (interview of interviewsForGroup(group.key); track interview.id) {
-              @if (candidateFor(interview); as candidate) {
+            @for (entry of entriesForGroup(group.key); track entry.id) {
+              @if (isPto(entry)) {
                 <li class="flex items-center gap-3">
                   <span
                     class="w-[5.5rem] shrink-0 text-[length:var(--font-size-label)] text-muted-color"
                   >
-                    {{ interview.timeLabel }}
+                    {{ ptoCopy.timeLabel }}
+                  </span>
+
+                  <div class="min-w-0 flex-1">
+                    <p class="m-0 text-base font-bold text-color">{{ ptoCopy.title }}</p>
+                    <div class="truncate text-[length:var(--font-size-label)] text-muted-color">
+                      {{ ptoCopy.subtitle }}
+                    </div>
+                  </div>
+
+                  <span
+                    class="inline-flex shrink-0 text-muted-color"
+                    [attr.aria-label]="ptoCopy.ariaLabel"
+                  >
+                    <span class="pi pi-bell-slash text-lg" aria-hidden="true"></span>
+                  </span>
+                </li>
+              } @else if (candidateFor(entry); as candidate) {
+                <li class="flex items-center gap-3">
+                  <span
+                    class="w-[5.5rem] shrink-0 text-[length:var(--font-size-label)] text-muted-color"
+                  >
+                    {{ entry.timeLabel }}
                   </span>
 
                   <div class="min-w-0 flex-1">

@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Card } from 'primeng/card';
 import { Tooltip } from 'primeng/tooltip';
 
-import { KpiMetric, KpiTrendDirection } from '../../models/dashboard.models';
+import { KPI_DEFINITIONS } from './kpi.catalog';
+import { KpiMetric, KpiWeekValues, KpiTrendDirection } from '../../models/dashboard.models';
 
 @Component({
   selector: 'app-kpi',
@@ -10,7 +11,14 @@ import { KpiMetric, KpiTrendDirection } from '../../models/dashboard.models';
   templateUrl: './kpi.component.html',
 })
 export class KpiComponent {
-  @Input({ required: true }) kpis: KpiMetric[] = [];
+  @Input({ required: true }) kpiValues: KpiWeekValues[] = [];
+
+  get kpis(): KpiMetric[] {
+    return KPI_DEFINITIONS.map((definition, index) => ({
+      label: definition.label,
+      ...this.kpiValues[index],
+    }));
+  }
 
   trendIcon(trend?: KpiTrendDirection): string | null {
     switch (trend) {

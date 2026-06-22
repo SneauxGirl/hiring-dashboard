@@ -4,7 +4,8 @@ import { Avatar } from 'primeng/avatar';
 import { Card } from 'primeng/card';
 import { Menu } from 'primeng/menu';
 
-import { DashboardUser, NavItem } from '../../models/dashboard.models';
+import { DASHBOARD_NAV_ITEMS } from '../../config/dashboard-nav.config';
+import { DashboardUser } from '../../models/dashboard.models';
 
 @Component({
   selector: 'app-sidebar-nav',
@@ -16,7 +17,6 @@ import { DashboardUser, NavItem } from '../../models/dashboard.models';
   },
 })
 export class SidebarNavComponent {
-  @Input({ required: true }) navItems: NavItem[] = [];
   @Input({ required: true }) user!: DashboardUser;
   @Input() collapsed = false;
   @Output() toggle = new EventEmitter<void>();
@@ -27,21 +27,14 @@ export class SidebarNavComponent {
   }
 
   get menuModel(): MenuItem[] {
-    return this.navItems.map((item) => ({
+    return DASHBOARD_NAV_ITEMS.map((item) => ({
       id: item.id,
       label: item.label,
       icon: item.icon,
+      url: item.href,
       title: this.collapsed ? item.label : undefined,
       styleClass: item.active ? 'nav-item--active' : undefined,
     }));
-  }
-
-  get userInitials(): string {
-    const parts = this.user.name.trim().split(/\s+/);
-    return parts
-      .slice(0, 2)
-      .map((part) => part.charAt(0).toUpperCase())
-      .join('');
   }
 
   get toggleLabel(): string {
