@@ -4,6 +4,7 @@ import { Card } from 'primeng/card';
 import { OpenRequisition, OpenRequisitionsData } from '../../models/dashboard.models';
 import { PipColor, PipRiskLevel } from '../../theme/pip-tokens';
 import { paletteFill, paletteInk, paletteSolid } from '../../theme/theme-colors';
+import { REQUISITIONS_DISPLAY_ROW_COUNT } from './requisitions.catalog';
 
 const STAGE_PILL_COLORS: Record<string, PipColor> = {
   Screening: 'purple',
@@ -20,6 +21,23 @@ const STAGE_PILL_COLORS: Record<string, PipColor> = {
 })
 export class RequisitionsComponent {
   @Input({ required: true }) requisitions!: OpenRequisitionsData;
+
+  displayRows(): Array<OpenRequisition | null> {
+    const rows: Array<OpenRequisition | null> = this.requisitions.items.slice(
+      0,
+      REQUISITIONS_DISPLAY_ROW_COUNT,
+    );
+
+    while (rows.length < REQUISITIONS_DISPLAY_ROW_COUNT) {
+      rows.push(null);
+    }
+
+    return rows;
+  }
+
+  moreCount(): number {
+    return this.requisitions.moreCount ?? 0;
+  }
 
   stageStyle(stage: string): { bg: string; text: string } {
     const color = STAGE_PILL_COLORS[stage] ?? 'charcoal';

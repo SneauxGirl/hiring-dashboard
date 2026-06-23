@@ -183,14 +183,26 @@
     min-width: 0;
     flex-shrink: 0;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    text-align: end;
   }
 
-  app-bottleneck .bottleneck-metrics p {
+  app-bottleneck .bottleneck-metric {
+    display: flex;
     min-width: 0;
-    overflow-wrap: break-word;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.175rem;
+    line-height: 1.25;
+  }
+
+  app-bottleneck .bottleneck-metric-value {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-bold);
+  }
+
+  app-bottleneck .bottleneck-metric-label {
+    font-size: var(--font-size-label);
   }
 
   @container bottleneck (min-width: 421px) {
@@ -240,28 +252,10 @@
     }
 
     app-bottleneck .bottleneck-metrics {
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
       align-self: stretch;
-      gap: 0;
-      padding-inline-start: 1rem;
-      text-align: start;
-    }
-
-    app-bottleneck .bottleneck-metrics p {
-      position: relative;
-      padding-inline-start: 0.625rem;
-    }
-
-    app-bottleneck .bottleneck-metrics p::before {
-      content: '';
-      position: absolute;
-      inset-inline-start: 0;
-      top: 0.55em;
-      width: 0.25rem;
-      height: 0.25rem;
-      border-radius: 50%;
-      background: var(--bottleneck-accent);
+      gap: 1rem;
     }
   }
 
@@ -380,7 +374,10 @@
     }
 
     app-trends {
+      display: flex;
       flex: 0 0 338px;
+      flex-direction: column;
+      align-self: stretch;
       width: 338px;
       min-width: 338px;
       max-width: 338px;
@@ -404,6 +401,69 @@
       flex: 1 1 auto;
       height: auto;
       min-height: 0;
+    }
+
+    app-requisitions {
+      display: flex;
+      flex: 1 1 calc(100% - 338px - var(--dashboard-grid-gap));
+      flex-direction: column;
+      align-self: stretch;
+      min-width: calc(100% - 338px - var(--dashboard-grid-gap));
+    }
+
+    app-requisitions > p-card {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    app-requisitions .requisitions-card.p-card,
+    app-requisitions .requisitions-card .p-card-body,
+    app-requisitions .requisitions-card .p-card-content {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      min-height: 375px;
+    }
+
+    app-requisitions .requisitions-layout {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    app-requisitions .requisitions-table-wrap {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    app-requisitions .requisitions-table-wrap .dashboard-scroll-x {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    app-requisitions .requisitions-table {
+      height: 100%;
+    }
+
+    app-requisitions .requisitions-table tbody {
+      height: 100%;
+    }
+
+    app-requisitions .requisitions-table tbody tr {
+      height: 20%;
+    }
+
+    app-requisitions .requisitions-table tbody th,
+    app-requisitions .requisitions-table tbody td {
+      vertical-align: middle;
+    }
+
+    app-requisitions .requisitions-more-pill {
+      flex-shrink: 0;
+      margin-top: auto;
     }
   }
 

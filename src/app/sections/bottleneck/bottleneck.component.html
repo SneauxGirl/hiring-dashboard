@@ -42,28 +42,28 @@
             </div>
 
             <div class="bottleneck-metrics">
-              <p class="bottleneck-metric m-0 leading-tight">
+              <div class="bottleneck-metric">
                 <span
-                  class="text-base font-bold"
+                  class="bottleneck-metric-value"
                   [style.color]="accentColor(bottleneck.responsibility)"
                 >
                   {{ bottleneck.candidateCount }}
                 </span>
-                <span class="text-[length:var(--font-size-label)] text-muted-color">
-                  {{ ' ' + candidateLabel(bottleneck.candidateCount) }}
+                <span class="bottleneck-metric-label text-muted-color">
+                  {{ candidateLabel(bottleneck.candidateCount) }}
                 </span>
-              </p>
-              <p class="bottleneck-metric m-0 leading-tight">
+              </div>
+              <div class="bottleneck-metric">
                 <span
-                  class="text-base font-bold"
+                  class="bottleneck-metric-value"
                   [style.color]="accentColor(bottleneck.responsibility)"
                 >
                   {{ bottleneck.avgMetric }} days
                 </span>
-                <span class="text-[length:var(--font-size-label)] text-muted-color">
-                  {{ ' ' + bottleneck.avgLabel }}
+                <span class="bottleneck-metric-label text-muted-color">
+                  {{ bottleneck.avgLabel }}
                 </span>
-              </p>
+              </div>
             </div>
           </div>
         </li>
