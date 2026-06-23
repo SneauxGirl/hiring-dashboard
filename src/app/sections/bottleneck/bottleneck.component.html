@@ -14,18 +14,22 @@
     <ul class="bottleneck-list m-0 flex list-none flex-col gap-3 p-0">
       @for (bottleneck of bottlenecks; track bottleneck.id) {
         <li
-          class="bottleneck-item relative flex items-stretch gap-3 rounded-border border border-surface p-3"
+          class="bottleneck-item relative flex min-w-0 rounded-border border border-surface"
           [style.border-inline-start-width]="'3px'"
-          [style.border-inline-start-color]="accentColor(bottleneck.responsibility)"
+          [style.border-inline-start-color]="borderColor(bottleneck.responsibility)"
+          [style.--bottleneck-accent]="accentColor(bottleneck.responsibility)"
+          [style.--bottleneck-aside-pale]="asidePaleBg(bottleneck.responsibility)"
+          [style.--bottleneck-icon-fill]="iconBg(bottleneck.responsibility)"
         >
-          <span
-            class="bottleneck-fill relative z-1 -my-3 -ms-3 flex w-9 shrink-0 items-center justify-center self-stretch rounded-e-border text-base"
-            [style.background]="washBg(bottleneck.responsibility)"
-            [style.color]="accentColor(bottleneck.responsibility)"
-            aria-hidden="true"
-          >
-            <span [class]="responsibilityConfig(bottleneck.responsibility).iconClass"></span>
-          </span>
+          <div class="bottleneck-aside">
+            <span
+              class="bottleneck-icon flex shrink-0 items-center justify-center rounded-border text-base"
+              [style.color]="accentColor(bottleneck.responsibility)"
+              aria-hidden="true"
+            >
+              <span [class]="responsibilityConfig(bottleneck.responsibility).iconClass"></span>
+            </span>
+          </div>
 
           <div class="bottleneck-item-text">
             <div class="bottleneck-title text-base font-bold text-color">

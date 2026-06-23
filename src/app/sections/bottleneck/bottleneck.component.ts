@@ -4,7 +4,7 @@ import { Card } from 'primeng/card';
 import { BOTTLENECK_DEFINITIONS } from './bottleneck.catalog';
 import { BottleneckCard, BottleneckWeekMetrics } from '../../models/dashboard.models';
 import { PipResponsibility } from '../../theme/pip-tokens';
-import { bottleneckAccent, bottleneckIconBg } from '../../theme/theme-colors';
+import { bottleneckAccent, bottleneckIconBg, bottleneckSolid } from '../../theme/theme-colors';
 
 @Component({
   selector: 'app-bottleneck',
@@ -40,6 +40,10 @@ export class BottleneckComponent {
     return { iconClass: definition?.iconClass ?? 'pi pi-info-circle' };
   }
 
+  borderColor(responsibility: PipResponsibility): string {
+    return bottleneckSolid(responsibility);
+  }
+
   accentColor(responsibility: PipResponsibility): string {
     return bottleneckAccent(responsibility);
   }
@@ -48,7 +52,7 @@ export class BottleneckComponent {
     return bottleneckIconBg(responsibility);
   }
 
-  washBg(responsibility: PipResponsibility): string {
+  asidePaleBg(responsibility: PipResponsibility): string {
     const fill = bottleneckIconBg(responsibility);
     return `color-mix(in srgb, ${fill} 45%, white)`;
   }

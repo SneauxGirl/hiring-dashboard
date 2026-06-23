@@ -40,11 +40,11 @@
         [requisitions]="data.openRequisitions"
       />
       <app-trends
-        class="order-5 w-full min-w-0 lg:order-7 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)*0.35)]"
+        class="order-5 w-full min-w-0 lg:order-7 lg:min-w-0 lg:flex-1"
         [trendValues]="data.trends"
       />
       <app-funnel
-        class="order-6 w-full min-w-0 lg:order-5 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-2.5rem)/3)]"
+        class="order-6 w-full min-w-0 lg:order-5 lg:min-w-0 lg:flex-1"
         [funnelStageValues]="data.funnelStages"
         [stageDurationDays]="data.stageDurationDays"
       />
