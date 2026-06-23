@@ -1,5 +1,5 @@
 <p-card styleClass="schedule-card min-w-0">
-  <div class="schedule-layout flex min-w-0 flex-col gap-4">
+  <div class="schedule-layout flex min-h-0 min-w-0 flex-col gap-4 lg:flex-1">
     <div
       class="flex min-w-0 flex-col gap-1 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between min-[380px]:gap-3"
     >
@@ -12,7 +12,7 @@
       </a>
     </div>
 
-    <div class="schedule-groups flex min-w-0 flex-col">
+    <div class="schedule-groups flex min-h-0 min-w-0 flex-col lg:flex-1 lg:justify-between">
       @for (group of visibleGroups(); track group.key; let last = $last) {
         <section class="schedule-group min-w-0 shrink-0" [attr.aria-label]="group.label">
           <h3
@@ -97,7 +97,7 @@
         </section>
 
         @if (!last) {
-          <div class="schedule-group-divider shrink-0" aria-hidden="true">
+          <div class="schedule-group-divider shrink-0 py-4" aria-hidden="true">
             <hr class="m-0 border-0 border-t border-surface" />
           </div>
         }

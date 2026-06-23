@@ -1,5 +1,5 @@
 <p-card styleClass="trends-card min-w-0">
-  <div class="trends-layout flex min-w-0 flex-col gap-4">
+  <div class="trends-layout flex min-h-0 min-w-0 flex-col gap-4 lg:flex-1">
     <div class="flex min-w-0 items-start justify-between gap-3">
       <div class="min-w-0">
         <h2
@@ -24,7 +24,10 @@
     </div>
 
     @if (viewMode === 'chart') {
-      <div class="trends-chart relative w-full min-w-0" aria-hidden="false">
+      <div
+        class="trends-chart relative h-[17.5rem] w-full min-w-0 shrink-0 sm:h-[20rem] lg:h-auto lg:min-h-0 lg:flex-1"
+        aria-hidden="false"
+      >
         <canvas #chartCanvas role="img" aria-label="Trends chart"></canvas>
       </div>
     } @else {

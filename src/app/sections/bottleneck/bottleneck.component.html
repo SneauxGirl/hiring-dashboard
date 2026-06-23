@@ -1,5 +1,5 @@
 <p-card styleClass="bottleneck-card min-w-0">
-  <div class="bottleneck-layout flex flex-col gap-4">
+  <div class="@container/bottleneck bottleneck-layout flex min-h-0 flex-col gap-4 lg:flex-1">
     <div class="flex items-center gap-2">
       <h2 class="m-0 text-[length:var(--font-size-label)] text-color">Bottlenecks</h2>
       <button
@@ -11,19 +11,20 @@
       </button>
     </div>
 
-    <ul class="bottleneck-list m-0 flex list-none flex-col gap-3 p-0">
+    <ul class="bottleneck-list m-0 flex list-none flex-col gap-3 p-0 lg:flex-1 lg:justify-between">
       @for (bottleneck of bottlenecks; track bottleneck.id) {
         <li
-          class="bottleneck-item relative flex min-w-0 rounded-border border border-surface"
+          class="relative flex min-w-0 items-center gap-3 overflow-hidden rounded-border border border-surface bg-white p-3 @max-[420px]/bottleneck:p-0 @max-[420px]/bottleneck:pe-3 lg:min-w-0 lg:flex-1 lg:basis-auto"
           [style.border-inline-start-width]="'3px'"
           [style.border-inline-start-color]="borderColor(bottleneck.responsibility)"
-          [style.--bottleneck-accent]="accentColor(bottleneck.responsibility)"
-          [style.--bottleneck-aside-pale]="asidePaleBg(bottleneck.responsibility)"
-          [style.--bottleneck-icon-fill]="iconBg(bottleneck.responsibility)"
         >
-          <div class="bottleneck-aside">
+          <div
+            class="flex shrink-0 items-center justify-center self-stretch @min-[421px]/bottleneck:-my-3 @min-[421px]/bottleneck:-ms-3 @min-[421px]/bottleneck:px-2.5 @max-[420px]/bottleneck:w-15 @max-[420px]/bottleneck:px-2.5 @max-[420px]/bottleneck:py-4"
+            [style.background]="asidePaleBg(bottleneck.responsibility)"
+          >
             <span
-              class="bottleneck-icon flex shrink-0 items-center justify-center rounded-border text-base"
+              class="flex size-9 shrink-0 items-center justify-center rounded-border text-base"
+              [style.background]="iconBg(bottleneck.responsibility)"
               [style.color]="accentColor(bottleneck.responsibility)"
               aria-hidden="true"
             >
@@ -31,36 +32,46 @@
             </span>
           </div>
 
-          <div class="bottleneck-item-text">
-            <div class="bottleneck-title text-base font-bold text-color">
+          <div
+            class="flex min-w-0 flex-1 flex-row items-center gap-3 @max-[420px]/bottleneck:flex-col @max-[420px]/bottleneck:items-start @max-[420px]/bottleneck:self-center @max-[420px]/bottleneck:justify-center @max-[420px]/bottleneck:py-4 @max-[420px]/bottleneck:gap-1.5"
+          >
+            <div
+              class="min-w-0 flex-1 break-words text-base font-bold text-color @max-[420px]/bottleneck:flex-none"
+            >
               @if (bottleneck.titleLine2) {
-                <span class="bottleneck-title-line">{{ bottleneck.title }}</span>
-                <span class="bottleneck-title-line">{{ bottleneck.titleLine2 }}</span>
+                <span class="bottleneck-title-line block @min-[421px]/bottleneck:inline">{{
+                  bottleneck.title
+                }}</span>
+                <span class="bottleneck-title-line block @min-[421px]/bottleneck:inline">{{
+                  bottleneck.titleLine2
+                }}</span>
               } @else {
                 {{ bottleneck.title }}
               }
             </div>
 
-            <div class="bottleneck-metrics">
-              <div class="bottleneck-metric">
+            <div
+              class="flex min-w-0 shrink-0 flex-row items-start gap-4 @max-[420px]/bottleneck:self-stretch"
+            >
+              <div class="flex min-w-0 flex-col items-start gap-[0.175rem] leading-tight">
                 <span
-                  class="bottleneck-metric-value"
+                  class="text-base font-bold"
                   [style.color]="accentColor(bottleneck.responsibility)"
                 >
                   {{ bottleneck.candidateCount }}
                 </span>
-                <span class="bottleneck-metric-label text-muted-color">
+                <span class="text-[length:var(--font-size-label)] text-muted-color">
                   {{ candidateLabel(bottleneck.candidateCount) }}
                 </span>
               </div>
-              <div class="bottleneck-metric">
+              <div class="flex min-w-0 flex-col items-start gap-[0.175rem] leading-tight">
                 <span
-                  class="bottleneck-metric-value"
+                  class="text-base font-bold"
                   [style.color]="accentColor(bottleneck.responsibility)"
                 >
                   {{ bottleneck.avgMetric }} days
                 </span>
-                <span class="bottleneck-metric-label text-muted-color">
+                <span class="text-[length:var(--font-size-label)] text-muted-color">
                   {{ bottleneck.avgLabel }}
                 </span>
               </div>
