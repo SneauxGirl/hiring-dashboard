@@ -2,7 +2,7 @@
   <div class="mobile-header-bar">
     <button
       type="button"
-      class="mobile-header-menu"
+      class="mobile-header-icon-btn mobile-header-menu"
       aria-label="Open navigation menu"
       (click)="openDrawer()"
     >
@@ -14,17 +14,28 @@
     </div>
 
     <div class="mobile-header-schedule">
-      <span class="pi pi-calendar" aria-hidden="true"></span>
-      <p-select
-        [options]="weeks"
-        [ngModel]="selectedWeek"
-        (ngModelChange)="onWeekChange($event)"
-        optionLabel="label"
-        optionValue="key"
-        ariaLabel="Select week"
-        class="week-range-select mobile-header-week-select w-full min-w-[10rem] max-w-[11rem]"
-        panelStyleClass="week-range-select-panel"
-      />
+      <button
+        type="button"
+        class="mobile-header-icon-btn mobile-header-calendar"
+        aria-label="Select week"
+        (click)="openWeekDrawer()"
+      >
+        <span class="pi pi-calendar" aria-hidden="true"></span>
+      </button>
+
+      <div class="mobile-header-week-inline">
+        <span class="pi pi-calendar" aria-hidden="true"></span>
+        <p-select
+          [options]="weeks"
+          [ngModel]="selectedWeek"
+          (ngModelChange)="onWeekChange($event)"
+          optionLabel="label"
+          optionValue="key"
+          ariaLabel="Select week"
+          class="week-range-select mobile-header-week-select w-full min-w-[10rem] max-w-[11rem]"
+          panelStyleClass="week-range-select-panel"
+        />
+      </div>
     </div>
   </div>
 </header>
@@ -58,6 +69,33 @@
         <div class="truncate text-base font-medium text-color">{{ user.name }}</div>
         <div class="truncate text-[length:var(--font-size-label)] text-muted-color">{{ user.title }}</div>
       </div>
+    </div>
+  </div>
+</p-drawer>
+
+<p-drawer
+  [(visible)]="weekDrawerVisible"
+  position="right"
+  [modal]="true"
+  [closable]="true"
+  ariaCloseLabel="Close week selector"
+  styleClass="mobile-week-drawer"
+  (onShow)="onWeekDrawerShow()"
+  (onHide)="onWeekDrawerHide()"
+>
+  <div class="mobile-week-drawer-panel">
+    <div class="mobile-week-drawer-trigger flex min-w-0 shrink-0 items-center">
+      <p-select
+        #weekDrawerSelect
+        [options]="weeks"
+        [ngModel]="selectedWeek"
+        (ngModelChange)="onWeekChange($event)"
+        optionLabel="label"
+        optionValue="key"
+        ariaLabel="Select week"
+        class="week-range-select min-w-0 w-full flex-1"
+        panelStyleClass="week-range-select-panel"
+      />
     </div>
   </div>
 </p-drawer>

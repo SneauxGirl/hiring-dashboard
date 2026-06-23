@@ -1,11 +1,19 @@
 <section
-  class="grid w-full min-w-0 grid-cols-1 gap-[length:var(--dashboard-grid-gap)] min-[500px]:grid-cols-2 xl:grid-cols-4"
+  class="kpi-section flex w-full min-w-0 flex-col max-[380px]:gap-4"
   aria-label="Key performance indicators"
 >
+  <h2
+    class="kpi-section-heading m-0 hidden text-[length:var(--font-size-label)] text-color max-[380px]:block"
+  >
+    KPIs
+  </h2>
+  <div
+    class="grid w-full min-w-0 grid-cols-1 gap-[length:var(--dashboard-grid-gap)] min-[500px]:grid-cols-2 xl:grid-cols-4"
+  >
   @for (kpi of kpis; track kpi.label) {
     <p-card styleClass="min-w-0">
       <div class="flex min-w-0 flex-col gap-1.5 xl:gap-2">
-        <span class="text-pretty text-[length:var(--font-size-label)] leading-snug text-muted-color">{{
+        <span class="text-pretty text-[length:var(--font-size-label)] leading-snug text-color">{{
           kpi.label
         }}</span>
 
@@ -39,4 +47,5 @@
       </div>
     </p-card>
   }
+  </div>
 </section>

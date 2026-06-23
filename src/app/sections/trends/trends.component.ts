@@ -97,7 +97,7 @@ export class TrendsComponent implements OnChanges, OnDestroy {
     };
   }
 
-  /** Last month index (inclusive) that uses current-year data. */
+  /** First month index that uses prior-year data (the in-progress month). */
   get currentMonthIndex(): number {
     return this.trendValues.asOfMonthIndex;
   }
@@ -154,7 +154,7 @@ export class TrendsComponent implements OnChanges, OnDestroy {
   }
 
   isPriorMonth(monthIndex: number): boolean {
-    return monthIndex > this.currentMonthIndex;
+    return monthIndex >= this.currentMonthIndex;
   }
 
   valueForMonth(series: WorkforceTrendSeries, monthIndex: number): number {
@@ -203,6 +203,7 @@ export class TrendsComponent implements OnChanges, OnDestroy {
 
     const config = this.buildChartConfig();
     this.chart = new Chart(canvas, config);
+    requestAnimationFrame(() => this.chart?.resize());
   }
 
   private destroyChart(): void {
@@ -225,13 +226,13 @@ export class TrendsComponent implements OnChanges, OnDestroy {
           return {
             label: series.label,
             data: series.currentYear.map((_, monthIndex) =>
-              monthIndex <= currentMonthIndex
+              monthIndex < currentMonthIndex
                 ? series.currentYear[monthIndex]
                 : series.priorYear[monthIndex],
             ),
             borderColor: color,
             pointBackgroundColor: (ctx) =>
-              (ctx.dataIndex ?? 0) > currentMonthIndex ? priorColor : color,
+              (ctx.dataIndex ?? 0) >= currentMonthIndex ? priorColor : color,
             pointBorderColor: '#fff',
             pointRadius: 0,
             pointHoverRadius: 5,
@@ -241,10 +242,10 @@ export class TrendsComponent implements OnChanges, OnDestroy {
             spanGaps: false,
             segment: {
               borderColor: (ctx) =>
-                (ctx.p1DataIndex ?? 0) > currentMonthIndex ? priorColor : color,
+                (ctx.p1DataIndex ?? 0) >= currentMonthIndex ? priorColor : color,
               borderDash: (ctx) =>
-                (ctx.p1DataIndex ?? 0) > currentMonthIndex ? [5, 4] : undefined,
-              borderWidth: (ctx) => ((ctx.p1DataIndex ?? 0) > currentMonthIndex ? 1.5 : 2.5),
+                (ctx.p1DataIndex ?? 0) >= currentMonthIndex ? [5, 4] : undefined,
+              borderWidth: (ctx) => ((ctx.p1DataIndex ?? 0) >= currentMonthIndex ? 1.5 : 2.5),
             },
           };
         }),

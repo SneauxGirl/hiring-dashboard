@@ -76,7 +76,7 @@ export interface TrendSeriesWeekValues {
 
 /** Weekly trend numbers — metric labels and chart years are in trends.catalog.ts. */
 export interface TrendWeekData {
-  /** 0–11 (Jan–Dec); months through this index use currentYear in chart/table. */
+  /** 0–11 (Jan–Dec); months before this index use currentYear; this month onward use priorYear. */
   asOfMonthIndex: number;
   series: Record<WorkforceTrendMetricId, TrendSeriesWeekValues>;
 }
