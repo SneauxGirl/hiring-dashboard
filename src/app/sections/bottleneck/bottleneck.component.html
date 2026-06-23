@@ -1,11 +1,7 @@
-<p-card>
-  <div class="flex flex-col gap-4">
+<p-card styleClass="bottleneck-card min-w-0">
+  <div class="bottleneck-layout flex flex-col gap-4">
     <div class="flex items-center gap-2">
-      <h2
-        class="m-0 text-[length:var(--font-size-label)] text-color"
-      >
-        Bottlenecks
-      </h2>
+      <h2 class="m-0 text-[length:var(--font-size-label)] text-color">Bottlenecks</h2>
       <button
         type="button"
         class="inline-flex shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-muted-color hover:text-color"
@@ -15,15 +11,15 @@
       </button>
     </div>
 
-    <ul class="m-0 flex list-none flex-col gap-3 p-0">
+    <ul class="bottleneck-list m-0 flex list-none flex-col gap-3 p-0">
       @for (bottleneck of bottlenecks; track bottleneck.id) {
         <li
-          class="relative flex items-center gap-3 rounded-border border border-surface p-3"
+          class="bottleneck-item relative flex items-stretch gap-3 rounded-border border border-surface p-3"
           [style.border-inline-start-width]="'3px'"
           [style.border-inline-start-color]="accentColor(bottleneck.responsibility)"
         >
           <span
-            class="relative z-1 -my-3 -ms-3 flex w-9 shrink-0 items-center justify-center self-stretch rounded-e-border text-base"
+            class="bottleneck-fill relative z-1 -my-3 -ms-3 flex w-9 shrink-0 items-center justify-center self-stretch rounded-e-border text-base"
             [style.background]="washBg(bottleneck.responsibility)"
             [style.color]="accentColor(bottleneck.responsibility)"
             aria-hidden="true"
@@ -31,32 +27,39 @@
             <span [class]="responsibilityConfig(bottleneck.responsibility).iconClass"></span>
           </span>
 
-          <div class="min-w-0 flex-1">
-            <div class="text-base font-bold text-color">{{ bottleneck.title }}</div>
-          </div>
-
-          <div class="flex shrink-0 items-center gap-4 text-right sm:gap-5">
-            <div>
-              <div
-                class="text-base font-bold leading-tight"
-                [style.color]="accentColor(bottleneck.responsibility)"
-              >
-                {{ bottleneck.candidateCount }}
-              </div>
-              <div class="text-[length:var(--font-size-label)] text-muted-color">
-                {{ candidateLabel(bottleneck.candidateCount) }}
-              </div>
+          <div class="bottleneck-item-text">
+            <div class="bottleneck-title text-base font-bold text-color">
+              @if (bottleneck.titleLine2) {
+                <span class="bottleneck-title-line">{{ bottleneck.title }}</span>
+                <span class="bottleneck-title-line">{{ bottleneck.titleLine2 }}</span>
+              } @else {
+                {{ bottleneck.title }}
+              }
             </div>
-            <div>
-              <div
-                class="text-base font-bold leading-tight"
-                [style.color]="accentColor(bottleneck.responsibility)"
-              >
-                {{ bottleneck.avgMetric }} days
-              </div>
-              <div class="text-[length:var(--font-size-label)] text-muted-color">
-                {{ bottleneck.avgLabel }}
-              </div>
+
+            <div class="bottleneck-metrics">
+              <p class="bottleneck-metric m-0 leading-tight">
+                <span
+                  class="text-base font-bold"
+                  [style.color]="accentColor(bottleneck.responsibility)"
+                >
+                  {{ bottleneck.candidateCount }}
+                </span>
+                <span class="text-[length:var(--font-size-label)] text-muted-color">
+                  {{ ' ' + candidateLabel(bottleneck.candidateCount) }}
+                </span>
+              </p>
+              <p class="bottleneck-metric m-0 leading-tight">
+                <span
+                  class="text-base font-bold"
+                  [style.color]="accentColor(bottleneck.responsibility)"
+                >
+                  {{ bottleneck.avgMetric }} days
+                </span>
+                <span class="text-[length:var(--font-size-label)] text-muted-color">
+                  {{ ' ' + bottleneck.avgLabel }}
+                </span>
+              </p>
             </div>
           </div>
         </li>

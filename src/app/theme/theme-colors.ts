@@ -100,6 +100,10 @@ export function bottleneckAccent(responsibility: PipResponsibility): string {
   return paletteInk(responsibilityColor(responsibility));
 }
 
+export function bottleneckSolid(responsibility: PipResponsibility): string {
+  return paletteSolid(responsibilityColor(responsibility));
+}
+
 export function bottleneckIconBg(responsibility: PipResponsibility): string {
   return paletteFill(responsibilityColor(responsibility));
 }

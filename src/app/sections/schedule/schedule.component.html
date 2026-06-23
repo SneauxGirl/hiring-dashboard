@@ -1,5 +1,5 @@
-<p-card styleClass="min-w-0">
-  <div class="flex min-w-0 flex-col gap-4">
+<p-card styleClass="schedule-card min-w-0">
+  <div class="schedule-layout flex min-w-0 flex-col gap-4">
     <div
       class="flex min-w-0 flex-col gap-1 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between min-[380px]:gap-3"
     >
@@ -12,80 +12,97 @@
       </a>
     </div>
 
-    @for (group of groupConfigs; track group.key; let last = $last) {
-      @if (entriesForGroup(group.key).length > 0) {
-        <section class="min-w-0" [attr.aria-label]="group.label">
+    <div class="schedule-groups flex min-w-0 flex-col">
+      @for (group of visibleGroups(); track group.key; let last = $last) {
+        <section class="schedule-group min-w-0 shrink-0" [attr.aria-label]="group.label">
           <h3
             class="m-0 mb-3 text-[length:var(--font-size-label)] font-bold"
-            [class.text-color]="group.key === 'tomorrow'"
+            [class.text-color]="group.key === 'tomorrow' || group.key === 'this-week'"
             [style.color]="group.key === 'today' ? groupColor(group.key) : null"
           >
             {{ group.label }}
           </h3>
 
           <ul class="m-0 flex list-none flex-col gap-3 p-0">
-            @for (entry of entriesForGroup(group.key); track entry.id) {
-              @if (isPto(entry)) {
-                <li
-                  class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-center min-[380px]:gap-3"
-                >
-                  <span class="text-[length:var(--font-size-label)] text-muted-color">
-                    {{ ptoCopy.timeLabel }}
-                  </span>
-
-                  <div class="min-w-0 flex-1 overflow-hidden">
-                    <p class="m-0 truncate text-base font-bold text-color">{{ ptoCopy.title }}</p>
-                    <div class="truncate text-sm text-muted-color">
-                      {{ ptoCopy.subtitle }}
-                    </div>
-                  </div>
-
-                  <span
-                    class="inline-flex shrink-0 text-muted-color min-[380px]:justify-self-end"
-                    [attr.aria-label]="ptoCopy.ariaLabel"
+            @if (entriesForGroup(group.key).length > 0) {
+              @for (entry of entriesForGroup(group.key); track entry.id) {
+                @if (isPto(entry)) {
+                  <li
+                    class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-center min-[380px]:gap-3"
                   >
-                    <span class="pi pi-bell-slash text-lg" aria-hidden="true"></span>
-                  </span>
-                </li>
-              } @else if (candidateFor(entry); as candidate) {
-                <li
-                  class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-center min-[380px]:gap-3"
-                >
-                  <span class="text-[length:var(--font-size-label)] text-muted-color">
-                    {{ entry.timeLabel }}
-                  </span>
+                    <span class="text-[length:var(--font-size-label)] text-muted-color">
+                      {{ ptoCopy.timeLabel }}
+                    </span>
 
-                  <div class="min-w-0 flex-1 overflow-hidden">
-                    <button
-                      type="button"
-                      class="m-0 block w-full min-w-0 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-base font-bold text-color hover:underline"
-                      (click)="openCandidate(candidate.id)"
+                    <div class="min-w-0 flex-1 overflow-hidden">
+                      <p class="m-0 truncate text-base font-bold text-color">{{ ptoCopy.title }}</p>
+                      <div class="truncate text-sm text-muted-color">
+                        {{ ptoCopy.subtitle }}
+                      </div>
+                    </div>
+
+                    <span
+                      class="inline-flex shrink-0 text-muted-color min-[380px]:justify-self-end"
+                      [attr.aria-label]="ptoCopy.ariaLabel"
                     >
-                      {{ candidate.name }}
-                    </button>
-                    <div class="truncate text-sm text-muted-color">
-                      {{ candidate.roleTitle }}
-                    </div>
-                  </div>
-
-                  <a
-                    href="#"
-                    class="shrink-0 text-muted-color no-underline hover:text-color min-[380px]:justify-self-end"
-                    [attr.aria-label]="'Zoom link for ' + candidate.name"
+                      <span class="pi pi-bell-slash text-lg" aria-hidden="true"></span>
+                    </span>
+                  </li>
+                } @else if (candidateFor(entry); as candidate) {
+                  <li
+                    class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-center min-[380px]:gap-3"
                   >
-                    <span class="pi pi-users text-lg" aria-hidden="true"></span>
-                  </a>
-                </li>
+                    <span class="text-[length:var(--font-size-label)] text-muted-color">
+                      {{ entry.timeLabel }}
+                    </span>
+
+                    <div class="min-w-0 flex-1 overflow-hidden">
+                      <button
+                        type="button"
+                        class="m-0 block w-full min-w-0 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-base font-bold text-color hover:underline"
+                        (click)="openCandidate(candidate.id)"
+                      >
+                        {{ candidate.name }}
+                      </button>
+                      <div class="truncate text-sm text-muted-color">
+                        {{ candidate.roleTitle }}
+                      </div>
+                    </div>
+
+                    <a
+                      href="#"
+                      class="shrink-0 text-muted-color no-underline hover:text-color min-[380px]:justify-self-end"
+                      [attr.aria-label]="'Zoom link for ' + candidate.name"
+                    >
+                      <span class="pi pi-users text-lg" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                }
               }
+            } @else {
+              <li
+                class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-center min-[380px]:gap-3"
+                aria-label="No interviews scheduled"
+              >
+                <span class="text-[length:var(--font-size-label)] text-muted-color" aria-hidden="true"></span>
+
+                <div class="min-w-0 flex-1 overflow-hidden">
+                  <p class="m-0 truncate text-base text-muted-color">{{ emptyCopy.label }}</p>
+                </div>
+
+                <span class="shrink-0 min-[380px]:justify-self-end" aria-hidden="true"></span>
+              </li>
             }
           </ul>
         </section>
 
         @if (!last) {
-          <hr class="m-0 border-0 border-t border-surface" />
+          <div class="schedule-group-divider shrink-0" aria-hidden="true">
+            <hr class="m-0 border-0 border-t border-surface" />
+          </div>
         }
       }
-    }
+    </div>
   </div>
 </p-card>
 

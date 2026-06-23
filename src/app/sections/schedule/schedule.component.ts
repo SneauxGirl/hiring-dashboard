@@ -9,7 +9,7 @@ import {
   ScheduleGroup,
   SchedulePtoEntry,
 } from '../../models/dashboard.models';
-import { PTO_SCHEDULE_COPY } from './schedule.catalog';
+import { EMPTY_SCHEDULE_COPY, PTO_SCHEDULE_COPY } from './schedule.catalog';
 import { scheduleGroupColor } from '../../theme/theme-colors';
 
 interface ScheduleGroupConfig {
@@ -30,15 +30,36 @@ export class ScheduleComponent {
   selectedCandidate: CandidateProfile | null = null;
 
   readonly ptoCopy = PTO_SCHEDULE_COPY;
+  readonly emptyCopy = EMPTY_SCHEDULE_COPY;
 
   readonly groupConfigs: ScheduleGroupConfig[] = [
     { key: 'today', label: 'Today' },
     { key: 'tomorrow', label: 'Tomorrow' },
-    { key: 'this-week', label: 'This week' },
+    { key: 'this-week', label: 'Later This Week' },
   ];
 
   entriesForGroup(group: ScheduleGroup): ScheduleEntry[] {
     return this.schedule.filter((entry) => entry.group === group);
+  }
+
+  visibleGroups(): ScheduleGroupConfig[] {
+    const withEntries = this.groupConfigs.filter(
+      (group) => this.entriesForGroup(group.key).length > 0,
+    );
+
+    if (withEntries.length === 0) {
+      return [...this.groupConfigs];
+    }
+
+    const groups = [...withEntries];
+    if (!groups.some((group) => group.key === 'this-week')) {
+      const thisWeek = this.groupConfigs.find((group) => group.key === 'this-week');
+      if (thisWeek) {
+        groups.push(thisWeek);
+      }
+    }
+
+    return groups;
   }
 
   isPto(entry: ScheduleEntry): entry is SchedulePtoEntry {

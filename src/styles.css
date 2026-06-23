@@ -381,6 +381,60 @@
     min-width: 0;
   }
 
+  .dashboard-page {
+    background:radial-gradient(
+      ellipse 180% 140% at 50% -30%,
+      #fff 0%,
+      #fffdf8 40%,
+      #f8f5f2 100%
+    );
+  }
+  
+  .dashboard-page--morning {
+    background: radial-gradient(
+      ellipse 130% 100% at 50% 110%,
+      #fffdf8 0%,
+      #fcf6f1 20%,
+      #f6f0ef 40%,
+      #eeebf0 62%,
+      #e7e9f0 84%,
+      #f4f6f9 100%
+    );
+  }
+
+  .dashboard-page--afternoon {
+    background:radial-gradient(
+      ellipse 180% 140% at 50% -30%,
+      #f8fafc 0%,
+      #fffdf8 40%,
+      #fcf6f1 100%
+    );
+  }
+
+  .dashboard-page--evening {
+    background: radial-gradient(
+      ellipse 130% 100% at 50% 110%,
+      #fffdf8 0%,
+      #fcf6f1 20%,
+      #f6f0ef 40%,
+      #eeebf0 62%,
+      #e7e9f0 84%,
+      #f4f6f9 100%
+    );
+  }
+
+  .dashboard-page--dusk{
+    background: radial-gradient(
+  ellipse 130% 100% at 50% 110%,
+  #fff9f1 0%,
+  #fdf1e8 15%,
+  #f8e9e7 32%,
+  #f1e8ef 55%,
+  #e8eaf2 80%,
+  #f4f6f9 100%
+);
+  }
+
   @media (max-width: 767px) {
     :root {
       --dashboard-margin: 0.75rem;

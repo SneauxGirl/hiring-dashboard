@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.bottleneck-item-text {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bottleneck-title {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.bottleneck-title-line {
+  display: block;
+}
+
+.bottleneck-metrics {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  :host {
+    display: flex;
+    flex: 0 0 340px;
+    flex-direction: column;
+    align-self: stretch;
+    width: 340px;
+    min-width: 340px;
+    max-width: 340px;
+  }
+
+  :host > p-card {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  :host ::ng-deep .bottleneck-card.p-card,
+  :host ::ng-deep .bottleneck-card .p-card-body,
+  :host ::ng-deep .bottleneck-card .p-card-content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .bottleneck-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .bottleneck-list {
+    flex: 1 1 auto;
+    justify-content: space-between;
+  }
+}

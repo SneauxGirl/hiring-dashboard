@@ -10,6 +10,7 @@ import { bottleneckAccent, bottleneckIconBg } from '../../theme/theme-colors';
   selector: 'app-bottleneck',
   imports: [Card],
   templateUrl: './bottleneck.component.html',
+  styleUrl: './bottleneck.component.css',
 })
 export class BottleneckComponent {
   @Input({ required: true }) bottleneckMetrics: BottleneckWeekMetrics[] = [];
@@ -20,6 +21,7 @@ export class BottleneckComponent {
       return {
         id: definition.responsibility,
         title: definition.title,
+        titleLine2: definition.titleLine2,
         subtitle: definition.subtitle,
         avgLabel: definition.avgLabel,
         responsibility: definition.responsibility,

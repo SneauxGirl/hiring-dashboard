@@ -3,6 +3,7 @@ import { PipResponsibility } from '../../theme/pip-tokens';
 export interface BottleneckDefinition {
   responsibility: PipResponsibility;
   title: string;
+  titleLine2?: string;
   subtitle: string;
   avgLabel: string;
   iconClass: string;
@@ -25,7 +26,8 @@ export const BOTTLENECK_DEFINITIONS: readonly BottleneckDefinition[] = [
   },
   {
     responsibility: 'candidates-aging',
-    title: 'Candidates Aging > 14 Days',
+    title: 'Candidates Aging',
+    titleLine2: '> 14 Days',
     subtitle: 'No recent activity',
     avgLabel: 'avg idle time',
     iconClass: 'pi pi-calendar',
