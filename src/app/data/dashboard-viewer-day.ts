@@ -1,10 +1,14 @@
-import { DashboardStoryDay } from './dashboard-daily.mock';
-import { startOfDay, storyTodayForDate, toDateKey } from './dashboard-story-day.resolver';
+import { DashboardCalendarDay } from './dashboard-daily.mock';
+import {
+  calendarTodayForDate,
+  startOfDay,
+  toDateKey,
+} from './dashboard-calendar-day.resolver';
 
 export type ViewerDay = {
   dayKey: string;
   date: Date;
-  storyDay: DashboardStoryDay;
+  calendarDay: DashboardCalendarDay;
   capturedAt: Date;
 };
 
@@ -14,7 +18,7 @@ export function captureViewerDay(now = new Date()): ViewerDay {
   return {
     dayKey: toDateKey(date),
     date,
-    storyDay: storyTodayForDate(date),
+    calendarDay: calendarTodayForDate(date),
     capturedAt: now,
   };
 }

@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, EventEmitter, inject, Input, Output, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePicker } from 'primeng/datepicker';
 import { DatePickerDateMeta } from 'primeng/types/datepicker';
 
 import {
   isSameDay,
-  isSelectableStoryDate,
+  isSelectableCalendarDate,
   startOfDay,
-} from '../../data/dashboard-story-day.resolver';
+} from '../../data/dashboard-calendar-day.resolver';
 import { ViewerDay } from '../../data/dashboard-viewer-day';
 import { DashboardUser } from '../../models/dashboard.models';
 
@@ -17,6 +18,9 @@ import { DashboardUser } from '../../models/dashboard.models';
   templateUrl: './page-header.component.html',
 })
 export class PageHeaderComponent {
+  /** Popup DatePicker overlay is not SSR-safe; mount after browser bootstrap. */
+  protected readonly showDatePicker = isPlatformBrowser(inject(PLATFORM_ID));
+
   @Input({ required: true }) user!: DashboardUser;
   @Input({ required: true }) viewerDay!: ViewerDay;
   @Input({ required: true }) calendarMinDate!: Date;
@@ -45,7 +49,7 @@ export class PageHeaderComponent {
       return false;
     }
 
-    return isSelectableStoryDate(
+    return isSelectableCalendarDate(
       new Date(date.year, date.month, date.day),
       this.viewerDay.date,
     );
@@ -66,7 +70,7 @@ export class PageHeaderComponent {
     }
 
     const normalized = startOfDay(date);
-    if (!isSelectableStoryDate(normalized, this.viewerDay.date)) {
+    if (!isSelectableCalendarDate(normalized, this.viewerDay.date)) {
       return;
     }
 

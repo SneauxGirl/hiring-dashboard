@@ -5,6 +5,8 @@ export const PTO_SCHEDULE_COPY = {
   ariaLabel: 'Out of office',
 } as const;
 
-export const EMPTY_SCHEDULE_COPY = {
-  label: 'None Scheduled',
+export const NA_SCHEDULE_COPY = {
+  timeLabel: 'All day',
+  title: 'None',
+  ariaLabel: 'No interviews scheduled',
 } as const;

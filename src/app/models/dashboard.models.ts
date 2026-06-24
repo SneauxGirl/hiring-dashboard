@@ -150,7 +150,7 @@ export interface DashboardWeekData {
   stageDurationDays: number[];
 }
 
-/** Story-day-scoped dashboard mock payload (days 1–15; no user, nav, or trends). */
+/** Calendar-day-scoped dashboard mock payload (days 1–21; no user, nav, or trends). */
 export interface DashboardDayData {
   kpis: KpiWeekValues[];
   schedule: ScheduleEntry[];

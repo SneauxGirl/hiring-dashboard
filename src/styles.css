@@ -620,7 +620,11 @@
   }
 
   .dashboard-story-calendar {
-    width: min(100%, 18.5rem);
+    min-height: var(--dashboard-control-height);
+  }
+
+  .dashboard-story-calendar .dashboard-story-datepicker {
+    width: auto;
   }
 
   .dashboard-story-datepicker-panel.p-datepicker-panel-inline {

@@ -9,8 +9,7 @@ import {
   ScheduleGroup,
   SchedulePtoEntry,
 } from '../../models/dashboard.models';
-import { EMPTY_SCHEDULE_COPY, PTO_SCHEDULE_COPY } from './schedule.catalog';
-import { scheduleGroupColor } from '../../theme/theme-colors';
+import { NA_SCHEDULE_COPY, PTO_SCHEDULE_COPY } from './schedule.catalog';
 
 interface ScheduleGroupConfig {
   key: ScheduleGroup;
@@ -25,59 +24,25 @@ interface ScheduleGroupConfig {
 export class ScheduleComponent {
   @Input({ required: true }) schedule: ScheduleEntry[] = [];
   @Input({ required: true }) candidates: CandidateProfile[] = [];
-  @Input() todayGroupLabel = 'Today';
-  @Input() viewingHistoricalDate = false;
 
   dialogVisible = false;
   selectedCandidate: CandidateProfile | null = null;
 
   readonly ptoCopy = PTO_SCHEDULE_COPY;
-  readonly emptyCopy = EMPTY_SCHEDULE_COPY;
+  readonly naCopy = NA_SCHEDULE_COPY;
 
   readonly groupConfigs: ScheduleGroupConfig[] = [
     { key: 'today', label: 'Today' },
     { key: 'tomorrow', label: 'Tomorrow' },
-    { key: 'this-week', label: 'Later This Week' },
+    { key: 'this-week', label: 'This Week' },
   ];
 
   groupLabel(group: ScheduleGroupConfig): string {
-    if (group.key === 'today') {
-      return this.todayGroupLabel;
-    }
-
-    if (this.viewingHistoricalDate && group.key === 'tomorrow') {
-      return 'Next Day';
-    }
-
-    if (this.viewingHistoricalDate && group.key === 'this-week') {
-      return 'Rest of Week';
-    }
-
     return group.label;
   }
 
   entriesForGroup(group: ScheduleGroup): ScheduleEntry[] {
     return this.schedule.filter((entry) => entry.group === group);
-  }
-
-  visibleGroups(): ScheduleGroupConfig[] {
-    const withEntries = this.groupConfigs.filter(
-      (group) => this.entriesForGroup(group.key).length > 0,
-    );
-
-    if (withEntries.length === 0) {
-      return [...this.groupConfigs];
-    }
-
-    const groups = [...withEntries];
-    if (!groups.some((group) => group.key === 'this-week')) {
-      const thisWeek = this.groupConfigs.find((group) => group.key === 'this-week');
-      if (thisWeek) {
-        groups.push(thisWeek);
-      }
-    }
-
-    return groups;
   }
 
   isPto(entry: ScheduleEntry): entry is SchedulePtoEntry {
@@ -90,10 +55,6 @@ export class ScheduleComponent {
     }
 
     return this.candidates.find((candidate) => candidate.id === entry.candidateId);
-  }
-
-  groupColor(group: ScheduleGroup): string {
-    return scheduleGroupColor(group);
   }
 
   openCandidate(candidateId: string): void {

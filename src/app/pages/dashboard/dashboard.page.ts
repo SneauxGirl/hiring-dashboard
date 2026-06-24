@@ -5,7 +5,7 @@ import {
   disabledDatesInCalendarNav,
   fromDateKey,
   toDateKey,
-} from '../../data/dashboard-story-day.resolver';
+} from '../../data/dashboard-calendar-day.resolver';
 import { trendsForDate } from '../../data/dashboard-trends.mock';
 import {
   calendarNavRangeForDate,
@@ -70,9 +70,6 @@ export class DashboardPage implements OnDestroy {
   );
   readonly selectedDateLabel = computed(() => formatStoryDateLabel(this.selectedDate()));
   readonly viewerDayLabel = computed(() => formatStoryDateLabel(this.viewerDay().date));
-  readonly scheduleTodayLabel = computed(() =>
-    this.isViewingViewerDay() ? 'Today' : this.selectedDateLabel(),
-  );
 
   sidebarCollapsed = false;
 
