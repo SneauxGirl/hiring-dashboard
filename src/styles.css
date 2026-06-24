@@ -640,13 +640,26 @@
     font-size: 1rem;
   }
 
+  .dashboard-story-day {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
+
   .dashboard-story-day--data {
     font-weight: 600;
   }
 
-  .dashboard-story-datepicker-panel .p-datepicker-today .p-datepicker-day {
+  .dashboard-story-day--viewer-today {
     outline: 2px solid var(--pip-nav-active-ink);
     outline-offset: 1px;
+    border-radius: 50%;
+  }
+
+  .dashboard-story-datepicker-panel .p-datepicker-today .p-datepicker-day:not(.dashboard-story-day--viewer-today) {
+    outline: none;
   }
 }
 

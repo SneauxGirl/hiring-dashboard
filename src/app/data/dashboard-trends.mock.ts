@@ -38,12 +38,18 @@ function trendSeries(): TrendWeekData['series'] {
   };
 }
 
-/** Static workforce trends; only the in-progress month boundary follows the viewer's calendar. */
-export function trendsForViewer(referenceDate: Date = new Date()): TrendWeekData {
+/** Static workforce trends; month boundary and year labels follow the viewed calendar date. */
+export function trendsForDate(viewDate: Date): TrendWeekData {
   return {
-    asOfMonthIndex: referenceDate.getMonth(),
+    asOfMonthIndex: viewDate.getMonth(),
+    calendarYear: viewDate.getFullYear(),
     series: trendSeries(),
   };
+}
+
+/** @deprecated Use trendsForDate */
+export function trendsForViewer(referenceDate: Date = new Date()): TrendWeekData {
+  return trendsForDate(referenceDate);
 }
 
 /** @deprecated Weekly payloads still attach trends until daily migration; use trendsForViewer on the page. */

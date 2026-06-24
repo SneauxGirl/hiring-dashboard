@@ -16,17 +16,24 @@
       [ngModel]="selectedDate"
       (ngModelChange)="onDateChange($event)"
       [inline]="true"
-      [minDate]="minStoryDate"
-      [maxDate]="maxStoryDate"
+      [showIcon]="true"
+      [minDate]="calendarMinDate"
+      [maxDate]="calendarMaxDate"
       [disabledDates]="disabledStoryDates"
-      [defaultDate]="referenceDate"
+      [defaultDate]="selectedDate"
       [showOtherMonths]="false"
       ariaLabel="Select date"
       styleClass="dashboard-story-datepicker"
       panelStyleClass="dashboard-story-datepicker-panel"
     >
       <ng-template #date let-date>
-        <span [class.dashboard-story-day--data]="isStoryDay(date)">{{ date.day }}</span>
+        <span
+          class="dashboard-story-day"
+          [class.dashboard-story-day--data]="isStoryDay(date)"
+          [class.dashboard-story-day--viewer-today]="isViewerToday(date)"
+        >
+          {{ date.day }}
+        </span>
       </ng-template>
     </p-datepicker>
   </div>

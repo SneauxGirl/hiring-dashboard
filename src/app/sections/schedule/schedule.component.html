@@ -14,13 +14,13 @@
 
     <div class="schedule-groups flex min-h-0 min-w-0 flex-col lg:flex-1 lg:justify-between">
       @for (group of visibleGroups(); track group.key; let last = $last) {
-        <section class="schedule-group min-w-0 shrink-0" [attr.aria-label]="group.label">
+        <section class="schedule-group min-w-0 shrink-0" [attr.aria-label]="groupLabel(group)">
           <h3
             class="m-0 mb-3 text-[length:var(--font-size-label)] font-bold"
             [class.text-color]="group.key === 'tomorrow' || group.key === 'this-week'"
             [style.color]="group.key === 'today' ? groupColor(group.key) : null"
           >
-            {{ group.label }}
+            {{ groupLabel(group) }}
           </h3>
 
           <ul class="m-0 flex list-none flex-col gap-3 p-0">

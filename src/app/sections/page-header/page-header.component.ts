@@ -4,11 +4,11 @@ import { DatePicker } from 'primeng/datepicker';
 import { DatePickerDateMeta } from 'primeng/types/datepicker';
 
 import {
-  disabledDatesOutsideStory,
+  isSameDay,
   isSelectableStoryDate,
   startOfDay,
-  storyDateRange,
 } from '../../data/dashboard-story-day.resolver';
+import { ViewerDay } from '../../data/dashboard-viewer-day';
 import { DashboardUser } from '../../models/dashboard.models';
 
 @Component({
@@ -18,7 +18,10 @@ import { DashboardUser } from '../../models/dashboard.models';
 })
 export class PageHeaderComponent {
   @Input({ required: true }) user!: DashboardUser;
-  @Input({ required: true }) referenceDate!: Date;
+  @Input({ required: true }) viewerDay!: ViewerDay;
+  @Input({ required: true }) calendarMinDate!: Date;
+  @Input({ required: true }) calendarMaxDate!: Date;
+  @Input({ required: true }) disabledStoryDates!: Date[];
   @Input({ required: true }) selectedDate!: Date;
   @Output() readonly selectedDateChange = new EventEmitter<Date>();
 
@@ -37,24 +40,24 @@ export class PageHeaderComponent {
     return 'Good evening, ';
   }
 
-  get minStoryDate(): Date {
-    return storyDateRange(this.referenceDate).min;
-  }
-
-  get maxStoryDate(): Date {
-    return storyDateRange(this.referenceDate).max;
-  }
-
-  get disabledStoryDates(): Date[] {
-    return disabledDatesOutsideStory(this.referenceDate);
-  }
-
   isStoryDay(date: DatePickerDateMeta): boolean {
     if (date.otherMonth) {
       return false;
     }
 
-    return isSelectableStoryDate(new Date(date.year, date.month, date.day), this.referenceDate);
+    return isSelectableStoryDate(
+      new Date(date.year, date.month, date.day),
+      this.viewerDay.date,
+    );
+  }
+
+  isViewerToday(date: DatePickerDateMeta): boolean {
+    if (date.otherMonth) {
+      return false;
+    }
+
+    const cell = new Date(date.year, date.month, date.day);
+    return isSameDay(cell, this.viewerDay.date);
   }
 
   onDateChange(date: Date | null): void {
@@ -63,7 +66,7 @@ export class PageHeaderComponent {
     }
 
     const normalized = startOfDay(date);
-    if (!isSelectableStoryDate(normalized, this.referenceDate)) {
+    if (!isSelectableStoryDate(normalized, this.viewerDay.date)) {
       return;
     }
 

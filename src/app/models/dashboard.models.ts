@@ -78,6 +78,8 @@ export interface TrendSeriesWeekValues {
 export interface TrendWeekData {
   /** 0–11 (Jan–Dec); months before this index use currentYear; this month onward use priorYear. */
   asOfMonthIndex: number;
+  /** Calendar year for the viewed date (drives chart year labels). */
+  calendarYear: number;
   series: Record<WorkforceTrendMetricId, TrendSeriesWeekValues>;
 }
 

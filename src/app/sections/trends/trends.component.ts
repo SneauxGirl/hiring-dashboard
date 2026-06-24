@@ -85,7 +85,7 @@ export class TrendsComponent implements OnChanges, OnDestroy {
   readonly quarterRows = QUARTER_ROWS;
 
   get trends(): WorkforceTrends {
-    const calendarYear = new Date().getFullYear();
+    const calendarYear = this.trendValues.calendarYear;
 
     return {
       currentYear: calendarYear,

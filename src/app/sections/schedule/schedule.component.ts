@@ -25,6 +25,8 @@ interface ScheduleGroupConfig {
 export class ScheduleComponent {
   @Input({ required: true }) schedule: ScheduleEntry[] = [];
   @Input({ required: true }) candidates: CandidateProfile[] = [];
+  @Input() todayGroupLabel = 'Today';
+  @Input() viewingHistoricalDate = false;
 
   dialogVisible = false;
   selectedCandidate: CandidateProfile | null = null;
@@ -35,8 +37,24 @@ export class ScheduleComponent {
   readonly groupConfigs: ScheduleGroupConfig[] = [
     { key: 'today', label: 'Today' },
     { key: 'tomorrow', label: 'Tomorrow' },
-    { key: 'this-week', label: 'This Week' },
+    { key: 'this-week', label: 'Later This Week' },
   ];
+
+  groupLabel(group: ScheduleGroupConfig): string {
+    if (group.key === 'today') {
+      return this.todayGroupLabel;
+    }
+
+    if (this.viewingHistoricalDate && group.key === 'tomorrow') {
+      return 'Next Day';
+    }
+
+    if (this.viewingHistoricalDate && group.key === 'this-week') {
+      return 'Rest of Week';
+    }
+
+    return group.label;
+  }
 
   entriesForGroup(group: ScheduleGroup): ScheduleEntry[] {
     return this.schedule.filter((entry) => entry.group === group);

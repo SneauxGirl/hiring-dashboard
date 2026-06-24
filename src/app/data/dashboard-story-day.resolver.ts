@@ -126,19 +126,16 @@ export function isSelectableStoryDate(
   return storyDayForDate(targetDate, referenceDate) !== null;
 }
 
-export function storyDateRange(referenceDate: Date = new Date()): { min: Date; max: Date } {
-  const dates = selectableStoryDates(referenceDate);
-  return { min: dates[0], max: dates[dates.length - 1] };
-}
-
-/** Weekdays in the story span that do not map to story data (e.g. weekends). */
-export function disabledDatesOutsideStory(referenceDate: Date = new Date()): Date[] {
-  const { min, max } = storyDateRange(referenceDate);
+/** Non-story days within the calendar navigation window (weekends and out-of-story weekdays). */
+export function disabledDatesInCalendarNav(
+  viewerAnchor: Date,
+  navRange: { min: Date; max: Date },
+): Date[] {
   const disabled: Date[] = [];
-  const cursor = startOfDay(min);
+  const cursor = startOfDay(navRange.min);
 
-  while (cursor.getTime() <= max.getTime()) {
-    if (!isSelectableStoryDate(cursor, referenceDate)) {
+  while (cursor.getTime() <= navRange.max.getTime()) {
+    if (!isSelectableStoryDate(cursor, viewerAnchor)) {
       disabled.push(new Date(cursor));
     }
     cursor.setDate(cursor.getDate() + 1);
