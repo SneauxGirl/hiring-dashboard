@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 
 import { MOCK_DASHBOARD_USER } from '../../data/dashboard-user.mock';
+import { trendsForViewer } from '../../data/dashboard-trends.mock';
 import { DASHBOARD_WEEKS, DashboardWeekKey } from '../../data/dashboard-weeks.mock';
 import { MOCK_DASHBOARD_BY_WEEK } from '../../data/dashboard-weekly.mock';
 import {
@@ -33,6 +34,7 @@ import {
 })
 export class DashboardPage {
   readonly user = MOCK_DASHBOARD_USER;
+  readonly trendValues = trendsForViewer();
   readonly weeks = DASHBOARD_WEEKS;
   readonly selectedWeekKey = signal<DashboardWeekKey>('2026-06-15');
   readonly dashboard = computed(

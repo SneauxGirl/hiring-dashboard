@@ -30,8 +30,7 @@
       <button
         type="button"
         [class]="iconBtnClass + ' hidden text-[color:var(--pip-nav-active-ink)] max-[459px]:inline-flex'"
-        aria-label="Select week"
-        (click)="openWeekDrawer()"
+        aria-label="Schedule"
       >
         <span class="pi pi-calendar text-xl leading-none" aria-hidden="true"></span>
       </button>
@@ -103,50 +102,6 @@
           {{ user.title }}
         </div>
       </div>
-    </div>
-  </div>
-</p-drawer>
-
-<p-drawer
-  [(visible)]="weekDrawerVisible"
-  position="right"
-  [modal]="true"
-  [closable]="false"
-  styleClass="mobile-week-drawer"
-  (onShow)="onWeekDrawerShow()"
-  (onHide)="onWeekDrawerHide()"
->
-  <ng-template #header>
-    <div class="flex w-full min-w-0 items-center justify-between gap-3">
-      <img
-        src="/PurplePipLogo.png"
-        alt="PIP Tech"
-        class="dashboard-brand-logo h-[length:var(--dashboard-brand-logo-height)] shrink-0 -translate-y-0.5"
-      />
-      <button
-        type="button"
-        [class]="iconBtnClass + ' text-muted-color hover:text-color'"
-        aria-label="Close week selector"
-        (click)="closeWeekDrawer()"
-      >
-        <span class="pi pi-times text-xl leading-none" aria-hidden="true"></span>
-      </button>
-    </div>
-  </ng-template>
-
-  <div class="relative flex min-h-0 min-w-0 flex-1 flex-col">
-    <div class="flex min-w-0 shrink-0 items-center">
-      <p-select
-        #weekDrawerSelect
-        [options]="weeks"
-        [ngModel]="selectedWeek"
-        (ngModelChange)="onWeekChange($event)"
-        optionLabel="label"
-        optionValue="key"
-        ariaLabel="Select week"
-        class="week-range-select h-[length:var(--dashboard-control-height)] min-w-0 w-full flex-1"
-        panelStyleClass="week-range-select-panel"
-      />
     </div>
   </div>
 </p-drawer>

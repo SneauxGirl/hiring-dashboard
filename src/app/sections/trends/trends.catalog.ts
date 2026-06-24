@@ -9,8 +9,3 @@ export const TREND_METRIC_DEFINITIONS: ReadonlyArray<{
   { id: 'transfers', label: 'Transfers' },
   { id: 'backfills', label: 'Backfills' },
 ] as const;
-
-export const TREND_CHART_YEARS = {
-  currentYear: 2026,
-  priorYear: 2025,
-} as const;

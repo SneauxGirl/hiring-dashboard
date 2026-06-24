@@ -29,7 +29,7 @@ import {
   trendSeriesColor,
   trendSeriesPriorColor,
 } from '../../theme/theme-colors';
-import { TREND_CHART_YEARS, TREND_METRIC_DEFINITIONS } from './trends.catalog';
+import { TREND_METRIC_DEFINITIONS } from './trends.catalog';
 
 type TrendsViewMode = 'chart' | 'table';
 
@@ -85,8 +85,11 @@ export class TrendsComponent implements OnChanges, OnDestroy {
   readonly quarterRows = QUARTER_ROWS;
 
   get trends(): WorkforceTrends {
+    const calendarYear = new Date().getFullYear();
+
     return {
-      ...TREND_CHART_YEARS,
+      currentYear: calendarYear,
+      priorYear: calendarYear - 1,
       asOfMonthIndex: this.trendValues.asOfMonthIndex,
       series: TREND_METRIC_DEFINITIONS.map((definition) => ({
         id: definition.id,

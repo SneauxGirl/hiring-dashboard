@@ -18,7 +18,6 @@ import { DashboardUser } from '../../models/dashboard.models';
 })
 export class MobileHeaderComponent {
   @ViewChild(Menu) private navMenu?: Menu;
-  @ViewChild('weekDrawerSelect') private weekDrawerSelect?: Select;
 
   readonly iconBtnClass =
     'inline-flex size-[length:var(--dashboard-control-height)] shrink-0 cursor-pointer items-center justify-center rounded-[length:var(--p-content-border-radius)] border-0 bg-transparent p-0 leading-none hover:bg-[color:var(--p-content-hover-background)] focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--pip-nav-active-ink)]';
@@ -29,7 +28,6 @@ export class MobileHeaderComponent {
   @Output() readonly selectedWeekChange = new EventEmitter<DashboardWeekKey>();
 
   drawerVisible = false;
-  weekDrawerVisible = false;
 
   get menuItems(): MenuItem[] {
     return DASHBOARD_NAV_ITEMS.map((item) => ({
@@ -52,27 +50,7 @@ export class MobileHeaderComponent {
     this.drawerVisible = false;
   }
 
-  openWeekDrawer(): void {
-    this.weekDrawerVisible = true;
-  }
-
-  onWeekDrawerShow(): void {
-    queueMicrotask(() => this.weekDrawerSelect?.hide());
-  }
-
-  onWeekDrawerHide(): void {
-    this.weekDrawerSelect?.hide();
-    this.weekDrawerVisible = false;
-  }
-
-  closeWeekDrawer(): void {
-    this.weekDrawerVisible = false;
-  }
-
   onWeekChange(key: DashboardWeekKey): void {
     this.selectedWeekChange.emit(key);
-    if (this.weekDrawerVisible) {
-      this.closeWeekDrawer();
-    }
   }
 }

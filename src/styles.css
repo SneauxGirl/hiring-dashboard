@@ -342,35 +342,9 @@
     width: min(18rem, 85vw);
   }
 
-  .dashboard-drawer .p-drawer-header,
-  .p-drawer.mobile-week-drawer .p-drawer-header {
+  .dashboard-drawer .p-drawer-header {
     width: 100%;
     padding: 1.125rem;
-  }
-
-  .p-drawer.mobile-week-drawer.p-drawer-right {
-    top: 0;
-    right: 0;
-    left: auto;
-    bottom: auto;
-    width: min(18rem, 85vw);
-    height: 360px !important;
-    max-height: 360px !important;
-    border-radius: 0 !important;
-  }
-
-  .p-drawer.mobile-week-drawer .p-drawer-header,
-  .p-drawer.mobile-week-drawer .p-drawer-content {
-    border-radius: 0 !important;
-  }
-
-  .p-drawer.mobile-week-drawer .p-drawer-content {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    min-height: 0;
-    padding: 0 1.125rem 1.125rem;
-    overflow: hidden;
   }
 
   .sidebar-brand .dashboard-brand-logo {
