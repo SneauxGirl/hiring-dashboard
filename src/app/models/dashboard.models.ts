@@ -148,5 +148,16 @@ export interface DashboardWeekData {
   stageDurationDays: number[];
 }
 
+/** Story-day-scoped dashboard mock payload (days 1–15; no user, nav, or trends). */
+export interface DashboardDayData {
+  kpis: KpiWeekValues[];
+  schedule: ScheduleEntry[];
+  candidates: CandidateProfile[];
+  bottlenecks: BottleneckWeekMetrics[];
+  openRequisitions: OpenRequisitionsData;
+  funnelStages: FunnelStageWeekData[];
+  stageDurationDays: number[];
+}
+
 /** @deprecated Use DashboardWeekData */
 export type DashboardData = DashboardWeekData;
