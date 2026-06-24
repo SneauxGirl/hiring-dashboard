@@ -35,7 +35,7 @@ export class ScheduleComponent {
   readonly groupConfigs: ScheduleGroupConfig[] = [
     { key: 'today', label: 'Today' },
     { key: 'tomorrow', label: 'Tomorrow' },
-    { key: 'this-week', label: 'Later This Week' },
+    { key: 'this-week', label: 'This Week' },
   ];
 
   entriesForGroup(group: ScheduleGroup): ScheduleEntry[] {

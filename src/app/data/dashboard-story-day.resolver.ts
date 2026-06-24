@@ -15,12 +15,6 @@ const STORY_TODAY_BY_DOW: Record<number, DashboardStoryDay> = {
   6: 5,
 };
 
-const STORY_DATE_LABEL = new Intl.DateTimeFormat('en-US', {
-  weekday: 'short',
-  month: 'short',
-  day: 'numeric',
-});
-
 export function startOfDay(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
@@ -125,20 +119,32 @@ export function selectableStoryDates(referenceDate: Date = new Date()): Date[] {
   return dates;
 }
 
-export function formatStoryDateLabel(date: Date): string {
-  return STORY_DATE_LABEL.format(date);
+export function isSelectableStoryDate(
+  targetDate: Date,
+  referenceDate: Date = new Date(),
+): boolean {
+  return storyDayForDate(targetDate, referenceDate) !== null;
 }
 
-export type StoryDateOption = {
-  value: string;
-  label: string;
-};
+export function storyDateRange(referenceDate: Date = new Date()): { min: Date; max: Date } {
+  const dates = selectableStoryDates(referenceDate);
+  return { min: dates[0], max: dates[dates.length - 1] };
+}
 
-export function storyDateSelectOptions(referenceDate: Date = new Date()): StoryDateOption[] {
-  return selectableStoryDates(referenceDate).map((date) => ({
-    value: toDateKey(date),
-    label: formatStoryDateLabel(date),
-  }));
+/** Weekdays in the story span that do not map to story data (e.g. weekends). */
+export function disabledDatesOutsideStory(referenceDate: Date = new Date()): Date[] {
+  const { min, max } = storyDateRange(referenceDate);
+  const disabled: Date[] = [];
+  const cursor = startOfDay(min);
+
+  while (cursor.getTime() <= max.getTime()) {
+    if (!isSelectableStoryDate(cursor, referenceDate)) {
+      disabled.push(new Date(cursor));
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  return disabled;
 }
 
 export function dashboardForDate(

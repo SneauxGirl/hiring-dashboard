@@ -1,22 +1,26 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Select } from 'primeng/select';
+import { DatePicker } from 'primeng/datepicker';
+import { DatePickerDateMeta } from 'primeng/types/datepicker';
 
-import { StoryDateOption } from '../../data/dashboard-story-day.resolver';
+import {
+  disabledDatesOutsideStory,
+  isSelectableStoryDate,
+  startOfDay,
+  storyDateRange,
+} from '../../data/dashboard-story-day.resolver';
 import { DashboardUser } from '../../models/dashboard.models';
-
-export type { StoryDateOption };
 
 @Component({
   selector: 'app-page-header',
-  imports: [FormsModule, Select],
+  imports: [FormsModule, DatePicker],
   templateUrl: './page-header.component.html',
 })
 export class PageHeaderComponent {
   @Input({ required: true }) user!: DashboardUser;
-  @Input({ required: true }) storyDates!: ReadonlyArray<StoryDateOption>;
-  @Input({ required: true }) selectedDateKey!: string;
-  @Output() readonly selectedDateKeyChange = new EventEmitter<string>();
+  @Input({ required: true }) referenceDate!: Date;
+  @Input({ required: true }) selectedDate!: Date;
+  @Output() readonly selectedDateChange = new EventEmitter<Date>();
 
   get firstName(): string {
     return this.user.name.trim().split(/\s+/)[0] ?? this.user.name;
@@ -33,7 +37,36 @@ export class PageHeaderComponent {
     return 'Good evening, ';
   }
 
-  onDateChange(dateKey: string): void {
-    this.selectedDateKeyChange.emit(dateKey);
+  get minStoryDate(): Date {
+    return storyDateRange(this.referenceDate).min;
+  }
+
+  get maxStoryDate(): Date {
+    return storyDateRange(this.referenceDate).max;
+  }
+
+  get disabledStoryDates(): Date[] {
+    return disabledDatesOutsideStory(this.referenceDate);
+  }
+
+  isStoryDay(date: DatePickerDateMeta): boolean {
+    if (date.otherMonth) {
+      return false;
+    }
+
+    return isSelectableStoryDate(new Date(date.year, date.month, date.day), this.referenceDate);
+  }
+
+  onDateChange(date: Date | null): void {
+    if (!date) {
+      return;
+    }
+
+    const normalized = startOfDay(date);
+    if (!isSelectableStoryDate(normalized, this.referenceDate)) {
+      return;
+    }
+
+    this.selectedDateChange.emit(normalized);
   }
 }

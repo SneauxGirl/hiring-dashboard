@@ -1,18 +1,15 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Avatar } from 'primeng/avatar';
 import { Drawer } from 'primeng/drawer';
 import { Menu } from 'primeng/menu';
-import { Select } from 'primeng/select';
 
 import { DASHBOARD_NAV_ITEMS } from '../../config/dashboard-nav.config';
-import { StoryDateOption } from '../../data/dashboard-story-day.resolver';
 import { DashboardUser } from '../../models/dashboard.models';
 
 @Component({
   selector: 'app-mobile-header',
-  imports: [Drawer, FormsModule, Menu, Avatar, Select],
+  imports: [Drawer, Menu, Avatar],
   templateUrl: './mobile-header.component.html',
   host: { class: 'block md:hidden' },
 })
@@ -23,9 +20,6 @@ export class MobileHeaderComponent {
     'inline-flex size-[length:var(--dashboard-control-height)] shrink-0 cursor-pointer items-center justify-center rounded-[length:var(--p-content-border-radius)] border-0 bg-transparent p-0 leading-none hover:bg-[color:var(--p-content-hover-background)] focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--pip-nav-active-ink)]';
 
   @Input({ required: true }) user!: DashboardUser;
-  @Input({ required: true }) storyDates!: ReadonlyArray<StoryDateOption>;
-  @Input({ required: true }) selectedDateKey!: string;
-  @Output() readonly selectedDateKeyChange = new EventEmitter<string>();
 
   drawerVisible = false;
 
@@ -48,9 +42,5 @@ export class MobileHeaderComponent {
 
   closeDrawer(): void {
     this.drawerVisible = false;
-  }
-
-  onDateChange(dateKey: string): void {
-    this.selectedDateKeyChange.emit(dateKey);
   }
 }

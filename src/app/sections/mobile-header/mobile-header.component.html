@@ -24,9 +24,7 @@
       />
     </div>
 
-    <div
-      class="flex h-[length:var(--dashboard-control-height)] min-w-0 shrink-0 items-center"
-    >
+    <div class="flex shrink-0 items-center">
       <button
         type="button"
         [class]="iconBtnClass + ' hidden text-[color:var(--pip-nav-active-ink)] max-[459px]:inline-flex'"
@@ -34,22 +32,10 @@
       >
         <span class="pi pi-calendar text-xl leading-none" aria-hidden="true"></span>
       </button>
-
-      <div
-        class="flex h-[length:var(--dashboard-control-height)] min-w-0 shrink-0 items-center gap-2 text-muted-color max-[459px]:hidden"
-      >
-        <span class="pi pi-calendar" aria-hidden="true"></span>
-        <p-select
-          [options]="storyDates"
-          [ngModel]="selectedDateKey"
-          (ngModelChange)="onDateChange($event)"
-          optionLabel="label"
-          optionValue="value"
-          ariaLabel="Select date"
-          class="week-range-select h-[length:var(--dashboard-control-height)] w-full min-w-[10rem] max-w-[11rem]"
-          panelStyleClass="week-range-select-panel"
-        />
-      </div>
+      <span
+        class="inline-flex size-[length:var(--dashboard-control-height)] max-[459px]:hidden"
+        aria-hidden="true"
+      ></span>
     </div>
   </div>
 </header>

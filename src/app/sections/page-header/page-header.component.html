@@ -1,4 +1,4 @@
-<header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+<header class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
   <div
     class="flex min-h-[length:var(--dashboard-header-row-height)] min-w-0 flex-col justify-end"
   >
@@ -11,17 +11,23 @@
     </p>
   </div>
 
-  <div class="flex shrink-0 items-center gap-2 self-start sm:self-center">
-    <span class="pi pi-calendar text-muted-color" aria-hidden="true"></span>
-    <p-select
-      [options]="storyDates"
-      [ngModel]="selectedDateKey"
+  <div class="dashboard-story-calendar shrink-0 self-start sm:self-center">
+    <p-datepicker
+      [ngModel]="selectedDate"
       (ngModelChange)="onDateChange($event)"
-      optionLabel="label"
-      optionValue="value"
+      [inline]="true"
+      [minDate]="minStoryDate"
+      [maxDate]="maxStoryDate"
+      [disabledDates]="disabledStoryDates"
+      [defaultDate]="referenceDate"
+      [showOtherMonths]="false"
       ariaLabel="Select date"
-      class="week-range-select w-full min-w-[12rem] sm:min-w-[14rem]"
-      panelStyleClass="week-range-select-panel"
-    />
+      styleClass="dashboard-story-datepicker"
+      panelStyleClass="dashboard-story-datepicker-panel"
+    >
+      <ng-template #date let-date>
+        <span [class.dashboard-story-day--data]="isStoryDay(date)">{{ date.day }}</span>
+      </ng-template>
+    </p-datepicker>
   </div>
 </header>

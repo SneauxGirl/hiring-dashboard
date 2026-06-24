@@ -4,7 +4,6 @@ import {
   dashboardForDate,
   fromDateKey,
   startOfDay,
-  storyDateSelectOptions,
   toDateKey,
 } from '../../data/dashboard-story-day.resolver';
 import { trendsForViewer } from '../../data/dashboard-trends.mock';
@@ -41,7 +40,6 @@ export class DashboardPage {
   readonly user = MOCK_DASHBOARD_USER;
   readonly trendValues = trendsForViewer();
   readonly referenceDate = startOfDay(new Date());
-  readonly storyDateOptions = storyDateSelectOptions(this.referenceDate);
   readonly selectedDateKey = signal(toDateKey(this.referenceDate));
   readonly selectedDate = computed(() => fromDateKey(this.selectedDateKey()));
   readonly dashboard = computed(
@@ -51,4 +49,8 @@ export class DashboardPage {
   );
 
   sidebarCollapsed = false;
+
+  onSelectedDateChange(date: Date): void {
+    this.selectedDateKey.set(toDateKey(date));
+  }
 }

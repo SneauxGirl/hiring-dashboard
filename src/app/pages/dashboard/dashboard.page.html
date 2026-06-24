@@ -8,12 +8,7 @@
   />
 
   <div class="dashboard-page flex w-full min-w-0 flex-none flex-col bg-surface-50 md:flex-1">
-    <app-mobile-header
-      [user]="user"
-      [storyDates]="storyDateOptions"
-      [selectedDateKey]="selectedDateKey()"
-      (selectedDateKeyChange)="selectedDateKey.set($event)"
-    />
+    <app-mobile-header [user]="user" />
 
     <main
       class="dashboard-main flex min-w-0 flex-1 flex-col gap-[length:var(--dashboard-grid-gap)] pb-5 pt-[length:var(--dashboard-header-padding-block)] lg:flex-row lg:flex-wrap lg:pb-6 lg:pt-[length:var(--dashboard-header-padding-block-lg)]"
@@ -21,9 +16,9 @@
       <app-page-header
         class="hidden w-full min-w-0 md:block lg:order-1"
         [user]="user"
-        [storyDates]="storyDateOptions"
-        [selectedDateKey]="selectedDateKey()"
-        (selectedDateKeyChange)="selectedDateKey.set($event)"
+        [referenceDate]="referenceDate"
+        [selectedDate]="selectedDate()"
+        (selectedDateChange)="onSelectedDateChange($event)"
       />
       <app-kpi class="order-1 w-full min-w-0 lg:order-2" [kpiValues]="data.kpis" />
       <app-schedule

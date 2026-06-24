@@ -57,7 +57,16 @@ static from `src/app/data/`. Design tokens in `src/app/theme/pip-tokens.ts`; glo
 
 ### Mock Data
 
-Currently mid-refactor from weekly to daily.
+- Prioritized for portfolio viewing rather than SAAS function.
+- Refactoring from weekly to daily, with commit at the end of each step. Steps 1-2 are non-functional for deployment.
+
+1. Remove schedule modal; refactor static trends + dynamic month/years; decouple from day payload
+2. Re-key daily mock to story days 1–15; remove trends + weekKeyForDay from daily builder
+3. Story-day resolver + dashboard page wiring
+4. Desktop calendar in page header
+5. Delete/retire weekly mock + weeks mock
+6. Type renames (DashboardDayData, etc.) across imports
+7. Clean data and return to styling
 
 ## Scripts
 

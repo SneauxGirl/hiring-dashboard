@@ -619,20 +619,34 @@
     padding-left: 1rem;
   }
 
-  .week-range-select.p-select:not(.p-disabled):hover,
-  .week-range-select.p-select.p-focus {
-    border-color: var(--pip-nav-active-ink);
+  .dashboard-story-calendar {
+    width: min(100%, 18.5rem);
   }
 
-  .week-range-select-panel .p-select-option.p-focus:not(.p-select-option-selected) {
-    background: var(--pip-nav-hover-bg);
-    color: var(--pip-nav-hover-ink);
+  .dashboard-story-datepicker-panel.p-datepicker-panel-inline {
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
   }
 
-  .week-range-select-panel .p-select-option.p-select-option-selected,
-  .week-range-select-panel .p-select-option.p-select-option-selected.p-focus {
-    background: var(--pip-nav-active-bg);
-    color: var(--pip-nav-active-ink);
+  .dashboard-story-datepicker-panel .p-datepicker-header {
+    padding-inline: 0;
+  }
+
+  .dashboard-story-datepicker-panel .p-datepicker-day {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+
+  .dashboard-story-day--data {
+    font-weight: 600;
+  }
+
+  .dashboard-story-datepicker-panel .p-datepicker-today .p-datepicker-day {
+    outline: 2px solid var(--pip-nav-active-ink);
+    outline-offset: 1px;
   }
 }
 
