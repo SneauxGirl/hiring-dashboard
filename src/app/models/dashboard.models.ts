@@ -138,18 +138,6 @@ export interface DashboardUser {
   avatarUrl: string;
 }
 
-/** Week-scoped dashboard mock payload (no user, nav, or fixed labels). */
-export interface DashboardWeekData {
-  kpis: KpiWeekValues[];
-  schedule: ScheduleEntry[];
-  candidates: CandidateProfile[];
-  bottlenecks: BottleneckWeekMetrics[];
-  trends: TrendWeekData;
-  openRequisitions: OpenRequisitionsData;
-  funnelStages: FunnelStageWeekData[];
-  stageDurationDays: number[];
-}
-
 /** Calendar-day-scoped dashboard mock payload (days 1–14; no user, nav, or trends). */
 export interface DashboardDayData {
   kpis: KpiWeekValues[];
@@ -160,6 +148,3 @@ export interface DashboardDayData {
   funnelStages: FunnelStageWeekData[];
   stageDurationDays: number[];
 }
-
-/** @deprecated Use DashboardWeekData */
-export type DashboardData = DashboardWeekData;

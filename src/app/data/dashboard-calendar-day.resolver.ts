@@ -39,11 +39,6 @@ export function isSameDay(a: Date, b: Date): boolean {
   return startOfDay(a).getTime() === startOfDay(b).getTime();
 }
 
-export function isWeekend(date: Date): boolean {
-  const day = date.getDay();
-  return day === 0 || day === 6;
-}
-
 export function calendarTodayForDate(referenceDate: Date = new Date()): DashboardCalendarDay {
   return CALENDAR_TODAY_BY_DOW[startOfDay(referenceDate).getDay()];
 }
@@ -82,17 +77,6 @@ export function dateForCalendarDay(
 ): Date {
   const viewerToday = calendarTodayForDate(referenceDate);
   return addCalendarDays(referenceDate, calendarDay - viewerToday);
-}
-
-export function selectableCalendarDates(referenceDate: Date = new Date()): Date[] {
-  const viewerToday = calendarTodayForDate(referenceDate);
-  const dates: Date[] = [];
-
-  for (let calendarDay = 1; calendarDay <= viewerToday; calendarDay++) {
-    dates.push(dateForCalendarDay(calendarDay as DashboardCalendarDay, referenceDate));
-  }
-
-  return dates;
 }
 
 export function isSelectableCalendarDate(

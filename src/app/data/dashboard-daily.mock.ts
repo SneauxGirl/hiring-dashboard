@@ -5,23 +5,6 @@ export type DashboardCalendarDay =
 
 export const DASHBOARD_CALENDAR_DAY_COUNT = 14;
 
-export const DASHBOARD_CALENDAR_DAYS = [
-  { key: 1, label: 'Week 1 · Sun' },
-  { key: 2, label: 'Week 1 · Mon' },
-  { key: 3, label: 'Week 1 · Tue' },
-  { key: 4, label: 'Week 1 · Wed' },
-  { key: 5, label: 'Week 1 · Thu' },
-  { key: 6, label: 'Week 1 · Fri' },
-  { key: 7, label: 'Week 1 · Sat' },
-  { key: 8, label: 'Week 2 · Sun' },
-  { key: 9, label: 'Week 2 · Mon' },
-  { key: 10, label: 'Week 2 · Tue' },
-  { key: 11, label: 'Week 2 · Wed' },
-  { key: 12, label: 'Week 2 · Thu' },
-  { key: 13, label: 'Week 2 · Fri' },
-  { key: 14, label: 'Week 2 · Sat' },
-] as const satisfies ReadonlyArray<{ key: DashboardCalendarDay; label: string }>;
-
 type StoryWeek = 1 | 2;
 
 const STAGE_DURATION_DAYS_BY_STORY_WEEK: Record<StoryWeek, readonly number[]> = {
@@ -193,12 +176,6 @@ const CANDIDATES = {
     roleSpecs: 'Senior UI engineer with component architecture and mentoring experience.',
   },
 };
-
-const PTO_SCHEDULE = [
-  { id: 'pto-today', kind: 'pto', group: 'today' },
-  { id: 'pto-tomorrow', kind: 'pto', group: 'tomorrow' },
-  { id: 'pto-week', kind: 'pto', group: 'this-week' },
-] as const;
 
 const KPI_WEEK1 = [
   { value: 4, delta: '0 this month', trend: 'neutral' },

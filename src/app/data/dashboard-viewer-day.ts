@@ -40,13 +40,3 @@ export function calendarNavRangeForDate(date: Date): { min: Date; max: Date } {
     max: new Date(year, month + 2, 0),
   };
 }
-
-const STORY_DATE_LABEL = new Intl.DateTimeFormat('en-US', {
-  weekday: 'short',
-  month: 'short',
-  day: 'numeric',
-});
-
-export function formatStoryDateLabel(date: Date): string {
-  return STORY_DATE_LABEL.format(date);
-}

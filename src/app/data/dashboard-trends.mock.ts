@@ -1,5 +1,4 @@
-import { StageDuration, TrendWeekData, WorkforceTrendMetricId } from '../models/dashboard.models';
-import { DashboardWeekKey } from './dashboard-weeks.mock';
+import { TrendWeekData, WorkforceTrendMetricId } from '../models/dashboard.models';
 
 /** Prior calendar year — Jan through Dec (index 0 = January). */
 const TREND_PRIOR_YEAR: Record<WorkforceTrendMetricId, readonly number[]> = {
@@ -45,35 +44,4 @@ export function trendsForDate(viewDate: Date): TrendWeekData {
     calendarYear: viewDate.getFullYear(),
     series: trendSeries(),
   };
-}
-
-/** @deprecated Use trendsForDate */
-export function trendsForViewer(referenceDate: Date = new Date()): TrendWeekData {
-  return trendsForDate(referenceDate);
-}
-
-/** @deprecated Weekly payloads still attach trends until daily migration; use trendsForViewer on the page. */
-export function trendsForWeek(_weekKey: DashboardWeekKey): TrendWeekData {
-  return trendsForViewer();
-}
-
-const WEEK_STAGE_DURATION_DAYS: Record<DashboardWeekKey, readonly number[]> = {
-  '2026-06-01': [10, 9, 18, 14, 62, 3],
-  '2026-06-08': [9, 8, 17, 12, 58, 2],
-  '2026-06-15': [9, 8, 16, 11, 55, 2],
-  '2026-06-22': [8, 7, 15, 10, 48, 2],
-  '2026-06-29': [8, 7, 14, 9, 42, 2],
-};
-
-export function stageDurationDaysForWeek(weekKey: DashboardWeekKey): number[] {
-  return [...WEEK_STAGE_DURATION_DAYS[weekKey]];
-}
-
-/** @deprecated Use stageDurationDaysForWeek */
-export function stageDurationsForWeek(weekKey: DashboardWeekKey): StageDuration[] {
-  return stageDurationDaysForWeek(weekKey).map((days, index) => ({
-    fromStage: `h${index}`,
-    toStage: `h${index + 1}`,
-    days,
-  }));
 }
