@@ -4,7 +4,7 @@ Work in progress: Hiring-manager dashboard. Built in Angular, with Typescript an
 
 **Live demo:** [pipeline-dashboard-seven-chi.vercel.app/](https://pipeline-dashboard-seven-chi.vercel.app/)
 
-![PIP Tech dashboard mid-refactor](docs/images/PipDashboard-DayRefactor.png)
+![PIP Tech dashboard - after refactor, before style](docs/images/dashboard-AfterRefactorBeforeStyle.png)
 
 ## Stack
 
@@ -53,20 +53,13 @@ npm run serve:ssr:pip
 Output goes to `dist/pip/`. Fonts load from Google Fonts on first visit (network required for typography).
 
 Section components live under `src/app/sections/` and compose on `src/app/pages/dashboard/`. Data is 
-static from `src/app/data/`. Design tokens in `src/app/theme/pip-tokens.ts`; global styles in `src/styles.css`
+static from `src/app/data/` (mocks and resolvers). Design tokens in `src/app/theme/pip-tokens.ts`; global styles in `src/styles.css`
 
 ### Mock Data
 
 - Prioritized for portfolio viewing rather than SAAS function.
-- Refactoring from weekly to daily, with commit at the end of each step. Steps 1-2 are non-functional for deployment.
-
-1. Remove schedule modal; refactor static trends + dynamic month/years; decouple from day payload
-2. Re-key daily mock to story days 1–15; remove trends + weekKeyForDay from daily builder
-3. Story-day resolver + dashboard page wiring
-4. Desktop calendar in page header
-5. Delete/retire weekly mock + weeks mock
-6. Type renames (DashboardDayData, etc.) across imports
-7. Clean data and return to styling
+- No API, no auth — all dashboard payload comes from `src/app/data/`.
+- On first load, the real weekday sets viewer “today” (Sun → 8 … Sat → 14), and sets data accordingly up to that day.
 
 ## Scripts
 

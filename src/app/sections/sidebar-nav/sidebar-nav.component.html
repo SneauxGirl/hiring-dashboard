@@ -43,17 +43,24 @@
     [pt]="navMenuPt"
   />
 
-  <p-card styleClass="sidebar-user-card mt-auto w-full border-t border-surface pt-4 mb-4">
-    <div class="sidebar-user flex items-center gap-3" aria-label="Signed in user">
-      <p-avatar
-        [image]="user.avatarUrl"
-        shape="circle"
-        [attr.aria-label]="user.name"
+  <div
+    class="mt-auto mb-4 w-full border-t border-surface pt-4"
+    aria-label="Signed in user"
+  >
+    <div
+      class="flex items-center gap-3"
+      [class.justify-center]="collapsed"
+      [class.pl-4]="!collapsed"
+    >
+      <img
+        [src]="user.avatarUrl"
+        [alt]="user.name"
+        class="size-10 shrink-0 rounded-full object-cover"
       />
-      <div class="sidebar-user-text min-w-0">
+      <div class="min-w-0" [class.hidden]="collapsed">
         <div class="truncate text-base font-medium text-color">{{ user.name }}</div>
         <div class="truncate text-[length:var(--font-size-label)] text-muted-color">{{ user.title }}</div>
       </div>
     </div>
-  </p-card>
+  </div>
 </nav>

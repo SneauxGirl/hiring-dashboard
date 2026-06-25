@@ -1,7 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Avatar } from 'primeng/avatar';
-import { Card } from 'primeng/card';
 import { Menu } from 'primeng/menu';
 
 import {
@@ -13,7 +11,7 @@ import { DashboardUser } from '../../models/dashboard.models';
 
 @Component({
   selector: 'app-sidebar-nav',
-  imports: [Card, Menu, Avatar],
+  imports: [Menu],
   templateUrl: './sidebar-nav.component.html',
   host: {
     class:

@@ -212,10 +212,6 @@
     padding-inline: 0.5rem;
   }
 
-  .sidebar-shell--collapsed .sidebar-user-text {
-    display: none;
-  }
-
   .sidebar-shell--collapsed .dashboard-nav-menu .p-menu-item-label {
     display: none;
   }
@@ -236,27 +232,6 @@
     flex-shrink: 0;
     margin-inline-end: 0;
     font-size: 1.125rem;
-  }
-
-  .sidebar-shell--collapsed .sidebar-user {
-    justify-content: center;
-    padding-inline: 0;
-  }
-
-  .sidebar-shell--collapsed .sidebar-user-card .p-card-content {
-    padding: 0;
-  }
-
-  .sidebar-user-card.p-card {
-    box-shadow: none;
-  }
-
-  .sidebar-user-card .p-card-body {
-    padding: 0;
-  }
-
-  .sidebar-user-card .p-card-content {
-    padding-left: 1rem;
   }
 }
 
