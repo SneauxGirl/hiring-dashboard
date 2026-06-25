@@ -1,16 +1,13 @@
 @if (showPicker) {
-  <div class="dashboard-date-picker">
+  <div class="relative min-h-[length:var(--dashboard-control-height)]">
     <div
-      class="dashboard-date-picker-control"
-      [class.dashboard-date-picker-control--open]="panelOpen"
+      class="flex min-h-[length:var(--dashboard-control-height)] items-stretch overflow-hidden rounded-border border border-surface bg-surface-0 focus-within:border-[color:var(--p-inputtext-focus-border-color)] focus-within:shadow-[var(--p-inputtext-focus-ring-shadow)] focus-within:outline focus-within:outline-[length:var(--p-inputtext-focus-ring-width)] focus-within:outline-offset-[length:var(--p-inputtext-focus-ring-offset)] focus-within:outline-[color:var(--p-inputtext-focus-ring-color)]"
       (mouseenter)="onControlMouseEnter()"
       (mouseleave)="onControlMouseLeave()"
     >
       <button
         type="button"
-        class="dashboard-date-picker-field"
-        [class.dashboard-date-picker-field--friendly]="usesFriendlyLabel"
-        [class.dashboard-date-picker-field--show-date]="showDateDetail"
+        class="flex min-w-[7.5rem] flex-1 cursor-pointer items-center border-0 bg-transparent px-3 text-left text-base leading-none text-color focus-visible:outline-none"
         [attr.aria-label]="ariaLabel"
         aria-haspopup="dialog"
         [attr.aria-expanded]="panelOpen"
@@ -19,8 +16,8 @@
         (blur)="onFieldBlur()"
       >
         @if (usesFriendlyLabel) {
-          <span class="dashboard-date-picker-friendly-default">{{ friendlyLabel }}</span>
-          <span class="dashboard-date-picker-friendly-hover">{{ formattedDate }}</span>
+          <span [class.hidden]="showDateDetail">{{ friendlyLabel }}</span>
+          <span class="hidden" [class.inline]="showDateDetail">{{ formattedDate }}</span>
         } @else {
           <span>{{ formattedDate }}</span>
         }
@@ -28,7 +25,7 @@
 
       <button
         type="button"
-        class="dashboard-date-picker-trigger"
+        class="inline-flex size-[length:var(--dashboard-control-height)] shrink-0 cursor-pointer items-center justify-center border-0 border-s border-surface bg-transparent text-color focus-visible:outline-none"
         [attr.aria-label]="panelOpen ? 'Close calendar' : 'Open calendar'"
         [attr.aria-expanded]="panelOpen"
         (click)="togglePanel()"
@@ -38,11 +35,17 @@
     </div>
 
     @if (panelOpen) {
-      <div #panel class="dashboard-date-picker-panel" role="dialog" aria-modal="true" [attr.aria-label]="monthTitle">
-        <div class="dashboard-date-picker-header">
+      <div
+        #panel
+        class="absolute top-[calc(100%+0.375rem)] right-0 z-20 w-[min(100vw-2rem,18rem)] rounded-border border border-surface bg-surface-0 p-3 shadow-[var(--p-overlay-select-shadow,var(--p-overlay-popover-shadow,0_2px_10px_rgb(0_0_0_/_12%)))]"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="monthTitle"
+      >
+        <div class="mb-3 flex items-center justify-between gap-2">
           <button
             type="button"
-            class="dashboard-date-picker-nav"
+            class="inline-flex size-8 cursor-pointer items-center justify-center rounded-border border-0 bg-transparent text-color focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--pip-nav-active-ink)] disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Previous month"
             [disabled]="!canGoPrevMonth"
             (click)="goPrevMonth()"
@@ -50,11 +53,11 @@
             <span class="pi pi-chevron-left" aria-hidden="true"></span>
           </button>
 
-          <span class="dashboard-date-picker-title">{{ monthTitle }}</span>
+          <span class="text-base font-medium text-color">{{ monthTitle }}</span>
 
           <button
             type="button"
-            class="dashboard-date-picker-nav"
+            class="inline-flex size-8 cursor-pointer items-center justify-center rounded-border border-0 bg-transparent text-color focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--pip-nav-active-ink)] disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Next month"
             [disabled]="!canGoNextMonth"
             (click)="goNextMonth()"
@@ -63,21 +66,34 @@
           </button>
         </div>
 
-        <div class="dashboard-date-picker-weekdays" aria-hidden="true">
+        <div class="mb-1.5 grid grid-cols-7 gap-0.5" aria-hidden="true">
           @for (label of weekdayLabels; track label) {
-            <span class="dashboard-date-picker-weekday">{{ label }}</span>
+            <span
+              class="inline-flex h-8 items-center justify-center text-[length:var(--font-size-label)] font-medium text-muted-color"
+            >
+              {{ label }}
+            </span>
           }
         </div>
 
-        <div class="dashboard-date-picker-grid" role="grid" [attr.aria-label]="monthTitle">
+        <div class="grid grid-cols-7 gap-0.5" role="grid" [attr.aria-label]="monthTitle">
           @for (cell of monthGrid; track cell.date.getTime()) {
             @if (cell.inMonth) {
               <button
                 type="button"
-                class="dashboard-date-picker-day"
                 role="gridcell"
-                [class.dashboard-date-picker-day--selected]="isSelectedCell(cell)"
-                [class.dashboard-date-picker-day--viewer-today]="isViewerTodayCell(cell)"
+                class="inline-flex size-8 cursor-pointer items-center justify-center justify-self-center rounded-full border-0 text-base focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--pip-nav-active-ink)] disabled:cursor-not-allowed disabled:opacity-35"
+                [class.bg-primary]="isSelectedCell(cell) && cell.selectable"
+                [class.font-semibold]="isSelectedCell(cell) && cell.selectable"
+                [class.text-primary-contrast]="isSelectedCell(cell) && cell.selectable"
+                [class.text-color]="!isSelectedCell(cell) || !cell.selectable"
+                [class.bg-transparent]="!isSelectedCell(cell)"
+                [class.outline]="isViewerTodayCell(cell) && !isSelectedCell(cell) && cell.selectable"
+                [class.outline-2]="isViewerTodayCell(cell) && !isSelectedCell(cell) && cell.selectable"
+                [class.outline-offset-1]="isViewerTodayCell(cell) && !isSelectedCell(cell) && cell.selectable"
+                [class.outline-[var(--pip-nav-active-ink)]]="
+                  isViewerTodayCell(cell) && !isSelectedCell(cell) && cell.selectable
+                "
                 [disabled]="!cell.selectable"
                 [attr.aria-label]="formatCellAria(cell.date)"
                 [attr.aria-selected]="isSelectedCell(cell)"
@@ -86,7 +102,7 @@
                 {{ cellLabel(cell) }}
               </button>
             } @else {
-              <span class="dashboard-date-picker-day dashboard-date-picker-day--empty" aria-hidden="true"></span>
+              <span class="size-8" aria-hidden="true"></span>
             }
           }
         </div>

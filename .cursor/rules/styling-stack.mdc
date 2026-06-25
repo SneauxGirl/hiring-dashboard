@@ -1,0 +1,33 @@
+---
+description: Tailwind-first styling — templates, PrimeNG hooks, styles.css scope
+alwaysApply: true
+---
+
+# Styling stack
+
+**Tailwind 4 + tailwindcss-primeui** — utilities in section templates, not custom CSS classes.
+
+## Own components (sections, custom widgets)
+
+- Style in `.html` with Tailwind utilities (`flex`, `text-color`, `border-surface`, `rounded-border`, etc.)
+- Match sibling sections (`bottleneck`, `schedule`, `mobile-header`) before inventing patterns
+- Do **not** add BEM blocks to `styles.css` for custom components
+- Dynamic display state → `[class.hidden]`, `ngClass`, or component `styles` only when utilities cannot express it (e.g. dynamic `color-mix`)
+
+## PrimeNG
+
+- Prefer component APIs and `styleClass` / `panelStyleClass` with Tailwind classes on the root
+- Global `.p-*` overrides in `styles.css` only where PrimeNG owns internal DOM and passThrough is insufficient
+- Check PrimeNG 21 docs before writing custom selectors
+
+## styles.css allowed for
+
+- `@layer base` (fonts, root tokens, `app-root` overflow)
+- PrimeNG / third-party DOM overrides
+- Shared utilities used across sections (`dashboard-scroll-x`, `.text-accent`) when repeated Tailwind is noisy
+- Documented exceptions: Chart.js config (TS), funnel dynamic bar vars (inline component styles)
+
+## Before styling work
+
+1. Read an existing section template in the same area
+2. Confirm whether the target is own markup (Tailwind) or PrimeNG internals (minimal global CSS)

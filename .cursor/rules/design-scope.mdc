@@ -9,7 +9,7 @@ alwaysApply: false
 - Mobile-first: base at 375px, then sm/md/lg/xl breakpoints
 - **Flexbox only** for page and section layout — never CSS Grid or absolute layout without explicit user permission
 - Dashboard shell: max-width 1440px, 20px horizontal margins
-- Tailwind - stick to Tailwind throughout, don't mix and match styling
+- Tailwind utilities in section templates — see `.cursor/rules/styling-stack.mdc`
 - Semantic HTML, logical heading order, keyboard focus on interactive widgets
 - Border radius: 10px (`--radius-md`) on cards, buttons, inputs, tags
 - Depth: inset box-shadows on recessed surfaces; same-hue gradients only
