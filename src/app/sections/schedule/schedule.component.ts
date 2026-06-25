@@ -4,6 +4,10 @@ import { Card } from 'primeng/card';
 import { Dialog } from 'primeng/dialog';
 
 import {
+  dashboardCardStretchPt,
+  dashboardCardStretchStyleClass,
+} from '../../config/dashboard-layout';
+import {
   CandidateProfile,
   ScheduleEntry,
   ScheduleGroup,
@@ -22,6 +26,9 @@ interface ScheduleGroupConfig {
   templateUrl: './schedule.component.html',
 })
 export class ScheduleComponent {
+  readonly cardStyleClass = dashboardCardStretchStyleClass('schedule-card');
+  readonly cardPt = dashboardCardStretchPt();
+
   @Input({ required: true }) schedule: ScheduleEntry[] = [];
   @Input({ required: true }) candidates: CandidateProfile[] = [];
 

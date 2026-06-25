@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Card } from 'primeng/card';
 
+import {
+  dashboardCardStretchPt,
+  dashboardCardStretchStyleClass,
+} from '../../config/dashboard-layout';
 import { BOTTLENECK_DEFINITIONS } from './bottleneck.catalog';
 import { BottleneckCard, BottleneckWeekMetrics } from '../../models/dashboard.models';
 import { PipResponsibility } from '../../theme/pip-tokens';
@@ -12,6 +16,9 @@ import { bottleneckAccent, bottleneckIconBg, bottleneckSolid } from '../../theme
   templateUrl: './bottleneck.component.html',
 })
 export class BottleneckComponent {
+  readonly cardStyleClass = dashboardCardStretchStyleClass('bottleneck-card');
+  readonly cardPt = dashboardCardStretchPt();
+
   @Input({ required: true }) bottleneckMetrics: BottleneckWeekMetrics[] = [];
 
   get bottlenecks(): BottleneckCard[] {

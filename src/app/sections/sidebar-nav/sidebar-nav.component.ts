@@ -17,7 +17,7 @@ import { DashboardUser } from '../../models/dashboard.models';
   templateUrl: './sidebar-nav.component.html',
   host: {
     class:
-      'sidebar-shell hidden md:flex md:sticky md:top-0 md:h-screen md:shrink-0 md:self-start md:overflow-hidden md:transition-[width] md:duration-200 md:ease-out',
+      'sidebar-shell w-[length:var(--sidebar-width)] [&.sidebar-shell--collapsed]:w-[length:var(--sidebar-width-collapsed)] hidden md:flex md:sticky md:top-0 md:h-screen md:shrink-0 md:self-start md:overflow-hidden md:transition-[width] md:duration-200 md:ease-out',
   },
 })
 export class SidebarNavComponent {

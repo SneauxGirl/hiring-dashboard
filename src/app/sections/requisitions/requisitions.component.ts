@@ -1,6 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Card } from 'primeng/card';
 
+import {
+  dashboardCardPanelPt,
+  dashboardCardPanelStyleClass,
+  DASHBOARD_SCROLL_CLIP_CLASS,
+  DASHBOARD_SCROLL_X_CLASS,
+} from '../../config/dashboard-layout';
 import { OpenRequisition, OpenRequisitionsData } from '../../models/dashboard.models';
 import { PipColor, PipRiskLevel } from '../../theme/pip-tokens';
 import { paletteFill, paletteInk, paletteSolid } from '../../theme/theme-colors';
@@ -20,6 +26,11 @@ const STAGE_PILL_COLORS: Record<string, PipColor> = {
   templateUrl: './requisitions.component.html',
 })
 export class RequisitionsComponent {
+  readonly cardStyleClass = dashboardCardPanelStyleClass('requisitions-card');
+  readonly cardPt = dashboardCardPanelPt();
+  readonly scrollClipClass = DASHBOARD_SCROLL_CLIP_CLASS;
+  readonly scrollXClass = DASHBOARD_SCROLL_X_CLASS;
+
   @Input({ required: true }) requisitions!: OpenRequisitionsData;
 
   displayRows(): Array<OpenRequisition | null> {

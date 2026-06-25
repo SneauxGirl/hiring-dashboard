@@ -143,120 +143,6 @@
       padding-inline: 0;
       padding-block-end: 0;
     }
-
-    .dashboard-main > app-kpi {
-      margin-top: calc(var(--bottleneck-kpi-gap) - var(--dashboard-grid-gap));
-    }
-  }
-
-  @media (min-width: 1024px) {
-    app-bottleneck {
-      display: flex;
-      flex: 0 0 338px;
-      flex-direction: column;
-      align-self: stretch;
-      width: 338px;
-      min-width: 338px;
-      max-width: 338px;
-    }
-
-    app-bottleneck > p-card {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 0;
-    }
-
-    app-bottleneck .bottleneck-card.p-card,
-    app-bottleneck .bottleneck-card .p-card-body,
-    app-bottleneck .bottleneck-card .p-card-content {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 0;
-    }
-
-    app-schedule {
-      display: flex;
-      flex: 0 0 338px;
-      flex-direction: column;
-      align-self: stretch;
-      width: 338px;
-      min-width: 338px;
-      max-width: 338px;
-    }
-
-    app-schedule > p-card {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 0;
-    }
-
-    app-schedule .schedule-card.p-card,
-    app-schedule .schedule-card .p-card-body,
-    app-schedule .schedule-card .p-card-content {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 0;
-    }
-
-    app-trends {
-      display: flex;
-      flex: 0 0 338px;
-      flex-direction: column;
-      align-self: stretch;
-      width: 338px;
-      min-width: 338px;
-      max-width: 338px;
-    }
-
-    app-trends .trends-card.p-card,
-    app-trends .trends-card .p-card-body,
-    app-trends .trends-card .p-card-content {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 375px;
-    }
-
-    app-requisitions {
-      display: flex;
-      flex: 1 1 calc(100% - 338px - var(--dashboard-grid-gap));
-      flex-direction: column;
-      align-self: stretch;
-      min-width: calc(100% - 338px - var(--dashboard-grid-gap));
-    }
-
-    app-requisitions > p-card {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 0;
-    }
-
-    app-requisitions .requisitions-card.p-card,
-    app-requisitions .requisitions-card .p-card-body,
-    app-requisitions .requisitions-card .p-card-content {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      min-height: 375px;
-    }
-
-    app-requisitions .requisitions-table tbody {
-      height: 100%;
-    }
-
-    app-requisitions .requisitions-table tbody tr {
-      height: 20%;
-    }
-
-    app-requisitions .requisitions-table tbody th,
-    app-requisitions .requisitions-table tbody td {
-      vertical-align: middle;
-    }
   }
 
   .dashboard-nav-menu .p-menu-item.nav-item--active > .p-menu-item-content {
@@ -300,74 +186,6 @@
     color: var(--pip-nav-hover-ink);
   }
 
-  .dashboard-main {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    max-width: var(--dashboard-max-width);
-    margin-inline: auto;
-    padding-inline: var(--dashboard-margin);
-  }
-
-  .dashboard-main .p-card .p-card-body > *,
-  .dashboard-main .p-card .p-card-content > * {
-    min-width: 0;
-  }
-
-  .dashboard-scroll-clip {
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: clip;
-    contain: inline-size;
-  }
-
-  .dashboard-scroll-x {
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-  }
-
-  .dashboard-scroll-x > table,
-  .dashboard-scroll-x > .trends-table {
-    width: 100%;
-  }
-
-  @media (max-width: 767px) {
-    .dashboard-scroll-x > table,
-    .dashboard-scroll-x > .trends-table {
-      min-width: 100%;
-    }
-  }
-
-  @media (max-width: 379px) {
-    .dashboard-scroll-x {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      overflow-x: auto;
-    }
-
-    .dashboard-scroll-x > * {
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    .dashboard-scroll-x table {
-      width: 100%;
-      min-width: 100%;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .dashboard-scroll-x > table {
-      min-width: 36rem;
-    }
-
-    .dashboard-scroll-x > .trends-table {
-      min-width: 20rem;
-    }
-  }
-
   .dashboard-page {
     max-width: 100%;
     min-width: 0;
@@ -384,18 +202,6 @@
     :root {
       --dashboard-margin: 0.75rem;
     }
-  }
-
-  .sidebar-nav {
-    border-right: 1px solid var(--p-content-border-color);
-  }
-
-  .sidebar-shell {
-    width: var(--sidebar-width);
-  }
-
-  .sidebar-shell.sidebar-shell--collapsed {
-    width: var(--sidebar-width-collapsed);
   }
 
   .sidebar-shell--collapsed .sidebar-brand {
@@ -451,20 +257,6 @@
 
   .sidebar-user-card .p-card-content {
     padding-left: 1rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .dashboard-main > app-schedule {
-    order: 1;
-  }
-
-  .dashboard-main > app-bottleneck {
-    order: 2;
-  }
-
-  .dashboard-main > app-kpi {
-    order: 3;
   }
 }
 

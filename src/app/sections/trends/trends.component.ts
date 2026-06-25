@@ -18,6 +18,12 @@ import { Menu } from 'primeng/menu';
 import type { ChartConfiguration } from 'chart.js';
 
 import {
+  dashboardCardPanelPt,
+  dashboardCardPanelStyleClass,
+  DASHBOARD_SCROLL_CLIP_CLASS,
+  DASHBOARD_SCROLL_X_CLASS,
+} from '../../config/dashboard-layout';
+import {
   TrendWeekData,
   WorkforceTrendSeries,
   WorkforceTrends,
@@ -73,6 +79,11 @@ const QUARTER_ROWS: QuarterRow[] = [
   templateUrl: './trends.component.html',
 })
 export class TrendsComponent implements OnChanges, OnDestroy {
+  readonly cardStyleClass = dashboardCardPanelStyleClass('trends-card');
+  readonly cardPt = dashboardCardPanelPt();
+  readonly scrollClipClass = DASHBOARD_SCROLL_CLIP_CLASS;
+  readonly scrollXClass = DASHBOARD_SCROLL_X_CLASS;
+
   @Input({ required: true }) trendValues!: TrendWeekData;
   @ViewChild('chartCanvas') chartCanvas?: ElementRef<HTMLCanvasElement>;
 

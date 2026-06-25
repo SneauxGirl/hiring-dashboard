@@ -1,4 +1,4 @@
-<p-card styleClass="trends-card w-full max-w-full min-w-0">
+<p-card [styleClass]="cardStyleClass" [pt]="cardPt">
   <div class="trends-layout flex min-h-0 min-w-0 flex-col gap-4 lg:flex-1">
     <div class="flex min-w-0 items-start justify-between gap-3">
       <div class="min-w-0">
@@ -31,9 +31,9 @@
         <canvas #chartCanvas role="img" aria-label="Trends chart"></canvas>
       </div>
     } @else {
-      <div class="dashboard-scroll-clip">
-        <div class="dashboard-scroll-x">
-          <table class="trends-table border-collapse text-base">
+      <div class="{{ scrollClipClass }}">
+        <div class="{{ scrollXClass }}">
+          <table class="trends-table w-full min-w-full border-collapse text-base md:min-w-[20rem]">
           <thead>
             <tr>
               <th

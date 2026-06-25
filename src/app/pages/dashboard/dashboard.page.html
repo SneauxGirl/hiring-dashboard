@@ -11,7 +11,7 @@
     <app-mobile-header [user]="user" />
 
     <main
-      class="dashboard-main flex min-w-0 flex-1 flex-col gap-[length:var(--dashboard-grid-gap)] pb-5 pt-[length:var(--dashboard-header-padding-block)] lg:flex-row lg:flex-wrap lg:pb-6 lg:pt-[length:var(--dashboard-header-padding-block-lg)]"
+      class="flex min-w-0 flex-1 flex-col gap-[length:var(--dashboard-grid-gap)] box-border w-full max-w-[length:var(--dashboard-max-width)] mx-auto px-[length:var(--dashboard-margin)] pb-5 pt-[length:var(--dashboard-header-padding-block)] lg:flex-row lg:flex-wrap lg:pb-6 lg:pt-[length:var(--dashboard-header-padding-block-lg)] [&_.p-card-body>*]:min-w-0 [&_.p-card-content>*]:min-w-0"
     >
       <app-page-header
         class="hidden w-full min-w-0 md:block lg:order-1"
@@ -23,22 +23,25 @@
         (selectedDateChange)="onSelectedDateChange($event)"
       />
 
-      <app-kpi class="order-1 w-full min-w-0 lg:order-2" [kpiValues]="data.kpis" />
+      <app-kpi
+        class="order-3 w-full min-w-0 max-[380px]:mt-[calc(var(--bottleneck-kpi-gap)-var(--dashboard-grid-gap))] lg:order-2"
+        [kpiValues]="data.kpis"
+      />
       <app-schedule
-        class="order-2 w-full min-w-0 lg:order-4"
+        class="order-1 w-full min-w-0 lg:order-4 {{ lgColumnClass }}"
         [schedule]="data.schedule"
         [candidates]="data.candidates"
       />
       <app-bottleneck
-        class="order-3 w-full min-w-0 lg:order-3"
+        class="order-2 w-full min-w-0 lg:order-3 {{ lgColumnClass }}"
         [bottleneckMetrics]="data.bottlenecks"
       />
       <app-requisitions
-        class="order-4 w-full min-w-0 lg:order-6"
+        class="order-4 w-full min-w-0 lg:order-6 {{ lgFillColumnClass }}"
         [requisitions]="data.openRequisitions"
       />
       <app-trends
-        class="order-5 w-full min-w-0 lg:order-7"
+        class="order-5 w-full min-w-0 lg:order-7 {{ lgColumnClass }}"
         [trendValues]="trendValues()"
       />
       <app-funnel
