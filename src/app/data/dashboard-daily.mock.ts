@@ -178,17 +178,17 @@ const CANDIDATES = {
 };
 
 const KPI_WEEK1 = [
-  { value: 4, delta: '0 this month', trend: 'neutral' },
   { value: 41, valueUnit: 'days', delta: '2 days', trend: 'up' },
   { value: 87, valueUnit: '%', delta: 'No change', trend: 'neutral' },
   { value: 6, delta: '2 versus previous month', trend: 'up' },
+  { value: 4, delta: '0 this month', trend: 'neutral' },
 ] as const;
 
 const KPI_WEEK2 = [
-  { value: 5, delta: '1 this month', trend: 'up' },
   { value: 39, valueUnit: 'days', delta: '2 days', trend: 'down' },
   { value: 88, valueUnit: '%', delta: '1% acceptance', trend: 'up' },
   { value: 6, delta: 'no change', trend: 'neutral' },
+  { value: 5, delta: '1 this month', trend: 'up' },
 ] as const;
 
 
@@ -246,9 +246,9 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   4: calendarDay(4, {
     kpis: [
-      KPI_WEEK1[0],
       { value: 40, valueUnit: 'days', delta: '1 day', trend: 'down' },
       { value: 88, valueUnit: '%', delta: '1% acceptance', trend: 'up' },
+      KPI_WEEK1[2],
       KPI_WEEK1[3],
     ],
     openRequisitions: reqs(
@@ -268,10 +268,10 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   5: calendarDay(5, {
     kpis: [
-      { value: 5, delta: '1 this month', trend: 'up' },
       { value: 40, valueUnit: 'days', delta: '1 day', trend: 'down' },
       { value: 88, valueUnit: '%', delta: '1% acceptance', trend: 'up' },
-      KPI_WEEK1[3],
+      KPI_WEEK1[2],
+      { value: 5, delta: '1 this month', trend: 'up' },
     ],
     openRequisitions: reqs(
       [
@@ -291,10 +291,10 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   6: calendarDay(6, {
     kpis: [
-      { value: 5, delta: '1 this month', trend: 'up' },
       { value: 39, valueUnit: 'days', delta: '2 days', trend: 'down' },
       { value: 88, valueUnit: '%', delta: '1% acceptance', trend: 'up' },
-      KPI_WEEK1[3],
+      KPI_WEEK1[2],
+      { value: 5, delta: '1 this month', trend: 'up' },
     ],
     openRequisitions: reqs(
       [
@@ -314,10 +314,10 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   7: calendarDay(7, {
     kpis: [
-      { value: 5, delta: '1 this month', trend: 'up' },
       { value: 39, valueUnit: 'days', delta: '2 days', trend: 'down' },
       { value: 88, valueUnit: '%', delta: '1% acceptance', trend: 'up' },
-      KPI_WEEK1[3],
+      KPI_WEEK1[2],
+      { value: 5, delta: '1 this month', trend: 'up' },
     ],
     openRequisitions: reqs(
       [
@@ -376,8 +376,8 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   10: calendarDay(10, {
     kpis: [
-      KPI_WEEK2[0],
       { value: 38, valueUnit: 'days', delta: '3 days', trend: 'down' },
+      KPI_WEEK2[1],
       KPI_WEEK2[2],
       KPI_WEEK2[3],
     ],
@@ -399,8 +399,8 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   11: calendarDay(11, {
     kpis: [
-      KPI_WEEK2[0],
       { value: 37, valueUnit: 'days', delta: '4 days', trend: 'down' },
+      KPI_WEEK2[1],
       KPI_WEEK2[2],
       KPI_WEEK2[3],
     ],
@@ -425,10 +425,10 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   12: calendarDay(12, {
     kpis: [
-      { value: 7, delta: '3 this month', trend: 'up' },
       { value: 36, valueUnit: 'days', delta: '5 days', trend: 'down' },
+      KPI_WEEK2[1],
       KPI_WEEK2[2],
-      KPI_WEEK2[3],
+      { value: 7, delta: '3 this month', trend: 'up' },
     ],
     openRequisitions: reqs(
       [
@@ -448,10 +448,10 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   13: calendarDay(13, {
     kpis: [
-      { value: 8, delta: '4 this month', trend: 'up' },
       { value: 35, valueUnit: 'days', delta: '6 days', trend: 'down' },
       { value: 89, valueUnit: '%', delta: '2% acceptance', trend: 'up' },
-      KPI_WEEK2[3],
+      KPI_WEEK2[2],
+      { value: 8, delta: '4 this month', trend: 'up' },
     ],
     openRequisitions: reqs(
       [
@@ -474,10 +474,10 @@ export const MOCK_DASHBOARD_BY_CALENDAR_DAY: Record<DashboardCalendarDay, Dashbo
 
   14: calendarDay(14, {
     kpis: [
-      { value: 8, delta: '4 this month', trend: 'up' },
       { value: 35, valueUnit: 'days', delta: '6 days', trend: 'down' },
       { value: 89, valueUnit: '%', delta: '2% acceptance', trend: 'up' },
-      KPI_WEEK2[3],
+      KPI_WEEK2[2],
+      { value: 8, delta: '4 this month', trend: 'up' },
     ],
     openRequisitions: reqs(
       [

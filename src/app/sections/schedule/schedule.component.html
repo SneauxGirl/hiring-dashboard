@@ -46,7 +46,7 @@
                   </li>
                 } @else if (candidateFor(entry); as candidate) {
                   <li
-                    class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-center min-[380px]:gap-3"
+                    class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)] min-[380px]:items-center min-[380px]:gap-3"
                   >
                     <span class="text-[length:var(--font-size-label)] text-muted-color">
                       {{ entry.timeLabel }}
@@ -64,14 +64,6 @@
                         {{ candidate.roleTitle }}
                       </div>
                     </div>
-
-                    <a
-                      href="#"
-                      class="shrink-0 text-muted-color no-underline hover:text-color min-[380px]:justify-self-end"
-                      [attr.aria-label]="'Zoom link for ' + candidate.name"
-                    >
-                      <span class="pi pi-users text-lg" aria-hidden="true"></span>
-                    </a>
                   </li>
                 }
               }
