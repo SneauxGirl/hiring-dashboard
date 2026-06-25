@@ -4,7 +4,11 @@ import { Avatar } from 'primeng/avatar';
 import { Card } from 'primeng/card';
 import { Menu } from 'primeng/menu';
 
-import { DASHBOARD_NAV_ITEMS } from '../../config/dashboard-nav.config';
+import {
+  DASHBOARD_NAV_ITEMS,
+  DASHBOARD_NAV_MENU_PT,
+  DASHBOARD_NAV_MENU_STYLE_CLASS,
+} from '../../config/dashboard-nav.config';
 import { DashboardUser } from '../../models/dashboard.models';
 
 @Component({
@@ -17,6 +21,9 @@ import { DashboardUser } from '../../models/dashboard.models';
   },
 })
 export class SidebarNavComponent {
+  readonly navMenuStyleClass = `${DASHBOARD_NAV_MENU_STYLE_CLASS} mt-6 flex-1`;
+  readonly navMenuPt = DASHBOARD_NAV_MENU_PT;
+
   @ViewChild(Menu) private navMenu?: Menu;
 
   @Input({ required: true }) user!: DashboardUser;

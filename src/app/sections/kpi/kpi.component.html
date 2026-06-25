@@ -11,7 +11,7 @@
     class="grid w-full min-w-0 grid-cols-1 gap-[length:var(--dashboard-grid-gap)] min-[500px]:grid-cols-2 xl:grid-cols-4"
   >
   @for (kpi of kpis; track kpi.label) {
-    <p-card styleClass="min-w-0">
+    <p-card styleClass="w-full max-w-full min-w-0">
       <div class="flex min-w-0 flex-col gap-1.5 xl:gap-2">
         <span class="text-pretty text-[length:var(--font-size-label)] leading-snug text-color">{{
           kpi.label

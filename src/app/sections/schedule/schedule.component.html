@@ -1,4 +1,4 @@
-<p-card styleClass="schedule-card min-w-0">
+<p-card styleClass="schedule-card w-full max-w-full min-w-0">
   <div class="schedule-layout flex min-h-0 min-w-0 flex-col gap-4 lg:flex-1">
     <div
       class="flex min-w-0 flex-col gap-1 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between min-[380px]:gap-3"
@@ -116,7 +116,8 @@
   [resizable]="false"
   [focusTrap]="true"
   closeAriaLabel="Close candidate details"
-  styleClass="candidate-dialog"
+  styleClass="w-[min(28rem,calc(100vw-2rem))] max-w-[min(28rem,calc(100vw-2rem))]"
+  contentStyleClass="break-words text-pretty"
   (onHide)="closeCandidateDialog()"
 >
   @if (selectedCandidate; as candidate) {

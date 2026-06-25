@@ -262,44 +262,6 @@
   .dashboard-nav-menu .p-menu-item.nav-item--active > .p-menu-item-content {
     background: var(--pip-nav-active-bg);
     color: var(--pip-nav-active-ink);
-    border-radius: var(--p-content-border-radius);
-  }
-
-  .dashboard-nav-menu.p-menu {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    border: none;
-    background: transparent;
-    padding: 0;
-  }
-
-  .dashboard-nav-menu .p-menu-list {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .dashboard-nav-menu .p-menu-item {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .dashboard-nav-menu .p-menu-item > .p-menu-item-content {
-    border-radius: var(--p-content-border-radius);
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .dashboard-nav-menu .p-menu-item-link {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    box-sizing: border-box;
   }
 
   .dashboard-nav-menu .p-menu-item:not(.nav-item--active) .p-menu-item-icon {
@@ -338,37 +300,6 @@
     color: var(--pip-nav-hover-ink);
   }
 
-  .dashboard-drawer.p-drawer {
-    width: min(18rem, 85vw);
-  }
-
-  .dashboard-drawer .p-drawer-header {
-    width: 100%;
-    padding: 1.125rem;
-  }
-
-  .sidebar-brand .dashboard-brand-logo {
-    height: var(--dashboard-brand-logo-height);
-    transform: translateY(-0.125rem);
-  }
-
-  .dashboard-brand-logo {
-    display: block;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .candidate-dialog.p-dialog {
-    width: min(28rem, calc(100vw - 2rem));
-    max-width: min(28rem, calc(100vw - 2rem));
-  }
-
-  .candidate-dialog .p-dialog-content {
-    overflow-wrap: break-word;
-    text-wrap: pretty;
-  }
-
   .dashboard-main {
     box-sizing: border-box;
     width: 100%;
@@ -376,14 +307,6 @@
     max-width: var(--dashboard-max-width);
     margin-inline: auto;
     padding-inline: var(--dashboard-margin);
-  }
-
-  .dashboard-main .p-card,
-  .dashboard-main .p-card .p-card-body,
-  .dashboard-main .p-card .p-card-content {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
   }
 
   .dashboard-main .p-card .p-card-body > *,
@@ -485,14 +408,6 @@
 
   .sidebar-shell--collapsed .sidebar-user-text {
     display: none;
-  }
-
-  .sidebar-shell--collapsed .dashboard-nav-menu.p-menu {
-    width: 100%;
-  }
-
-  .sidebar-shell--collapsed .dashboard-nav-menu .p-menu-list {
-    width: 100%;
   }
 
   .sidebar-shell--collapsed .dashboard-nav-menu .p-menu-item-label {

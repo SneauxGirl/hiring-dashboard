@@ -13,7 +13,7 @@
         <img
           src="/PurplePipLogo.png"
           alt="PIP Tech"
-          class="dashboard-brand-logo shrink-0"
+          class="block h-[length:var(--dashboard-brand-logo-height)] w-auto max-w-full shrink-0 -translate-y-0.5 object-contain"
         />
       </div>
     }
@@ -39,7 +39,8 @@
     [model]="menuModel"
     [popup]="false"
     ariaLabel="Dashboard sections"
-    styleClass="dashboard-nav-menu mt-6 w-full min-w-0 flex-1"
+    [styleClass]="navMenuStyleClass"
+    [pt]="navMenuPt"
   />
 
   <p-card styleClass="sidebar-user-card mt-auto w-full border-t border-surface pt-4 mb-4">

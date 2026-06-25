@@ -86,24 +86,6 @@ export function isSelectableCalendarDate(
   return calendarDayForDate(targetDate, referenceDate) !== null;
 }
 
-/** Non-narrative days within the calendar navigation window. */
-export function disabledDatesInCalendarNav(
-  viewerAnchor: Date,
-  navRange: { min: Date; max: Date },
-): Date[] {
-  const disabled: Date[] = [];
-  const cursor = startOfDay(navRange.min);
-
-  while (cursor.getTime() <= navRange.max.getTime()) {
-    if (!isSelectableCalendarDate(cursor, viewerAnchor)) {
-      disabled.push(new Date(cursor));
-    }
-    cursor.setDate(cursor.getDate() + 1);
-  }
-
-  return disabled;
-}
-
 export function dashboardForDate(
   targetDate: Date,
   referenceDate: Date = new Date(),

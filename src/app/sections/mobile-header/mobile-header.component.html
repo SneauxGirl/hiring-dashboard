@@ -45,14 +45,15 @@
   position="left"
   [modal]="true"
   [closable]="false"
-  styleClass="dashboard-drawer"
+  [styleClass]="drawerStyleClass"
+  [pt]="drawerPt"
 >
   <ng-template #header>
     <div class="flex w-full min-w-0 items-center justify-between gap-3">
       <img
         src="/PurplePipLogo.png"
         alt="PIP Tech"
-        class="dashboard-brand-logo h-[length:var(--dashboard-brand-logo-height)] shrink-0 -translate-y-0.5"
+        class="block h-[length:var(--dashboard-brand-logo-height)] w-auto max-w-full shrink-0 -translate-y-0.5 object-contain"
       />
       <button
         type="button"
@@ -70,7 +71,8 @@
       [model]="menuItems"
       [popup]="false"
       ariaLabel="Mobile navigation menu"
-      styleClass="dashboard-nav-menu w-full"
+      [styleClass]="navMenuStyleClass"
+      [pt]="navMenuPt"
     />
 
     <div
