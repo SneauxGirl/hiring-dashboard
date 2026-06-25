@@ -1,3 +1,4 @@
+export { DashboardDatePickerComponent } from './dashboard-date-picker/dashboard-date-picker.component';
 export { BottleneckComponent } from './bottleneck/bottleneck.component';
 export { FunnelComponent } from './funnel/funnel.component';
 export { KpiComponent } from './kpi/kpi.component';

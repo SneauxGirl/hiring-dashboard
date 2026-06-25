@@ -11,19 +11,41 @@
     </p>
   </div>
 
-  <div class="dashboard-story-calendar ml-auto shrink-0 self-end sm:ml-0 sm:self-center">
+  <div class="ml-auto flex shrink-0 items-end gap-3 self-end sm:ml-0 sm:self-center">
+    <app-dashboard-date-picker
+      [viewerDay]="viewerDay"
+      [calendarMinDate]="calendarMinDate"
+      [calendarMaxDate]="calendarMaxDate"
+      [selectedDate]="selectedDate"
+      (selectedDateChange)="onSelectedDateChange($event)"
+    />
+
+    <div
+      class="dashboard-story-calendar"
+      [class.dashboard-story-calendar--friendly-idle]="showFriendlyLabel"
+    >
     @if (showDatePicker) {
+      @if (showFriendlyLabel) {
+        <span class="dashboard-story-date-placeholder" aria-hidden="true">
+          {{ friendlyDateLabel }}
+        </span>
+      }
       <p-datepicker
         [ngModel]="selectedDate"
         (ngModelChange)="onDateChange($event)"
+        (onSelect)="onDateSelect($event)"
+        (onFocus)="onDateFocus()"
+        (onBlur)="onDateBlur()"
+        (onClose)="onDatePickerClose()"
         [inline]="false"
         [showIcon]="true"
+        [dateFormat]="datePickerFormat"
         [minDate]="calendarMinDate"
         [maxDate]="calendarMaxDate"
         [disabledDates]="disabledStoryDates"
         [defaultDate]="selectedDate"
         [showOtherMonths]="false"
-        ariaLabel="Select date"
+        [ariaLabel]="datePickerAriaLabel"
         styleClass="dashboard-story-datepicker"
         panelStyleClass="dashboard-story-datepicker-panel"
       >
@@ -38,5 +60,6 @@
         </ng-template>
       </p-datepicker>
     }
+    </div>
   </div>
 </header>

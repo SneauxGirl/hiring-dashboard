@@ -1,0 +1,96 @@
+@if (showPicker) {
+  <div class="dashboard-date-picker">
+    <div
+      class="dashboard-date-picker-control"
+      [class.dashboard-date-picker-control--open]="panelOpen"
+      (mouseenter)="onControlMouseEnter()"
+      (mouseleave)="onControlMouseLeave()"
+    >
+      <button
+        type="button"
+        class="dashboard-date-picker-field"
+        [class.dashboard-date-picker-field--friendly]="usesFriendlyLabel"
+        [class.dashboard-date-picker-field--show-date]="showDateDetail"
+        [attr.aria-label]="ariaLabel"
+        aria-haspopup="dialog"
+        [attr.aria-expanded]="panelOpen"
+        (click)="togglePanel()"
+        (focus)="onFieldFocus()"
+        (blur)="onFieldBlur()"
+      >
+        @if (usesFriendlyLabel) {
+          <span class="dashboard-date-picker-friendly-default">{{ friendlyLabel }}</span>
+          <span class="dashboard-date-picker-friendly-hover">{{ formattedDate }}</span>
+        } @else {
+          <span>{{ formattedDate }}</span>
+        }
+      </button>
+
+      <button
+        type="button"
+        class="dashboard-date-picker-trigger"
+        [attr.aria-label]="panelOpen ? 'Close calendar' : 'Open calendar'"
+        [attr.aria-expanded]="panelOpen"
+        (click)="togglePanel()"
+      >
+        <span class="pi pi-calendar" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    @if (panelOpen) {
+      <div #panel class="dashboard-date-picker-panel" role="dialog" aria-modal="true" [attr.aria-label]="monthTitle">
+        <div class="dashboard-date-picker-header">
+          <button
+            type="button"
+            class="dashboard-date-picker-nav"
+            aria-label="Previous month"
+            [disabled]="!canGoPrevMonth"
+            (click)="goPrevMonth()"
+          >
+            <span class="pi pi-chevron-left" aria-hidden="true"></span>
+          </button>
+
+          <span class="dashboard-date-picker-title">{{ monthTitle }}</span>
+
+          <button
+            type="button"
+            class="dashboard-date-picker-nav"
+            aria-label="Next month"
+            [disabled]="!canGoNextMonth"
+            (click)="goNextMonth()"
+          >
+            <span class="pi pi-chevron-right" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="dashboard-date-picker-weekdays" aria-hidden="true">
+          @for (label of weekdayLabels; track label) {
+            <span class="dashboard-date-picker-weekday">{{ label }}</span>
+          }
+        </div>
+
+        <div class="dashboard-date-picker-grid" role="grid" [attr.aria-label]="monthTitle">
+          @for (cell of monthGrid; track cell.date.getTime()) {
+            @if (cell.inMonth) {
+              <button
+                type="button"
+                class="dashboard-date-picker-day"
+                role="gridcell"
+                [class.dashboard-date-picker-day--selected]="isSelectedCell(cell)"
+                [class.dashboard-date-picker-day--viewer-today]="isViewerTodayCell(cell)"
+                [disabled]="!cell.selectable"
+                [attr.aria-label]="formatCellAria(cell.date)"
+                [attr.aria-selected]="isSelectedCell(cell)"
+                (click)="selectDate(cell.date)"
+              >
+                {{ cellLabel(cell) }}
+              </button>
+            } @else {
+              <span class="dashboard-date-picker-day dashboard-date-picker-day--empty" aria-hidden="true"></span>
+            }
+          }
+        </div>
+      </div>
+    }
+  </div>
+}
