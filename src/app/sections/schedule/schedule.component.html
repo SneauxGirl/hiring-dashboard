@@ -46,7 +46,7 @@
                   </li>
                 } @else if (candidateFor(entry); as candidate) {
                   <li
-                    class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)] min-[380px]:items-center min-[380px]:gap-3"
+                    class="flex min-w-0 flex-col gap-1 min-[380px]:grid min-[380px]:grid-cols-[5rem_minmax(0,1fr)_auto] min-[380px]:items-start min-[380px]:gap-3"
                   >
                     <span class="text-[length:var(--font-size-label)] text-muted-color">
                       {{ entry.timeLabel }}
@@ -64,6 +64,15 @@
                         {{ candidate.roleTitle }}
                       </div>
                     </div>
+
+                    <button
+                      type="button"
+                      class="inline-flex shrink-0 cursor-pointer self-start border-0 bg-transparent p-0 text-muted-color min-[380px]:justify-self-start"
+                      [attr.aria-label]="'Info about ' + candidate.name"
+                      (click)="openCandidate(candidate.id)"
+                    >
+                      <span class="pi pi-info-circle text-lg" aria-hidden="true"></span>
+                    </button>
                   </li>
                 }
               }

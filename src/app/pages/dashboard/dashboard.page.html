@@ -24,11 +24,11 @@
       />
 
       <app-kpi
-        class="order-3 w-full min-w-0 max-[380px]:mt-[calc(var(--bottleneck-kpi-gap)-var(--dashboard-grid-gap))] lg:order-2"
+        class="order-3 w-full min-w-0 lg:order-2"
         [kpiValues]="data.kpis"
       />
       <app-schedule
-        class="order-1 w-full min-w-0 lg:order-4 {{ lgColumnClass }}"
+        class="order-4 w-full min-w-0 lg:order-6 {{ lgColumnClass }}"
         [schedule]="data.schedule"
         [candidates]="data.candidates"
       />
@@ -37,15 +37,15 @@
         [bottleneckMetrics]="data.bottlenecks"
       />
       <app-requisitions
-        class="order-4 w-full min-w-0 lg:order-6 {{ lgFillColumnClass }}"
+        class="order-5 w-full min-w-0 lg:order-7 {{ lgFillColumnClass }}"
         [requisitions]="data.openRequisitions"
       />
       <app-trends
-        class="order-5 w-full min-w-0 lg:order-7 {{ lgColumnClass }}"
+        class="order-1 w-full min-w-0 lg:order-4 {{ lgColumnClass }}"
         [trendValues]="trendValues()"
       />
       <app-funnel
-        class="order-6 w-full min-w-0 lg:order-5 lg:min-w-0 lg:flex-1"
+        class="order-6 w-full min-w-0 lg:order-5 lg:min-w-[340px] lg:max-w-full lg:flex-1"
         [funnelStageValues]="data.funnelStages"
         [stageDurationDays]="data.stageDurationDays"
       />

@@ -4,7 +4,7 @@ Work in progress: Hiring-manager dashboard. Built in Angular, with Typescript an
 
 **Live demo:** [pipeline-dashboard-seven-chi.vercel.app/](https://pipeline-dashboard-seven-chi.vercel.app/)
 
-![PIP Tech dashboard - after refactor, before style](docs/images/dashboard-AfterRefactorBeforeStyle.png)
+![PIP Tech dashboard - final order](docs/images/dashboard-finalOrder.png)
 
 ## Stack
 

@@ -1,15 +1,6 @@
 <p-card [styleClass]="cardStyleClass" [pt]="cardPt">
   <div class="@container/bottleneck bottleneck-layout flex min-h-0 flex-col gap-4 lg:flex-1">
-    <div class="flex items-center gap-2">
-      <h2 class="m-0 text-[length:var(--font-size-label)] text-color">Bottlenecks</h2>
-      <button
-        type="button"
-        class="inline-flex shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-muted-color hover:text-color"
-        aria-label="About bottlenecks"
-      >
-        <span class="pi pi-info-circle text-sm" aria-hidden="true"></span>
-      </button>
-    </div>
+    <h2 class="m-0 text-[length:var(--font-size-label)] text-color">Bottlenecks</h2>
 
     <ul class="bottleneck-list m-0 flex list-none flex-col gap-3 p-0 lg:flex-1 lg:justify-between">
       @for (bottleneck of bottlenecks; track bottleneck.id) {
@@ -51,9 +42,11 @@
             </div>
 
             <div
-              class="flex min-w-0 shrink-0 flex-row items-start gap-4 @max-[420px]/bottleneck:self-stretch"
+              class="bottleneck-metrics flex min-w-0 shrink-0 flex-row items-start gap-4 @max-[420px]/bottleneck:self-stretch lg:ms-auto lg:min-w-[10.5rem] lg:justify-between"
             >
-              <div class="flex min-w-0 flex-col items-start gap-[0.175rem] leading-tight">
+              <div
+                class="bottleneck-metrics-candidates flex shrink-0 flex-col items-start text-left gap-[0.175rem] leading-tight"
+              >
                 <span
                   class="text-base font-bold"
                   [style.color]="accentColor(bottleneck.responsibility)"
@@ -64,7 +57,9 @@
                   {{ candidateLabel(bottleneck.candidateCount) }}
                 </span>
               </div>
-              <div class="flex min-w-0 flex-col items-start gap-[0.175rem] leading-tight">
+              <div
+                class="bottleneck-metrics-delay flex shrink-0 flex-col items-start gap-[0.175rem] leading-tight lg:items-end lg:text-right"
+              >
                 <span
                   class="text-base font-bold"
                   [style.color]="accentColor(bottleneck.responsibility)"

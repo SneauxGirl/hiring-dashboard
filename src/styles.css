@@ -125,26 +125,6 @@
     }
   }
 
-  @media (max-width: 380px) {
-    :root {
-      --bottleneck-kpi-gap: 2.5rem;
-    }
-
-    app-bottleneck .bottleneck-card.p-card,
-    app-bottleneck .bottleneck-card .p-card-body,
-    app-bottleneck .bottleneck-card .p-card-content {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-    }
-
-    app-bottleneck .bottleneck-card .p-card-body,
-    app-bottleneck .bottleneck-card .p-card-content {
-      padding-inline: 0;
-      padding-block-end: 0;
-    }
-  }
-
   .dashboard-nav-menu .p-menu-item.nav-item--active > .p-menu-item-content {
     background: var(--pip-nav-active-bg);
     color: var(--pip-nav-active-ink);
