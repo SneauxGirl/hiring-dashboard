@@ -10,14 +10,19 @@
           size="small"
           [text]="true"
           [styleClass]="menuButtonStyleClass"
-          ariaLabel="Chart options"
+          [ariaLabel]="chartOptionsAriaLabel"
+          [pt]="menuButtonPt"
           (onClick)="viewMenu.toggle($event)"
         />
         <p-menu
           #viewMenu
+          id="trends-view-menu"
           [model]="viewMenuModel"
           [popup]="true"
+          [pt]="viewMenuPt"
           styleClass="dashboard-nav-menu"
+          (onShow)="onViewMenuShow()"
+          (onHide)="onViewMenuHide()"
         />
       </div>
     </div>
@@ -121,5 +126,9 @@
         </div>
       </div>
     }
+  </div>
+
+  <div class="sr-only" aria-live="polite" aria-atomic="true">
+    {{ viewModeAnnouncement }}
   </div>
 </p-card>

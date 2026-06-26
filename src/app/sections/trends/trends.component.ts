@@ -15,6 +15,8 @@ import { MenuItem } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { Menu } from 'primeng/menu';
+import { ButtonPassThrough } from 'primeng/types/button';
+import { MenuPassThrough } from 'primeng/types/menu';
 import type { ChartConfiguration } from 'chart.js';
 
 import {
@@ -82,11 +84,22 @@ export class TrendsComponent implements OnChanges, OnDestroy {
   private chart: import('chart.js').Chart<'line'> | null = null;
 
   viewMode: TrendsViewMode = 'chart';
+  viewMenuOpen = false;
+  viewModeAnnouncement = '';
   canScrollTableLeft = false;
   canScrollTableRight = false;
 
   readonly menuButtonStyleClass =
-    '!size-6 !min-w-6 !min-h-6 shrink-0 !p-0 rounded-border text-muted-color hover:text-color';
+    '!size-6 !min-w-6 !min-h-6 shrink-0 !p-0 rounded-border text-muted-color hover:text-color focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--pip-nav-active-ink)]';
+
+  readonly viewMenuPt: MenuPassThrough = {
+    item: (pt) => {
+      const item = (pt as { context?: { item?: MenuItem } }).context?.item;
+      return item?.styleClass?.includes('nav-item--active')
+        ? { 'aria-checked': 'true' }
+        : { 'aria-checked': 'false' };
+    },
+  };
 
   readonly tableScrollButtonClass =
     'inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-border border border-surface bg-surface-0 text-muted-color hover:bg-[color:var(--p-content-hover-background)] hover:text-color disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--pip-nav-active-ink)]';
@@ -112,6 +125,21 @@ export class TrendsComponent implements OnChanges, OnDestroy {
   /** First month index that uses prior-year data (the in-progress month). */
   get currentMonthIndex(): number {
     return this.trendValues.asOfMonthIndex;
+  }
+
+  get chartOptionsAriaLabel(): string {
+    const mode = this.viewMode === 'chart' ? 'chart view' : 'table view';
+    return `Chart options, ${mode}`;
+  }
+
+  get menuButtonPt(): ButtonPassThrough {
+    return {
+      root: {
+        'aria-haspopup': 'menu',
+        'aria-expanded': this.viewMenuOpen,
+        'aria-controls': 'trends-view-menu',
+      },
+    };
   }
 
   constructor() {
@@ -166,6 +194,8 @@ export class TrendsComponent implements OnChanges, OnDestroy {
     }
 
     this.viewMode = mode;
+    this.viewModeAnnouncement =
+      mode === 'chart' ? 'Showing chart view' : 'Showing table view';
     this.syncViewMenuModel();
 
     if (mode === 'chart' && isPlatformBrowser(this.platformId)) {
@@ -181,6 +211,14 @@ export class TrendsComponent implements OnChanges, OnDestroy {
   private selectViewMode(mode: TrendsViewMode): void {
     this.setViewMode(mode);
     queueMicrotask(() => this.viewMenu?.onListBlur(new FocusEvent('blur')));
+  }
+
+  onViewMenuShow(): void {
+    this.viewMenuOpen = true;
+  }
+
+  onViewMenuHide(): void {
+    this.viewMenuOpen = false;
   }
 
   isPriorMonth(monthIndex: number): boolean {
