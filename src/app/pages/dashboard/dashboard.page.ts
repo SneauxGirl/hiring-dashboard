@@ -1,8 +1,11 @@
 import { Component, computed, linkedSignal, OnDestroy, signal } from '@angular/core';
 
 import {
-  DASHBOARD_LG_COLUMN_CLASS,
-  DASHBOARD_LG_FILL_COLUMN_CLASS,
+  DASHBOARD_FUNNEL_COLUMN_CLASS,
+  DASHBOARD_GRID_COLUMN_CLASS,
+  DASHBOARD_REQS_COLUMN_CLASS,
+  DASHBOARD_SCHEDULE_COLUMN_CLASS,
+  DASHBOARD_SECTION_FULL_ROW,
 } from '../../config/dashboard-layout';
 import {
   dashboardForDate,
@@ -45,8 +48,11 @@ import {
   host: { class: 'block w-full min-w-0 min-h-screen' },
 })
 export class DashboardPage implements OnDestroy {
-  readonly lgColumnClass = DASHBOARD_LG_COLUMN_CLASS;
-  readonly lgFillColumnClass = DASHBOARD_LG_FILL_COLUMN_CLASS;
+  readonly sectionFullRowClass = DASHBOARD_SECTION_FULL_ROW;
+  readonly gridColumnClass = DASHBOARD_GRID_COLUMN_CLASS;
+  readonly scheduleColumnClass = DASHBOARD_SCHEDULE_COLUMN_CLASS;
+  readonly funnelColumnClass = DASHBOARD_FUNNEL_COLUMN_CLASS;
+  readonly reqsColumnClass = DASHBOARD_REQS_COLUMN_CLASS;
 
   readonly user = MOCK_DASHBOARD_USER;
   readonly viewerDay = signal(captureViewerDay());

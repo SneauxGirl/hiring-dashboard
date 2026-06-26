@@ -1,0 +1,31 @@
+---
+description: Locked dashboard page grid and KPI grid — do not change without explicit user ask
+alwaysApply: true
+---
+
+# Dashboard layout (locked)
+
+## KPI grid — locked
+
+File: `src/app/sections/kpi/kpi.component.html`
+
+- **Never** `grid-cols-1` at any breakpoint.
+- **Default:** `grid-cols-2` (2×2 on mobile/tablet).
+- **Wide desktop:** `xl:grid-cols-4` (four in one row).
+- Typography scale at **`xl:`**, not `md:`.
+
+Do not edit KPI grid classes unless the user explicitly requests a KPI layout change.
+
+## Page grid vs sections
+
+- **Page shell only:** `@container/dashboard` on `dashboard-page`, column classes in `dashboard-layout.ts`, section hosts in `dashboard.page.html`.
+- **Section templates** (bottleneck, trends, schedule, requisitions, funnel, kpi): use existing **`lg:`** stretch internally — do **not** swap to `@min-[…]/dashboard:` inside sections without explicit ask.
+- **Card stretch PT** in `dashboard-layout.ts`: stays on **`lg:`**; container queries are for page-level column widths only.
+
+## Row breakers
+
+`DASHBOARD_SECTION_FULL_ROW` uses `@min-[43.25rem]/dashboard:basis-full` only when `main` is flex-row — never bare `basis-full` in flex-col (sets height, not width).
+
+## Before any layout pass
+
+Ask which tier is in scope. Do not bundle mobile order, KPI, section internals, and page grid in one diff unless the user lists all of them.

@@ -7,14 +7,16 @@
     (toggle)="sidebarCollapsed = !sidebarCollapsed"
   />
 
-  <div class="dashboard-page flex w-full min-w-0 flex-none flex-col bg-surface-50 md:flex-1">
+  <div
+    class="@container/dashboard dashboard-page flex w-full min-w-0 flex-none flex-col bg-surface-50 md:flex-1"
+  >
     <app-mobile-header [user]="user" />
 
     <main
-      class="flex min-w-0 flex-1 flex-col gap-[length:var(--dashboard-grid-gap)] box-border w-full max-w-[length:var(--dashboard-max-width)] mx-auto px-[length:var(--dashboard-margin)] pb-5 pt-[length:var(--dashboard-header-padding-block)] lg:flex-row lg:flex-wrap lg:pb-6 lg:pt-[length:var(--dashboard-header-padding-block-lg)] [&_.p-card-body>*]:min-w-0 [&_.p-card-content>*]:min-w-0"
+      class="flex min-w-0 flex-1 flex-col gap-[length:var(--dashboard-grid-gap)] box-border w-full max-w-[length:var(--dashboard-max-width)] mx-auto px-[length:var(--dashboard-margin)] pb-5 pt-[length:var(--dashboard-header-padding-block)] @min-[43.25rem]/dashboard:flex-row @min-[43.25rem]/dashboard:flex-wrap @min-[43.25rem]/dashboard:items-start md:pb-6 md:pt-[length:var(--dashboard-header-padding-block-lg)] [&_.p-card-body>*]:min-w-0 [&_.p-card-content>*]:min-w-0"
     >
       <app-page-header
-        class="hidden w-full min-w-0 md:block lg:order-1"
+        class="{{ sectionFullRowClass }} hidden md:block"
         [user]="user"
         [viewerDay]="viewerDay()"
         [calendarMinDate]="calendarNav().min"
@@ -24,30 +26,35 @@
       />
 
       <app-kpi
-        class="order-3 w-full min-w-0 lg:order-2"
+        class="{{ sectionFullRowClass }} max-md:order-1"
         [kpiValues]="data.kpis"
       />
+
+      <app-bottleneck
+        class="w-full min-w-0 max-md:order-3 {{ gridColumnClass }}"
+        [bottleneckMetrics]="data.bottlenecks"
+      />
+
+      <app-trends
+        class="w-full min-w-0 max-md:order-2 {{ gridColumnClass }}"
+        [trendValues]="trendValues()"
+      />
+
+      <app-funnel
+        class="w-full min-w-0 max-md:order-5 {{ funnelColumnClass }}"
+        [funnelStageValues]="data.funnelStages"
+        [stageDurationDays]="data.stageDurationDays"
+      />
+
       <app-schedule
-        class="order-4 w-full min-w-0 lg:order-6 {{ lgColumnClass }}"
+        class="w-full min-w-0 max-md:hidden {{ scheduleColumnClass }}"
         [schedule]="data.schedule"
         [candidates]="data.candidates"
       />
-      <app-bottleneck
-        class="order-2 w-full min-w-0 lg:order-3 {{ lgColumnClass }}"
-        [bottleneckMetrics]="data.bottlenecks"
-      />
+
       <app-requisitions
-        class="order-5 w-full min-w-0 lg:order-7 {{ lgFillColumnClass }}"
+        class="w-full min-w-0 max-md:order-4 {{ reqsColumnClass }}"
         [requisitions]="data.openRequisitions"
-      />
-      <app-trends
-        class="order-1 w-full min-w-0 lg:order-4 {{ lgColumnClass }}"
-        [trendValues]="trendValues()"
-      />
-      <app-funnel
-        class="order-6 w-full min-w-0 lg:order-5 lg:min-w-[340px] lg:max-w-full lg:flex-1"
-        [funnelStageValues]="data.funnelStages"
-        [stageDurationDays]="data.stageDurationDays"
       />
     </main>
   </div>

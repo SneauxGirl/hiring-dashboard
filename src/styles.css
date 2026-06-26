@@ -30,6 +30,9 @@
   --sidebar-toggle-size: 2rem;
   --sidebar-width: 200px;
   --sidebar-width-collapsed: 4.5rem;
+  /* @container/dashboard on main — pair/wide tiers (content width, not viewport) */
+  --dashboard-container-pair: 43.25rem;
+  --dashboard-container-wide: 64.5rem;
   --sidebar-edge-gap: 75px; /* viewport edge → first nav item top; mirrored below user text */
   --letter-spacing-caps: 0.12em;
 
@@ -107,6 +110,7 @@
   app-page-header {
     display: block;
     min-width: 0;
+    min-height: 0;
     max-width: 100%;
   }
 }
