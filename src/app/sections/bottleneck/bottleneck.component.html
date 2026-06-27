@@ -5,7 +5,7 @@
     <ul class="bottleneck-list m-0 flex list-none flex-col gap-3 p-0 @min-[43.25rem]/dashboard:flex-1 @min-[43.25rem]/dashboard:justify-between">
       @for (bottleneck of bottlenecks; track bottleneck.id) {
         <li
-          class="relative flex min-w-0 items-center gap-3 overflow-hidden rounded-border border border-surface bg-white p-3 @max-[420px]/bottleneck:p-0 @max-[420px]/bottleneck:pe-3 @min-[43.25rem]/dashboard:min-w-0 @min-[43.25rem]/dashboard:flex-1 @min-[43.25rem]/dashboard:basis-auto"
+          class="relative flex min-w-0 shrink-0 items-center gap-3 overflow-hidden rounded-border border border-surface bg-white px-3 py-3 @max-[420px]/bottleneck:p-0 @max-[420px]/bottleneck:pe-3 @min-[43.25rem]/dashboard:max-w-full @min-[43.25rem]/dashboard:min-w-0"
           [style.border-inline-start-width]="'3px'"
           [style.border-inline-start-color]="borderColor(bottleneck.responsibility)"
         >

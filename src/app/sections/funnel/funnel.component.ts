@@ -23,10 +23,6 @@ import {
   imports: [Card, DecimalPipe, NgStyle],
   templateUrl: './funnel.component.html',
   styles: `
-    :host {
-      display: block;
-    }
-
     .funnel-stage-bar {
       --bar-opacity: 0.85;
       position: relative;
