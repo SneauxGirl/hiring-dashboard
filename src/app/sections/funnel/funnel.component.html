@@ -10,16 +10,16 @@
 
     <div class="flex min-h-0 min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4 @min-[43.25rem]/dashboard:flex-1">
       <div
-        class="funnel-chart flex min-w-0 flex-1 flex-col"
+        class="funnel-chart flex min-w-0 flex-1 flex-col gap-1.5"
         role="img"
         [attr.aria-label]="'30 day funnel chart, max stage ' + (maxCount | number) + ' applicants'"
       >
         @for (stage of funnelStages; track stage.stageKey; let index = $index) {
-          <div class="funnel-stage-row flex h-9 w-full items-stretch justify-center">
+          <div class="funnel-stage-row flex h-8 w-full items-center justify-center">
             <div
-              class="funnel-stage-bar h-full shrink-0"
+              class="funnel-stage-bar h-8.5 shrink-0 rounded-full"
               [style.width.%]="barWidthPct(stage.count)"
-              [ngStyle]="barGlassVars(index)"
+              [ngStyle]="barSurfaceStyle(index)"
               [attr.aria-label]="stageTitle(stage) + ', ' + (stage.count | number) + ' applicants'"
             ></div>
           </div>
@@ -27,12 +27,12 @@
       </div>
 
       <div
-        class="flex min-w-0 flex-col sm:w-[17rem]"
+        class="flex min-w-0 flex-col gap-1.5 sm:w-[17rem]"
         aria-label="30 day funnel stage details"
       >
         @for (stage of funnelStages; track stage.stageKey; let index = $index) {
           <div
-            class="grid h-9 min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-3 border-b border-surface last:border-b-0"
+            class="grid h-8 min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-3 border-b border-surface last:border-b-0"
           >
             <span
               class="truncate text-[length:var(--font-size-label)] font-medium text-muted-color"

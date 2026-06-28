@@ -1,10 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+  afterNextRender,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
   inject,
+  Injector,
   Input,
   OnDestroy,
   Output,
@@ -17,6 +19,7 @@ import {
   isSameDay,
   isSelectableCalendarDate,
   startOfDay,
+  toDateKey,
 } from '../../data/dashboard-calendar-day.resolver';
 import { ViewerDay } from '../../data/dashboard-viewer-day';
 
@@ -36,13 +39,28 @@ export class DashboardDatePickerComponent implements OnDestroy {
   /** Delay before hover swaps Today/Yesterday to the formatted date. */
   private static readonly FRIENDLY_HOVER_DELAY_MS = 1500;
 
-  protected formatCellAria(date: Date): string {
-    return this.accessibleDateLabel.format(date);
+  private static readonly ARROW_DAY_OFFSET: Partial<Record<string, number>> = {
+    ArrowLeft: -1,
+    ArrowRight: 1,
+    ArrowUp: -7,
+    ArrowDown: 7,
+  };
+
+  protected formatCellAria(cell: DashboardDatePickerCell): string {
+    const parts = [this.calendarDayAriaLabel.format(cell.date)];
+    if (this.isSelectedCell(cell)) {
+      parts.push('selected');
+    }
+    if (this.isViewerTodayCell(cell)) {
+      parts.push('today');
+    }
+    return parts.join(', ');
   }
 
   protected readonly showPicker = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly injector = inject(Injector);
 
   private readonly formattedDateLabel = new Intl.DateTimeFormat('en-US', {
     month: 'numeric',
@@ -57,12 +75,20 @@ export class DashboardDatePickerComponent implements OnDestroy {
     year: 'numeric',
   });
 
+  /** Day buttons — year omitted; dialog title carries month and year. */
+  private readonly calendarDayAriaLabel = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });
+
   private readonly monthTitleLabel = new Intl.DateTimeFormat('en-US', {
     month: 'long',
     year: 'numeric',
   });
 
   @ViewChild('panel') panelRef?: ElementRef<HTMLElement>;
+  @ViewChild('triggerBtn') triggerRef?: ElementRef<HTMLButtonElement>;
 
   @Input({ required: true }) viewerDay!: ViewerDay;
   @Input({ required: true }) calendarMinDate!: Date;
@@ -74,6 +100,7 @@ export class DashboardDatePickerComponent implements OnDestroy {
   protected panelMonth: Date = startOfDay(new Date());
   protected fieldFocused = false;
   protected hoverDateRevealed = false;
+  protected selectionAnnouncement = '';
 
   private hoverRevealTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -115,12 +142,16 @@ export class DashboardDatePickerComponent implements OnDestroy {
   get ariaLabel(): string {
     const formatted = this.accessibleDateLabel.format(this.selectedDate);
     if (this.isSelectedToday) {
-      return `Selected date: ${formatted} (Today)`;
+      return `Date, Today, ${formatted}`;
     }
     if (this.isSelectedYesterday) {
-      return `Selected date: ${formatted} (Yesterday)`;
+      return `Date, Yesterday, ${formatted}`;
     }
-    return `Selected date: ${formatted}`;
+    return `Date, ${formatted}`;
+  }
+
+  get dialogAriaLabel(): string {
+    return `Choose date, ${this.monthTitle}`;
   }
 
   get monthTitle(): string {
@@ -148,11 +179,15 @@ export class DashboardDatePickerComponent implements OnDestroy {
   openPanel(): void {
     this.panelMonth = startOfDay(this.selectedDate);
     this.panelOpen = true;
+    afterNextRender(() => this.focusInitialDay(), { injector: this.injector });
   }
 
-  closePanel(): void {
+  closePanel(returnFocusToTrigger = false): void {
     this.panelOpen = false;
     this.cancelHoverReveal();
+    if (returnFocusToTrigger) {
+      afterNextRender(() => this.triggerRef?.nativeElement.focus(), { injector: this.injector });
+    }
   }
 
   onControlMouseEnter(): void {
@@ -220,8 +255,9 @@ export class DashboardDatePickerComponent implements OnDestroy {
       return;
     }
 
+    this.selectionAnnouncement = `${this.calendarDayAriaLabel.format(normalized)} selected`;
     this.selectedDateChange.emit(normalized);
-    this.closePanel();
+    this.closePanel(true);
   }
 
   isStoryDayCell(cell: DashboardDatePickerCell): boolean {
@@ -240,10 +276,58 @@ export class DashboardDatePickerComponent implements OnDestroy {
     return String(cell.day);
   }
 
+  cellDateKey(cell: DashboardDatePickerCell): string {
+    return toDateKey(cell.date);
+  }
+
+  onDayKeydown(event: KeyboardEvent, date: Date): void {
+    const offset = DashboardDatePickerComponent.ARROW_DAY_OFFSET[event.key];
+    if (offset === undefined) {
+      return;
+    }
+
+    event.preventDefault();
+    const next = this.findSelectableDateInDirection(date, offset);
+    if (next) {
+      this.focusDay(next);
+    }
+  }
+
   @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.panelOpen) {
-      this.closePanel();
+      this.closePanel(true);
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (!this.panelOpen || event.key !== 'Tab') {
+      return;
+    }
+
+    const panel = this.panelRef?.nativeElement;
+    if (!panel) {
+      return;
+    }
+
+    const focusable = panel.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    const list = Array.from(focusable);
+    if (list.length === 0) {
+      return;
+    }
+
+    const first = list[0];
+    const last = list[list.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
     }
   }
 
@@ -259,6 +343,71 @@ export class DashboardDatePickerComponent implements OnDestroy {
     }
 
     this.closePanel();
+  }
+
+  private focusInitialDay(): void {
+    if (isSelectableCalendarDate(this.selectedDate, this.viewerDay.date)) {
+      this.focusDay(this.selectedDate);
+      return;
+    }
+
+    const firstSelectable = this.monthGrid.find((cell) => cell.selectable);
+    if (firstSelectable) {
+      this.focusDay(firstSelectable.date);
+    }
+  }
+
+  private focusDay(date: Date): void {
+    const normalized = startOfDay(date);
+    const inPanelMonth =
+      normalized.getMonth() === this.panelMonth.getMonth() &&
+      normalized.getFullYear() === this.panelMonth.getFullYear();
+
+    if (!inPanelMonth) {
+      this.panelMonth = new Date(normalized.getFullYear(), normalized.getMonth(), 1);
+    }
+
+    const dateKey = toDateKey(normalized);
+    afterNextRender(() => {
+      this.panelRef?.nativeElement
+        .querySelector<HTMLButtonElement>(`button[data-date-key="${dateKey}"]:not([disabled])`)
+        ?.focus();
+    }, { injector: this.injector });
+  }
+
+  private findSelectableDateInDirection(from: Date, offset: number): Date | null {
+    const step = offset > 0 ? 1 : -1;
+    let candidate = startOfDay(from);
+
+    for (let moved = 0; moved < Math.abs(offset); moved++) {
+      candidate = addCalendarDays(candidate, step);
+      if (!this.isDateInCalendarRange(candidate)) {
+        return null;
+      }
+    }
+
+    if (isSelectableCalendarDate(candidate, this.viewerDay.date)) {
+      return candidate;
+    }
+
+    while (true) {
+      const next = addCalendarDays(candidate, step);
+      if (!this.isDateInCalendarRange(next)) {
+        return null;
+      }
+      candidate = next;
+      if (isSelectableCalendarDate(candidate, this.viewerDay.date)) {
+        return candidate;
+      }
+    }
+  }
+
+  private isDateInCalendarRange(date: Date): boolean {
+    const time = startOfDay(date).getTime();
+    return (
+      time >= startOfDay(this.calendarMinDate).getTime() &&
+      time <= startOfDay(this.calendarMaxDate).getTime()
+    );
   }
 }
 

@@ -121,6 +121,14 @@
     color: var(--pip-nav-active-ink);
   }
 
+  .dashboard-nav-menu .p-menu-list:focus {
+    outline: none;
+  }
+
+  .dashboard-nav-menu .p-menu-item.p-focus > .p-menu-item-content {
+    box-shadow: inset 0 0 0 2px var(--pip-nav-active-ink);
+  }
+
   .dashboard-nav-menu .p-menu-item:not(.nav-item--active) .p-menu-item-icon {
     color: var(--p-text-muted-color);
   }

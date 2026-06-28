@@ -56,6 +56,23 @@ export function funnelBarGlassStyle(stageIndex: number): { ink: string; fill: st
   return { ink: paletteSolid(color), fill: paletteFill(color) };
 }
 
+/** Funnel bar surface — solid ink + fill-tinted bottom cap (pre-blended hex for inline styles). */
+export function funnelBarSurfaceStyle(stageIndex: number): {
+  background: string;
+  border: string;
+  boxShadow: string;
+} {
+  const { ink: solid, fill } = funnelBarGlassStyle(stageIndex);
+  const bottomCap = blendHex(solid, fill, 0.30);
+  const drop = blendHex(solid, '#000000', 0.4);
+
+  return {
+    background: `linear-gradient(to bottom, ${solid} calc(100% - 2px), ${bottomCap} calc(100% - 2px))`,
+    border: `1px solid ${solid}`,
+    boxShadow: `0 1px 2px ${drop}66`,
+  };
+}
+
 export function funnelDurationColor(durationIndex: number): string {
   const colors = PIP_TOKENS.funnel.duration;
   const color = colors[Math.min(durationIndex, colors.length - 1)];

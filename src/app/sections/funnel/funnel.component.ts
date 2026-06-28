@@ -13,8 +13,8 @@ import {
 import { FunnelStage, FunnelStageWeekData, StageDuration } from '../../models/dashboard.models';
 import {
   funnelBarColor,
-  funnelBarGlassStyle,
   funnelBarLabelColor,
+  funnelBarSurfaceStyle,
   funnelDurationColor,
 } from '../../theme/theme-colors';
 
@@ -23,14 +23,13 @@ import {
   imports: [Card, DecimalPipe, NgStyle],
   templateUrl: './funnel.component.html',
   styles: `
+    :host {
+      display: block;
+    }
+
     .funnel-stage-bar {
-      --bar-opacity: 0.85;
-      position: relative;
       min-width: 0;
       max-width: 100%;
-      border-radius: 0.5rem;
-      border: 1px solid color-mix(in srgb, var(--bar-ink) white 72%);
-      background: var(--bar-ink);
     }
   `,
 })
@@ -79,12 +78,8 @@ export class FunnelComponent {
     return funnelBarColor(index);
   }
 
-  barGlassVars(index: number): Record<string, string> {
-    const { ink, fill } = funnelBarGlassStyle(index);
-    return {
-      '--bar-ink': ink,
-      '--bar-fill': fill,
-    };
+  barSurfaceStyle(index: number): Record<string, string> {
+    return funnelBarSurfaceStyle(index);
   }
 
   stageTitle(stage: FunnelStage): string {

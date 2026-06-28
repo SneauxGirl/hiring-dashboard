@@ -1,19 +1,21 @@
 @if (showPicker) {
   <div class="relative min-h-[length:var(--dashboard-control-height)]">
-    <div
-      class="flex min-h-[length:var(--dashboard-control-height)] items-stretch overflow-hidden rounded-border border border-surface bg-surface-0 focus-within:border-[color:var(--p-inputtext-focus-border-color)] focus-within:shadow-[var(--p-inputtext-focus-ring-shadow)] focus-within:outline focus-within:outline-[length:var(--p-inputtext-focus-ring-width)] focus-within:outline-offset-[length:var(--p-inputtext-focus-ring-offset)] focus-within:outline-[color:var(--p-inputtext-focus-ring-color)]"
+    <button
+      #triggerBtn
+      type="button"
+      class="flex min-h-[length:var(--dashboard-control-height)] w-full cursor-pointer items-stretch overflow-hidden rounded-border border border-surface bg-surface-0 text-left focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--pip-nav-active-ink)]"
+      [attr.aria-label]="ariaLabel"
+      aria-haspopup="dialog"
+      [attr.aria-expanded]="panelOpen"
+      (click)="togglePanel()"
       (mouseenter)="onControlMouseEnter()"
       (mouseleave)="onControlMouseLeave()"
+      (focus)="onFieldFocus()"
+      (blur)="onFieldBlur()"
     >
-      <button
-        type="button"
-        class="flex min-w-[7.5rem] flex-1 cursor-pointer items-center border-0 bg-transparent px-3 text-left text-base leading-none text-color focus-visible:outline-none"
-        [attr.aria-label]="ariaLabel"
-        aria-haspopup="dialog"
-        [attr.aria-expanded]="panelOpen"
-        (click)="togglePanel()"
-        (focus)="onFieldFocus()"
-        (blur)="onFieldBlur()"
+      <span
+        class="flex min-w-[7.5rem] flex-1 items-center px-3 text-base leading-none text-color"
+        aria-hidden="true"
       >
         @if (usesFriendlyLabel) {
           <span [class.hidden]="showDateDetail">{{ friendlyLabel }}</span>
@@ -21,17 +23,18 @@
         } @else {
           <span>{{ formattedDate }}</span>
         }
-      </button>
+      </span>
 
-      <button
-        type="button"
-        class="inline-flex size-[length:var(--dashboard-control-height)] shrink-0 cursor-pointer items-center justify-center border-0 border-s border-surface bg-transparent text-color focus-visible:outline-none"
-        [attr.aria-label]="panelOpen ? 'Close calendar' : 'Open calendar'"
-        [attr.aria-expanded]="panelOpen"
-        (click)="togglePanel()"
+      <span
+        class="inline-flex size-[length:var(--dashboard-control-height)] shrink-0 items-center justify-center border-s border-surface text-color"
+        aria-hidden="true"
       >
-        <span class="pi pi-calendar" aria-hidden="true"></span>
-      </button>
+        <span class="pi pi-calendar"></span>
+      </span>
+    </button>
+
+    <div class="sr-only" aria-live="polite" aria-atomic="true">
+      {{ selectionAnnouncement }}
     </div>
 
     @if (panelOpen) {
@@ -40,7 +43,7 @@
         class="absolute top-[calc(100%+0.375rem)] right-0 z-20 w-[min(100vw-2rem,18rem)] rounded-border border border-surface bg-surface-0 p-3 shadow-[var(--p-overlay-select-shadow,var(--p-overlay-popover-shadow,0_2px_10px_rgb(0_0_0_/_12%)))]"
         role="dialog"
         aria-modal="true"
-        [attr.aria-label]="monthTitle"
+        [attr.aria-label]="dialogAriaLabel"
       >
         <div class="mb-3 flex items-center justify-between gap-2">
           <button
@@ -66,7 +69,7 @@
           </button>
         </div>
 
-        <div class="mb-1.5 grid grid-cols-7 gap-0.5" aria-hidden="true">
+        <div class="mb-1.5 grid grid-cols-7 gap-0.5">
           @for (label of weekdayLabels; track label) {
             <span
               class="inline-flex h-8 items-center justify-center text-[length:var(--font-size-label)] font-medium text-muted-color"
@@ -76,12 +79,12 @@
           }
         </div>
 
-        <div class="grid grid-cols-7 gap-0.5" role="grid" [attr.aria-label]="monthTitle">
+        <div class="grid grid-cols-7 gap-0.5" role="group" [attr.aria-label]="monthTitle">
           @for (cell of monthGrid; track cell.date.getTime()) {
             @if (cell.inMonth) {
               <button
                 type="button"
-                role="gridcell"
+                data-day
                 class="inline-flex size-8 cursor-pointer items-center justify-center justify-self-center rounded-full border-0 text-base focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--pip-nav-active-ink)] disabled:cursor-not-allowed disabled:opacity-35"
                 [class.font-semibold]="isStoryDayCell(cell)"
                 [class.bg-primary]="isSelectedCell(cell) && cell.selectable"
@@ -96,9 +99,12 @@
                   isViewerTodayCell(cell) && !isSelectedCell(cell) && cell.selectable
                 "
                 [disabled]="!cell.selectable"
-                [attr.aria-label]="formatCellAria(cell.date)"
-                [attr.aria-selected]="isSelectedCell(cell)"
+                [attr.data-date-key]="cellDateKey(cell)"
+                [attr.data-selected-day]="isSelectedCell(cell) && cell.selectable ? true : null"
+                [attr.aria-label]="formatCellAria(cell)"
+                [attr.aria-current]="isViewerTodayCell(cell) ? 'date' : null"
                 (click)="selectDate(cell.date)"
+                (keydown)="onDayKeydown($event, cell.date)"
               >
                 {{ cellLabel(cell) }}
               </button>
