@@ -1,6 +1,7 @@
 import { Component, computed, linkedSignal, OnDestroy, signal } from '@angular/core';
 
 import {
+  DASHBOARD_BOTTLENECK_COLUMN_CLASS,
   DASHBOARD_FUNNEL_COLUMN_CLASS,
   DASHBOARD_GRID_COLUMN_CLASS,
   DASHBOARD_REQS_COLUMN_CLASS,
@@ -53,6 +54,7 @@ import {
 })
 export class DashboardPage implements OnDestroy {
   readonly sectionFullRowClass = DASHBOARD_SECTION_FULL_ROW;
+  readonly bottleneckColumnClass = DASHBOARD_BOTTLENECK_COLUMN_CLASS;
   readonly gridColumnClass = DASHBOARD_GRID_COLUMN_CLASS;
   readonly scheduleColumnClass = DASHBOARD_SCHEDULE_COLUMN_CLASS;
   readonly funnelColumnClass = DASHBOARD_FUNNEL_COLUMN_CLASS;

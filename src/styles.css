@@ -28,7 +28,7 @@
   --dashboard-control-height: 2.875rem;
   --mobile-header-logo-height: calc(var(--dashboard-control-height) - 0.5rem);
   --sidebar-toggle-size: 2rem;
-  --sidebar-width: 200px;
+  --sidebar-width: 240px;
   --sidebar-width-collapsed: 4.5rem;
   /* @container/dashboard on main — pair/wide tiers (content width, not viewport) */
   --dashboard-container-pair: 43.25rem;

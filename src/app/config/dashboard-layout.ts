@@ -17,6 +17,10 @@ export const DASHBOARD_SECTION_FULL_ROW =
 export const DASHBOARD_GRID_COLUMN_CLASS =
   '@min-[43.25rem]/dashboard:flex @min-[43.25rem]/dashboard:min-h-0 @min-[43.25rem]/dashboard:flex-1 @min-[43.25rem]/dashboard:min-w-[calc(50%-0.5rem)] @min-[43.25rem]/dashboard:flex-col @min-[43.25rem]/dashboard:self-stretch @min-[68rem]/dashboard:w-[338px] @min-[68rem]/dashboard:min-w-[338px] @min-[68rem]/dashboard:max-w-[338px] @min-[68rem]/dashboard:flex-none';
 
+/** Bottleneck — fixed 338px from pair breakpoint; full width in single column. */
+export const DASHBOARD_BOTTLENECK_COLUMN_CLASS =
+  '@min-[43.25rem]/dashboard:flex @min-[43.25rem]/dashboard:min-h-0 @min-[43.25rem]/dashboard:w-[420px] @min-[43.25rem]/dashboard:min-w-[338px] @min-[43.25rem]/dashboard:max-w-[338px] @min-[43.25rem]/dashboard:flex-none @min-[43.25rem]/dashboard:flex-col @min-[43.25rem]/dashboard:self-stretch';
+
 /** Schedule — 338px from pair breakpoint (sits beside funnel when wrapped); md+ only (mobile uses drawer). */
 export const DASHBOARD_SCHEDULE_COLUMN_CLASS =
   'md:@min-[43.25rem]/dashboard:flex md:@min-[43.25rem]/dashboard:min-h-0 md:@min-[43.25rem]/dashboard:w-[338px] md:@min-[43.25rem]/dashboard:min-w-[338px] md:@min-[43.25rem]/dashboard:max-w-[338px] md:@min-[43.25rem]/dashboard:flex-none md:@min-[43.25rem]/dashboard:flex-col md:@min-[43.25rem]/dashboard:self-stretch';
