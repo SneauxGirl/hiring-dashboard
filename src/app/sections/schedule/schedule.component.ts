@@ -1,9 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Button } from 'primeng/button';
 import { Card } from 'primeng/card';
-import { Dialog } from 'primeng/dialog';
-import { Tooltip } from 'primeng/tooltip';
 
 import {
   dashboardCardStretchPt,
@@ -22,7 +19,6 @@ import {
 import {
   NA_SCHEDULE_COPY,
   PTO_SCHEDULE_COPY,
-  SCHEDULE_MORE_COPY,
   SCHEDULE_VISIBLE_INTERVIEW_CAP,
 } from './schedule.catalog';
 
@@ -33,7 +29,7 @@ interface ScheduleGroupConfig {
 
 @Component({
   selector: 'app-schedule',
-  imports: [Button, Card, Dialog, NgTemplateOutlet, Tooltip],
+  imports: [Card, NgTemplateOutlet],
   templateUrl: './schedule.component.html',
 })
 export class ScheduleComponent {
@@ -52,12 +48,8 @@ export class ScheduleComponent {
     day: 'numeric',
   });
 
-  dialogVisible = false;
-  selectedCandidate: CandidateProfile | null = null;
-
   readonly ptoCopy = PTO_SCHEDULE_COPY;
   readonly naCopy = NA_SCHEDULE_COPY;
-  readonly moreCopy = SCHEDULE_MORE_COPY;
 
   readonly groupConfigs: ScheduleGroupConfig[] = [
     { key: 'today', label: 'Today' },
@@ -168,20 +160,5 @@ export class ScheduleComponent {
     }
 
     return this.candidates.find((candidate) => candidate.id === entry.candidateId);
-  }
-
-  openCandidate(candidateId: string): void {
-    const candidate = this.candidates.find((entry) => entry.id === candidateId);
-    if (!candidate) {
-      return;
-    }
-
-    this.selectedCandidate = candidate;
-    this.dialogVisible = true;
-  }
-
-  closeCandidateDialog(): void {
-    this.dialogVisible = false;
-    this.selectedCandidate = null;
   }
 }

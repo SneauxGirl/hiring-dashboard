@@ -184,6 +184,24 @@ export class TrendsComponent implements OnChanges, OnDestroy {
     this.destroyChart();
   }
 
+  /** Clear stale Chart.js sizing and remeasure after funnel row height changes. */
+  remeasureChart(): void {
+    if (!isPlatformBrowser(this.platformId) || this.viewMode !== 'chart' || !this.chart) {
+      return;
+    }
+
+    const canvas = this.chartCanvas?.nativeElement;
+    if (!canvas) {
+      return;
+    }
+
+    canvas.style.removeProperty('height');
+    canvas.style.removeProperty('width');
+    canvas.parentElement?.style.removeProperty('height');
+
+    requestAnimationFrame(() => this.chart?.resize());
+  }
+
   priorYearShort(): string {
     return String(this.trends.priorYear).slice(-2);
   }

@@ -54,13 +54,9 @@
                     </span>
 
                     <div class="min-w-0 flex-1 overflow-hidden">
-                      <button
-                        type="button"
-                        class="m-0 block w-full min-w-0 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-base font-bold text-color hover:underline"
-                        (click)="openCandidate(candidate.id)"
-                      >
+                      <p class="m-0 truncate text-base font-bold text-color">
                         {{ candidate.name }}
-                      </button>
+                      </p>
                       <div class="truncate text-sm text-muted-color">
                         {{ candidate.roleTitle }}
                       </div>
@@ -96,45 +92,10 @@
 
     @if (hiddenInterviewCount() > 0) {
       <div class="mt-auto flex shrink-0 justify-end">
-        <button
-          type="button"
-          class="inline-flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-muted-color hover:text-color"
-          [attr.aria-label]="moreCopy.ariaLabel"
-          [pTooltip]="moreCopy.ariaLabel"
-          tooltipEvent="both"
-          tooltipPosition="top"
-          [fitContent]="true"
-        >
+        <span class="inline-flex items-center justify-center p-1 text-muted-color">
           <span class="pi pi-ellipsis-h text-base" aria-hidden="true"></span>
-        </button>
+        </span>
       </div>
     }
   </div>
 </ng-template>
-
-<p-dialog
-  [header]="selectedCandidate?.name ?? ''"
-  [(visible)]="dialogVisible"
-  [modal]="true"
-  [closable]="true"
-  [draggable]="false"
-  [resizable]="false"
-  [focusTrap]="true"
-  closeAriaLabel="Close candidate details"
-  styleClass="w-[min(28rem,calc(100vw-2rem))] max-w-[min(28rem,calc(100vw-2rem))]"
-  contentStyleClass="break-words text-pretty"
-  (onHide)="closeCandidateDialog()"
->
-  @if (selectedCandidate; as candidate) {
-    <p class="m-0 mb-3 max-w-[24rem] text-pretty text-[length:var(--font-size-label)] font-bold text-muted-color">
-      {{ candidate.roleTitle }}
-    </p>
-    <p class="m-0 max-w-[24rem] text-pretty text-[length:var(--font-size-body)] leading-relaxed text-color">
-      {{ candidate.roleSpecs }}
-    </p>
-  }
-
-  <ng-template #footer>
-    <p-button type="button" label="Close" [text]="true" (onClick)="closeCandidateDialog()" />
-  </ng-template>
-</p-dialog>

@@ -1,10 +1,6 @@
 /** Max interview rows shown across Today → Tomorrow → This Week. */
 export const SCHEDULE_VISIBLE_INTERVIEW_CAP = 4;
 
-export const SCHEDULE_MORE_COPY = {
-  ariaLabel: 'See more interviews',
-} as const;
-
 export const PTO_SCHEDULE_COPY = {
   timeLabel: 'All day',
   title: 'PTO',
