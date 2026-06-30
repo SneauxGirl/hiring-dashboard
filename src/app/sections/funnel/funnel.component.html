@@ -10,14 +10,14 @@
 
     <div class="flex min-h-0 min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-[clamp(12px,2.5vw,48px)] @min-[43.25rem]/dashboard:flex-1">
       <div
-        class="funnel-chart flex min-w-[50px] flex-1 flex-col gap-1.5"
+        class="funnel-chart flex min-w-[50px] flex-1 flex-col gap-0"
         role="img"
         [attr.aria-label]="'30 day funnel chart, max stage ' + (maxCount | number) + ' applicants'"
       >
         @for (stage of funnelStages; track stage.stageKey; let index = $index) {
-          <div class="funnel-stage-row flex h-8 w-full items-center justify-center">
+          <div class="funnel-stage-row flex h-8.5 w-full items-center justify-center">
             <div
-              class="funnel-stage-bar h-8 shrink-0 rounded-full"
+              class="funnel-stage-bar h-8.5 shrink-0 rounded-full"
               [style.width.%]="barWidthPct(stage.count)"
               [ngStyle]="barSurfaceStyle(index)"
               [attr.aria-label]="stageTitle(stage) + ', ' + (stage.count | number) + ' applicants'"

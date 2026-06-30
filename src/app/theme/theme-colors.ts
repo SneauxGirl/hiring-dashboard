@@ -57,20 +57,23 @@ export function funnelBarGlassStyle(stageIndex: number): { ink: string; fill: st
   return { ink: paletteSolid(color), fill: paletteFill(color) };
 }
 
-/** Funnel bar surface — solid ink + fill-tinted bottom cap (pre-blended hex for inline styles). */
+/** Funnel bar glass — sheen on the bar only, at its displayed width (tuned for h-8.5 / 34px). */
 export function funnelBarSurfaceStyle(stageIndex: number): {
   background: string;
   border: string;
   boxShadow: string;
 } {
   const { ink: solid, fill } = funnelBarGlassStyle(stageIndex);
-  const bottomCap = blendHex(solid, fill, 0.30);
-  const drop = blendHex(solid, '#000000', 0.4);
+  const topSheen = blendHex(solid, '#ffffff', 0.32);
+  const midSheen = blendHex(solid, '#ffffff', 0.1);
+  const bottomDepth = blendHex(solid, fill, 0.34);
+  const rim = blendHex('#ffffff', solid, 0.5);
+  const drop = blendHex(solid, '#000000', 0.32);
 
   return {
-    background: `linear-gradient(to bottom, ${solid} calc(100% - 2px), ${bottomCap} calc(100% - 2px))`,
-    border: `1px solid ${solid}`,
-    boxShadow: `0 1px 2px ${drop}66`,
+    background: `linear-gradient(180deg, ${topSheen} 0%, ${midSheen} 26%, ${solid} 52%, ${bottomDepth} 100%)`,
+    border: `1px solid ${blendHex(solid, '#ffffff', 0.2)}`,
+    boxShadow: `inset 0 2px 0 ${rim}, inset 0 -1px 0 ${blendHex(solid, '#000000', 0.1)}, 0 2px 3px ${drop}44`,
   };
 }
 
