@@ -5,8 +5,9 @@ import { CardPassThrough } from 'primeng/types/card';
  * Sidebar open/closed changes main width and triggers reflow automatically.
  *
  * Pair (43.25rem / 692px): BN + Trends side by side.
- * Narrow pair (43.25rem–872px): BN + Trends 50/50.
- * Mid pair (872px–68rem): BN 40% + Trends 60%.
+ * Narrow pair (43.25rem–769px): BN + Trends 50/50.
+ * Mid pair A (770px–955px): BN 40% + Trends flex-1 (min 320 / 338).
+ * Mid pair B (956px–68rem): BN 30% + Trends flex-1 (min 320 / 388).
  * Wide (68rem / 1088px): BN fixed 320px; Trends fixed 356px when three columns fit (tier 4).
  * Threshold = 1048px flex row + 2× --dashboard-margin on dashboard-page.
  */
@@ -15,13 +16,13 @@ import { CardPassThrough } from 'primeng/types/card';
 export const DASHBOARD_SECTION_FULL_ROW =
   'w-full min-w-0 shrink-0 grow-0 @min-[43.25rem]/dashboard:basis-full';
 
-/** BN — 50/50 narrow pair; 40% mid pair; fixed 320px at wide. */
+/** BN — 50/50 narrow; 40% mid A; 30% mid B; fixed 320px at wide. */
 export const DASHBOARD_BOTTLENECK_COLUMN_CLASS =
-  '@min-[43.25rem]/dashboard:flex @min-[43.25rem]/dashboard:min-h-0 @min-[43.25rem]/dashboard:max-h-[412px] @min-[43.25rem]/dashboard:flex-col @min-[43.25rem]/dashboard:self-stretch @min-[43.25rem]/dashboard:@max-[871px]/dashboard:flex-[0_0_calc(50%-0.5rem)] @min-[43.25rem]/dashboard:@max-[871px]/dashboard:min-w-[calc(50%-0.5rem)] @min-[872px]/dashboard:@max-[67.999rem]/dashboard:flex-[0_0_calc(40%-0.4rem)] @min-[872px]/dashboard:@max-[67.999rem]/dashboard:min-w-[320px] @min-[68rem]/dashboard:max-h-none @min-[68rem]/dashboard:w-[320px] @min-[68rem]/dashboard:min-w-[320px] @min-[68rem]/dashboard:max-w-[320px] @min-[68rem]/dashboard:flex-none';
+  '@min-[43.25rem]/dashboard:flex @min-[43.25rem]/dashboard:min-h-0 @min-[43.25rem]/dashboard:max-h-[412px] @min-[43.25rem]/dashboard:flex-col @min-[43.25rem]/dashboard:self-stretch @min-[43.25rem]/dashboard:@max-[769px]/dashboard:flex-[0_0_calc(50%-0.5rem)] @min-[43.25rem]/dashboard:@max-[769px]/dashboard:min-w-[calc(50%-0.5rem)] @min-[770px]/dashboard:@max-[955px]/dashboard:flex-[0_0_calc(40%-0.4rem)] @min-[770px]/dashboard:@max-[955px]/dashboard:min-w-[320px] @min-[956px]/dashboard:@max-[67.999rem]/dashboard:flex-[0_0_calc(30%-0.3rem)] @min-[956px]/dashboard:@max-[67.999rem]/dashboard:min-w-[320px] @min-[68rem]/dashboard:max-h-none @min-[68rem]/dashboard:w-[320px] @min-[68rem]/dashboard:min-w-[320px] @min-[68rem]/dashboard:max-w-[320px] @min-[68rem]/dashboard:flex-none';
 
-/** Trends — 50/50 narrow pair; 60% mid pair; fixed 356px at wide. */
+/** Trends — 50/50 narrow; flex-1 mid A (min 338); flex-1 mid B (min 388); fixed 356px at wide. */
 export const DASHBOARD_TRENDS_COLUMN_CLASS =
-  '@min-[43.25rem]/dashboard:flex @min-[43.25rem]/dashboard:min-h-0 @min-[43.25rem]/dashboard:max-h-[412px] @min-[43.25rem]/dashboard:flex-col @min-[43.25rem]/dashboard:self-stretch @min-[43.25rem]/dashboard:@max-[871px]/dashboard:flex-[0_0_calc(50%-0.5rem)] @min-[43.25rem]/dashboard:@max-[871px]/dashboard:min-w-[calc(50%-0.5rem)] @min-[872px]/dashboard:@max-[67.999rem]/dashboard:flex-[1_1_0%] @min-[872px]/dashboard:@max-[67.999rem]/dashboard:min-w-[356px] @min-[68rem]/dashboard:max-h-none @min-[68rem]/dashboard:w-[356px] @min-[68rem]/dashboard:min-w-[356px] @min-[68rem]/dashboard:max-w-[356px] @min-[68rem]/dashboard:flex-none';
+  '@min-[43.25rem]/dashboard:flex @min-[43.25rem]/dashboard:min-h-0 @min-[43.25rem]/dashboard:max-h-[412px] @min-[43.25rem]/dashboard:flex-col @min-[43.25rem]/dashboard:self-stretch @min-[43.25rem]/dashboard:@max-[769px]/dashboard:flex-[0_0_calc(50%-0.5rem)] @min-[43.25rem]/dashboard:@max-[769px]/dashboard:min-w-[calc(50%-0.5rem)] @min-[770px]/dashboard:@max-[955px]/dashboard:flex-[1_1_0%] @min-[770px]/dashboard:@max-[955px]/dashboard:min-w-[338px] @min-[956px]/dashboard:@max-[67.999rem]/dashboard:flex-[1_1_0%] @min-[956px]/dashboard:@max-[67.999rem]/dashboard:min-w-[388px] @min-[68rem]/dashboard:max-h-none @min-[68rem]/dashboard:w-[356px] @min-[68rem]/dashboard:min-w-[356px] @min-[68rem]/dashboard:max-w-[356px] @min-[68rem]/dashboard:flex-none';
 
 /** Schedule — 338px from pair breakpoint (sits beside funnel when wrapped); md+ only (mobile uses drawer). */
 export const DASHBOARD_SCHEDULE_COLUMN_CLASS =
