@@ -8,8 +8,10 @@ export const DASHBOARD_CALENDAR_DAY_COUNT = 14;
 type StoryWeek = 1 | 2;
 
 const STAGE_DURATION_DAYS_BY_STORY_WEEK: Record<StoryWeek, readonly number[]> = {
-  1: [10, 9, 18, 14, 62, 3],
-  2: [9, 8, 17, 12, 58, 2],
+  // Total: 41
+  1: [4, 5, 6, 16, 7, 3],
+  // Total: 39
+  2: [5, 3, 6, 15, 7, 3],
 };
 
 function calendarWeekForDay(calendarDay: DashboardCalendarDay): StoryWeek {
@@ -168,14 +170,14 @@ const CANDIDATES = {
 };
 
 const KPI_WEEK1 = [
-  { value: 41, valueUnit: 'days', delta: '2 days', trend: 'up' },
+  { value: 41, valueUnit: 'days', delta: '2 days above target', trend: 'up' },
   { value: 87, valueUnit: '%', delta: 'No change', trend: 'neutral' },
   { value: 6, delta: '2 versus previous month', trend: 'up' },
   { value: 4, delta: '0 this month', trend: 'neutral' },
 ] as const;
 
 const KPI_WEEK2 = [
-  { value: 39, valueUnit: 'days', delta: '2 days', trend: 'down' },
+  { value: 39, valueUnit: 'days', delta: '1 day below target', trend: 'down' },
   { value: 88, valueUnit: '%', delta: '1% acceptance', trend: 'up' },
   { value: 6, delta: 'no change', trend: 'neutral' },
   { value: 5, delta: '1 this month', trend: 'up' },
